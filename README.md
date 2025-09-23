@@ -1,12 +1,26 @@
-# React + Vite
+# Projeto Gatos do Campo de Santana 🐈🌸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌷 Sobre o Projeto
+**🚧 Este projeto está em fase de desenvolvimento ativo 🚧**
 
-Currently, two official plugins are available:
+Esta é uma aplicação React em construção para apoiar o trabalho da ONG Gatos do Campo de Santana. O site está sendo desenvolvido para facilitar processos de adoção, arrecadação de fundos e itens essenciais para manter o campo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌼 Funcionalidades Principais
 
-## Expanding the ESLint configuration
+### 🌸 Área Pública
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Galeria de Fotos**: Veja os gatos disponíveis para adoção.
+* **História do Campo**: Descubra como o projeto surgiu, como atua e seu trabalho ajudando os gatinhos do Rio de Janeiro.
+* **Como Ajudar**: Veja como ajudar o campo, sendo como voluntário, por meio de doações em dinheiro ou itens essenciais.
+
+### 💌 Área Administrativa
+
+* **Gestão de Gatos**: Um sistema capaz de cadastrar novos gatos e públicar seus perfis na área pública.
+* **Gestão de Voluntários**: Cadastrar e gerenciar a equipe de voluntários.
+
+## 🎀 Tecnologias Utilizadas (Futuramente)
+
+* **Frontend**: React.js
+* **Autenticação**: Firebase
+
+_Última atualização: 23/09/2025 - Projeto em andamento_
