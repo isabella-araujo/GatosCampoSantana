@@ -1,0 +1,47 @@
+import { db } from '../services/firebase.js';
+import {
+  collection,
+  getDocs,
+  getDoc,
+  updateDoc,
+  doc,
+} from 'firebase/firestore';
+
+export async function getObjetivos() {
+  try {
+    const objetivos = [];
+    const querySnapshot = await getDocs(collection(db, 'objetivos'));
+    querySnapshot.forEach((doc) => {
+      objetivos.push({ id: doc.id, ...doc.data() });
+    });
+    return objetivos;
+  } catch (error) {
+    console.error('Error fetching objetivos:', error);
+    throw error;
+  }
+}
+
+export async function getObjetivoById(id) {
+  try {
+    const docRef = doc(db, 'objetivos', id);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      throw new Error('Objetivo not found');
+    }
+    return { id: docSnap.id, ...docSnap.data() };
+  } catch (error) {
+    console.error('Erro ao buscar objetivo:', error);
+    throw error;
+  }
+}
+
+export async function updateObjetivo(id, objetivoData) {
+  try {
+    const docRef = doc(db, 'objetivos', id);
+    await updateDoc(docRef, objetivoData);
+    console.log('Objetivo atualizado com sucesso');
+  } catch (error) {
+    console.error('Erro ao atualizar objetivo:', error);
+    throw error;
+  }
+}
