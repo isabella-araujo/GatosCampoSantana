@@ -10,8 +10,8 @@ import {
 export async function getObjetivos() {
   try {
     const objetivos = [];
-    const querySnapshot = await getDocs(collection(db, 'objetivos'));
-    querySnapshot.forEach((doc) => {
+    const snapshot = await getDocs(collection(db, 'objetivos'));
+    snapshot.forEach((doc) => {
       objetivos.push({ id: doc.id, ...doc.data() });
     });
     return objetivos;
@@ -24,11 +24,11 @@ export async function getObjetivos() {
 export async function getObjetivoById(id) {
   try {
     const docRef = doc(db, 'objetivos', id);
-    const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
+    const snapshot = await getDoc(docRef);
+    if (!snapshot.exists()) {
       throw new Error('Objetivo not found');
     }
-    return { id: docSnap.id, ...docSnap.data() };
+    return { id: snapshot.id, ...snapshot.data() };
   } catch (error) {
     console.error('Erro ao buscar objetivo:', error);
     throw error;
