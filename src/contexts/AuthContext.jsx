@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { resetPasswordUser, signInUser, signOutUser, signUpUser } from '../services/authService'
+import { resetPasswordUser, signInUser, signOutUser, signUpUser } from '../services/authServices'
 
 const AuthContext = createContext()
 
