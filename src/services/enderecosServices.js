@@ -1,5 +1,5 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../config/firebase";
 
 export async function createEndereco(endereco) {
     let response = new Object() 

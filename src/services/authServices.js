@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { auth } from "../services/firebase"
+import { auth } from "../config/firebase"
 
 export async function signInUser(userData) {
     let response = new Object()
