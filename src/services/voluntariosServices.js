@@ -1,5 +1,5 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../config/firebase";
 
 export async function createVoluntario(voluntario) {
     let response = new Object() 
