@@ -1,7 +1,7 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
-export async function addVoluntario(voluntario) {
+export async function createVoluntario(voluntario) {
     let response = new Object() 
     try {
         const docRef = await addDoc(collection(db, 'voluntarios'), voluntario)
