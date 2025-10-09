@@ -1,11 +1,7 @@
-import { AuthProvider } from './contexts/AuthContext'
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
-
-  return (
-    <AuthProvider>
-    </AuthProvider>
-  )
+  return <AuthProvider></AuthProvider>;
 }
 
 export default App;
