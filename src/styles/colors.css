@@ -1,0 +1,17 @@
+:root {
+    --color-primary-blue: #6AC5C4;
+    --color-secundary-blue: #7FEAEA;
+    --color-tertiary-blue: #529998;
+
+    --color-primary-yellow: #E3A438;
+    --color-secundary-yellow: #FFE397;
+    --color-tertiary-yellow: #B27F20;
+
+    --color-neutral-black: #2E2E2E;
+    --color-neutral-white: #FAF9FA;
+    --color-neutral-gray: #C6CEDA;
+    --color-neutral-brown: #6A5841;
+    
+    --color-support-green: #5BBE72;
+    --color-support-red: #FE3231;
+}

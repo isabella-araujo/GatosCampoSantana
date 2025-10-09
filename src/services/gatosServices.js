@@ -1,4 +1,4 @@
-import { db } from '../services/firebase.js';
+import { db } from '../config/firebase';
 import {
   collection,
   getDocs,
