@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    /* cores */
+    --color-primary-blue: #6AC5C4;
+    --color-secundary-blue: #7FEAEA;
+    --color-tertiary-blue: #529998;
+
+    --color-primary-yellow: #E3A438;
+    --color-secundary-yellow: #FFE397;
+    --color-tertiary-yellow: #B27F20;
+
+    --color-neutral-black: #2E2E2E;
+    --color-neutral-white: #FAF9FA;
+    --color-neutral-gray: #C6CEDA;
+    --color-neutral-brown: #6A5841;
+    
+    --color-support-green: #5BBE72;
+    --color-support-red: #FE3231;
+
+    /* tipografia */
+    --font-family-nunito: 'Nunito', sans-serif;
+    --font-family-rubik: 'Rubik', sans-serif;
+
+    /* body 1 */
+    --font-body1-family: var(--font-family-nunito);
+    --font-body1-weight: 400;
+    --font-body1-size: 18px;
+    --font-body1-line-height: 28px;
+    --font-body1-letter-spacing: 0.15px;
+
+    /* body 2 */
+    --font-body2-family: var(--font-family-nunito);
+    --font-body2-weight: 400;
+    --font-body2-size: 15px;
+    --font-body2-line-height: 24px;
+    --font-body2-letter-spacing: 0.15px;
+
+    /* button */
+    --font-button-family: var(--font-family-nunito);
+    --font-button-weight: 800;
+    --font-button-size: 16px;
+    --font-button-line-height: 24px;
+    --font-button-letter-spacing: 1.25px;
+
+    /* caption */
+    --font-caption-family: var(--font-family-nunito);
+    --font-caption-weight: 400;
+    --font-caption-size: 13px;
+    --font-caption-line-height: 24px;
+    --font-caption-letter-spacing: 0.4px;
+
+    /* overline */
+    --font-overline-family: var(--font-family-nunito);
+    --font-overline-weight: 400;
+    --font-overline-size: 11px;
+    --font-overline-line-height: 24px;
+    --font-overline-letter-spacing: 1.5px;
+
+    /* display */
+    --font-display-family: var(--font-family-rubik);
+    --font-display-weight: 500;
+    --font-display-size: 48px;
+    --font-display-line-height: 70px;
+    --font-display-letter-spacing: 0;
+
+    /* title */
+    --font-title-family: var(--font-family-rubik);
+    --font-title-weight: 500;
+    --font-title-size: 32px;
+    --font-title-line-height: 51px;
+    --font-title-letter-spacing: 0;
+
+    /* subtitle -- */
+    --font-subtitle-family: var(--font-family-rubik);
+    --font-subtitle-weight: 400;
+    --font-subtitle-size: 24px;
+    --font-subtitle-line-height: 39px;
+    --font-subtitle-letter-spacing: 0;
+}
+
+.text-body1 {
+  font-family: var(--font-body1-family);
+  font-weight: var(--font-body1-weight);
+  font-size: var(--font-body1-size);
+  line-height: var(--font-body1-line-height);
+  letter-spacing: var(--font-body1-letter-spacing);
+}
+
+.text-body2 {
+  font-family: var(--font-body2-family);
+  font-weight: var(--font-body2-weight);
+  font-size: var(--font-body2-size);
+  line-height: var(--font-body2-line-height);
+  letter-spacing: var(--font-body2-letter-spacing);
+}
+
+.text-button {
+  font-family: var(--font-button-family);
+  font-weight: var(--font-button-weight);
+  font-size: var(--font-button-size);
+  line-height: var(--font-button-line-height);
+  letter-spacing: var(--font-button-letter-spacing);
+}
+
+.text-caption {
+  font-family: var(--font-caption-family);
+  font-weight: var(--font-caption-weight);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line-height);
+  letter-spacing: var(--font-caption-letter-spacing);
+}
+
+.text-overline {
+  font-family: var(--font-overline-family);
+  font-weight: var(--font-overline-weight);
+  font-size: var(--font-overline-size);
+  line-height: var(--font-overline-line-height);
+  letter-spacing: var(--font-overline-letter-spacing);
+}
+
+.text-display {
+  font-family: var(--font-display-family);
+  font-weight: var(--font-display-weight);
+  font-size: var(--font-display-size);
+  line-height: var(--font-display-line-height);
+  letter-spacing: var(--font-display-letter-spacing);
+}
+
+.text-title {
+  font-family: var(--font-title-family);
+  font-weight: var(--font-title-weight);
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+  letter-spacing: var(--font-title-letter-spacing);
+}
+
+.text-subtitle {
+  font-family: var(--font-subtitle-family);
+  font-weight: var(--font-subtitle-weight);
+  font-size: var(--font-subtitle-size);
+  line-height: var(--font-subtitle-line-height);
+  letter-spacing: var(--font-subtitle-letter-spacing);
+}
