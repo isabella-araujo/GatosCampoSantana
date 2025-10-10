@@ -1,4 +1,4 @@
-import './style.css';
+import './styles.css';
 import PropTypes from 'prop-types';
 
 const IconButton = ({

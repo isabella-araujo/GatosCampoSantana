@@ -32,9 +32,3 @@ button {
   all: unset;
   cursor: pointer;
 }
-
-.container {
-  width: min(90%, 1200px);
-  margin: 0 auto;
-  padding: 2rem;
-}
