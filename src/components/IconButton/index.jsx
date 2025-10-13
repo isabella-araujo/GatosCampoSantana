@@ -10,6 +10,7 @@ const IconButton = ({
   color = 'var(--color-neutral-white)',
   size = 24,
   disabled = false,
+  ...props
 }) => (
   <button
     type={type}
@@ -17,6 +18,7 @@ const IconButton = ({
     onClick={onClick}
     aria-label={label}
     disabled={disabled}
+    {...props}
   >
     {Icon && <Icon color={color} size={size} />}
   </button>
