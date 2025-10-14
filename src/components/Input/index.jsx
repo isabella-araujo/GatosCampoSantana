@@ -1,21 +1,25 @@
 import './style.css'
 import '../../styles/variables.css'
 
-export default function Input({ label, placeholder, type='text', value, onChange, error, ...rest }) {
-    const classname = `input text-body1 ${error ? 'error' : ''}`;
+export default function Input({ label, placeholder, type='text', value, onChange, error, ...props }) {
+    const classname = `input ${error ? 'error' : ''}`;
 
     return (
         <div className='container'>
-            <p className='label text-body1'>{label}</p>
+            <p className='label'>{label}</p>
             <input
                 type={type}
                 value={value}
                 onChange={onChange}
                 className={classname}
                 placeholder={placeholder}
-                {...rest} 
+                {...props} 
             />
-           {error && <p className='error-message text-caption'>{error}</p>}
+           {error && 
+                <p className='error-message text-caption'>
+                    {error}
+                </p>
+            }
         </div>
     )
 }
