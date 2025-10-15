@@ -1,18 +1,35 @@
 import './style.css'
-import '../../styles/variables.css'
+import { useRef } from 'react';
+
 import { FaCheck } from "react-icons/fa6";
 
-export default function Checkbox({ label, onClick, isChecked }) {
-    const classname = `box ${isChecked ? 'checked' : ''}`
+export default function Checkbox({ label, checked, onChecked, ...props }) {
+    const classname = `checkbox ${checked ? 'checked' : ''}`
+    const inputRef = useRef(null)
+
+    function handleChange() {
+        onChecked(!checked)
+    }
+
+    function handleClick() {
+        inputRef.current.click();
+    }
 
     return (
         <div className='container'>
+            <input 
+                className='input-checkbox'
+                type='checkbox'
+                onChange={handleChange}
+                checked={checked}
+                ref={inputRef}
+                {...props}
+            />
             <div 
                 className={classname}
-                value={isChecked}
-                onClick={onClick}
+                onClick={handleClick}
             >
-                {isChecked && <FaCheck />}
+                {checked && <FaCheck />}
             </div>
             <p className='text-body1'>{label}</p>
         </div>

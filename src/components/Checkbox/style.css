@@ -5,7 +5,11 @@
     gap: 16px;
 }
 
-.box {
+.input-checkbox {
+    display: none;
+}
+
+.checkbox {
     box-shadow: 0px 1px 3px 1px #00000026;
     width: 25px;
     height: 25px;
@@ -17,11 +21,11 @@
     font-size: 20px;
 }
 
-.box.checked {
+.checkbox.checked {
     color: var(--color-neutral-white);
     background-color: var(--color-primary-blue);
 }
 
-.box:hover {
+.checkbox:hover {
     cursor: pointer;
 }

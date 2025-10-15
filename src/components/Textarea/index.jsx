@@ -1,20 +1,27 @@
 import './style.css'
 import '../../styles/variables.css'
 
-export default function Textarea({ label, placeholder, value, onChange, error, ...rest}) {
-    const inputClassname = `textarea text-body1 ${error ? 'error' : ''}`;
+export default function Textarea({ label, placeholder, value, onChange, error, ...props}) {
+    const classname = `textarea ${error ? 'error' : ''}`;
 
     return (
         <div className='container'>
-            <p className='label text-body1'>{label}</p>
+            <p className='label'>
+                {label}
+            </p>
             <textarea
                 value={value}
                 onChange={onChange}
-                className={inputClassname}
+                className={classname}
                 placeholder={placeholder}
-                {...rest} 
+                {...props} 
             ></textarea>
-           {error && <p className='error-message text-caption'>{error}</p>}
+
+           {error && 
+                <p className='error-message text-caption'>
+                    {error}
+                </p>
+            }
         </div>
     )
 }
