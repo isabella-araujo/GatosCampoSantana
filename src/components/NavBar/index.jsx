@@ -7,7 +7,7 @@ import IconButton from '../IconButton';
 import { IoReorderThreeOutline } from 'react-icons/io5';
 import { IoClose } from 'react-icons/io5';
 
-const NavBar = ({ links, navButton }) => {
+const NavBar = ({ links, navButton, logoutButton }) => {
   const [menuMobile, setMenuMobile] = useState(false);
   const menuToggle = () => setMenuMobile(!menuMobile);
 
@@ -33,6 +33,15 @@ const NavBar = ({ links, navButton }) => {
           </Button>
         </Link>
       )}
+      {logoutButton &&
+        <Button 
+          variant="secondary" 
+          size="small"
+          onClick={logoutButton.handleClick}
+        >
+          {logoutButton.label}
+        </Button>
+      }
       <div className="navbar-menuHamburger">
         {menuMobile ? (
           <IconButton
