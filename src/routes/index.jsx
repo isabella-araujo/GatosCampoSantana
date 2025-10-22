@@ -27,11 +27,11 @@ const router = createBrowserRouter([
       { path: 'sobre-nos', Component: SobreNos },
       { path: 'como-ajudar', Component: ComoAjudar },
       { path: 'doe', Component: Doe },
-      {
-        element: <PublicOnlyRoute />,
-        children: [{ path: 'login', Component: Login }],
-      },
     ],
+  },
+  {
+    element: <PublicOnlyRoute />,
+    children: [{ path: 'login', Component: Login }],
   },
   {
     element: <ProtectedRoute />,
@@ -43,13 +43,7 @@ const router = createBrowserRouter([
           { index: true, Component: Gatos },
           { path: 'pontos-coleta', Component: PontosColeta },
           { path: 'parceiros', Component: Parceiros },
-          {
-            path: 'voluntarios',
-            children: [
-              { index: true, Component: Voluntarios },
-              { path: 'cadastro', Component: VoluntariosCadastro },
-            ],
-          },
+          { path: 'voluntarios', Component: Voluntarios },
           { path: 'objetivos', Component: Objetivos },
         ],
       },

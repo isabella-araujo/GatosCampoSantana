@@ -1,0 +1,54 @@
+.login {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-img, .container-login {
+    width: 50vw;
+}
+
+.logo {
+    width: 400px;
+}
+
+.container-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login {
+    width: 50vw;
+    background-color: var(--color-primary-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.container-inputs, .title {
+    width: 308px;
+}
+
+.title {
+    color: var(--color-neutral-white);
+}
+
+.container-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recuperar-senha {
+    text-align: right;
+    color: var(--color-neutral-white);
+}
+
+.recuperar-senha:hover {
+    text-shadow: 0px 1px 3px #00000026;
+    cursor: pointer;
+    text-decoration: underline;
+}
