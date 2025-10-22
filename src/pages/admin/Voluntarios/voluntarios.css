@@ -1,0 +1,59 @@
+.admin-pages-margin{
+  margin: 142px 0 42px 0;
+}
+
+.admin-title-container{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 54px;
+}
+.admin-subtitle{
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-subtitle-description{
+  max-width: 770px;
+  padding: 8px;
+  margin: 14px 0px;
+}
+
+.header-actions{
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-inputs{
+  width: 324px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 20px 0px;
+}
+
+.form-buttons{
+  display: flex;
+  align-self: flex-start;
+  gap: 22px;
+  padding: 0 26px;
+}
+
+.delete-modal-content{
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 1rem;
+}
+
+.delete-modal-actions{
+  display: flex;
+  gap: 1rem;
+}

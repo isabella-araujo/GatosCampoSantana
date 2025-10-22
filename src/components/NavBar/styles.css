@@ -37,7 +37,8 @@
 
 }
 
-.navbar-links a:hover{
+.navbar-links a:hover,
+.active{
   color: var(--color-primary-blue);
 }
 

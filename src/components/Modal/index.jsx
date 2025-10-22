@@ -1,7 +1,8 @@
 import Container from '../Container';
 import './styles.css';
 
-const Modal = ({ children, onClose, footer }) => {
+const Modal = ({ open, children, onClose, footer }) => {
+  if (!open) return null;
   return (
     <div className="modal" onClick={onClose}>
       <Container onClick={(e) => e.stopPropagation()}>
