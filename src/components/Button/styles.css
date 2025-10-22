@@ -56,6 +56,15 @@
   color: var(--color-neutral-white);
 }
 
+.btn-danger {
+  background-color: var(--color-support-red);
+  color: var(--color-neutral-white);
+}
+
+.btn-danger:hover {
+  background-color: var(--color-neutral-gray);
+}
+
 .btn-small {
   padding: 8px 12px;
   /*min-width: 80px;*/

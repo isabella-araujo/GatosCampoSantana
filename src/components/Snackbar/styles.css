@@ -1,0 +1,33 @@
+.snackbar-container {
+  background-color: var(--color-primary-yellow);
+  color: var(--color-neutral-white);
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  min-width: 280px;
+  max-width: 420px;
+  animation: slideUp 0.3s ease-out;
+}
+
+.snackbar-message {
+  flex: 1;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

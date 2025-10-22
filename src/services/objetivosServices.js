@@ -5,6 +5,7 @@ import {
   getDoc,
   updateDoc,
   doc,
+  serverTimestamp,
 } from 'firebase/firestore';
 
 export async function getObjetivos() {
@@ -12,7 +13,11 @@ export async function getObjetivos() {
     const objetivos = [];
     const snapshot = await getDocs(collection(db, 'objetivos'));
     snapshot.forEach((doc) => {
-      objetivos.push({ id: doc.id, ...doc.data() });
+      objetivos.push({
+        id: doc.id,
+        ...doc.data(),
+        createAt: serverTimestamp(),
+      });
     });
     return objetivos;
   } catch (error) {

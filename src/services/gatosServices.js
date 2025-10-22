@@ -12,6 +12,7 @@ import {
   query,
   deleteDoc,
   updateDoc,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { storage } from '../services/firebase.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -63,7 +64,7 @@ export async function createGato(gatoData) {
   try {
     const gatosCollection = collection(db, 'gatos');
     const docRef = await addDoc(gatosCollection, gato);
-    return { id: docRef.id, ...gato };
+    return { id: docRef.id, ...gato, createAt: serverTimestamp() };
   } catch (error) {
     console.error('Erro ao criar gato:', error);
     throw error;

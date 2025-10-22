@@ -1,9 +1,10 @@
+import './styles.css';
 import DataTable from 'react-data-table-component';
 import { IoTrashOutline } from 'react-icons/io5';
 import { IoPencilOutline } from 'react-icons/io5';
 import { IoBanOutline } from 'react-icons/io5';
+import { IoCalendarClearOutline } from 'react-icons/io5';
 import IconButton from '../IconButton';
-import './styles.css';
 
 const Table = ({
   columns = [],
@@ -15,22 +16,41 @@ const Table = ({
   onDelete,
   onBlock,
 }) => {
-  const colmnsDefault = [];
+  const columnsDefault = [];
 
   if (showDate) {
-    colmnsDefault.push({
+    columnsDefault.push({
       name: 'Cadastro',
-      selector: (row) => row.createdAt,
-      sortable: true,
-      format: (row) =>
-        row.createdAt
-          ? new Date(row.createdAt).toLocaleDateString('pt-BR')
+      selector: (row) =>
+        row.createAt
+          ? row.createAt.toDate
+            ? row.createAt.toDate().toLocaleDateString('pt-BR')
+            : new Date(row.createAt).toLocaleDateString('pt-BR')
           : 'DD/MM/AAAA',
+      sortable: true,
+      grow: 1,
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      },
+      cell: (row) => (
+        <>
+          <span>
+            {row.createAt
+              ? row.createAt.toDate
+                ? row.createAt.toDate().toLocaleDateString('pt-BR')
+                : new Date(row.createAt).toLocaleDateString('pt-BR')
+              : 'DD/MM/AAAA'}
+          </span>
+          <IoCalendarClearOutline size={16} color="#545F71" />
+        </>
+      ),
     });
   }
 
   if (showActions) {
-    colmnsDefault.push({
+    columnsDefault.push({
       name: ' ',
       cell: (row) => (
         <div>
@@ -69,7 +89,7 @@ const Table = ({
     });
   }
 
-  const allColumns = [...columns, ...colmnsDefault];
+  const allColumns = [...columns, ...columnsDefault];
 
   if (data && data.length > 0) {
     return (

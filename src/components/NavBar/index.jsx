@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './styles.css';
 import Logo from '../../assets/Logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Button from '../Button';
 import IconButton from '../IconButton';
 import { IoReorderThreeOutline } from 'react-icons/io5';
@@ -22,7 +22,13 @@ const NavBar = ({ links, navButton, logoutButton }) => {
       <ul className={`navbar-links ${menuMobile ? 'active' : ''}`}>
         {links.map((link) => (
           <li key={link.to}>
-            <Link to={link.to}>{link.label}</Link>
+            <NavLink
+              to={link.to}
+              end
+              className={({ isActive }) => (isActive ? 'active' : ' ')}
+            >
+              {link.label}
+            </NavLink>
           </li>
         ))}
       </ul>
@@ -33,15 +39,15 @@ const NavBar = ({ links, navButton, logoutButton }) => {
           </Button>
         </Link>
       )}
-      {logoutButton &&
-        <Button 
-          variant="secondary" 
+      {logoutButton && (
+        <Button
+          variant="secondary"
           size="small"
           onClick={logoutButton.handleClick}
         >
           {logoutButton.label}
         </Button>
-      }
+      )}
       <div className="navbar-menuHamburger">
         {menuMobile ? (
           <IconButton

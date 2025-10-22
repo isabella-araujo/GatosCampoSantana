@@ -8,6 +8,7 @@ import {
   Timestamp,
   deleteDoc,
   updateDoc,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { storage } from '../services/firebase.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -78,7 +79,11 @@ export async function getParceiroById(id) {
     const docRef = doc(db, 'parceiros', id);
     const snapshot = await getDoc(docRef);
     if (snapshot.exists()) {
-      return { id: snapshot.id, ...snapshot.data() };
+      return {
+        id: snapshot.id,
+        ...snapshot.data(),
+        createAt: serverTimestamp(),
+      };
     } else {
       return null;
     }

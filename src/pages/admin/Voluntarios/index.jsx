@@ -1,5 +1,131 @@
+import './voluntarios.css';
+import Container from '../../../components/Container';
+import SearchArea from '../../../components/SearchArea';
+import Button from '../../../components/Button';
+import Table from '../../../components/Table';
+import Modal from '../../../components/Modal';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useReducer, useState } from 'react';
+import {
+  deleteVoluntario,
+  getVoluntarios,
+} from '../../../services/voluntariosServices';
+import { search } from '../../../utils/searchUtils';
+
+const initialState = {
+  voluntarios: [],
+  openModalConfirm: false,
+  selectedVoluntario: null,
+};
+
+function voluntariosReducer(state, action) {
+  switch (action.type) {
+    case 'SET_VOLUNTARIOS':
+      return { ...state, voluntarios: action.payload };
+    case 'OPEN_MODALCONFIRM':
+      return {
+        ...state,
+        openModalConfirm: true,
+        selectedVoluntario: action.payload,
+      };
+    case 'CLOSE_MODALCONFIRM':
+      return { ...state, openModalConfirm: false, selectedVoluntario: null };
+    default:
+      return state;
+  }
+}
+
 export default function Voluntarios() {
-    return (
-        <p>Voluntários</p>
-    )
+  const navigate = useNavigate();
+  const [state, dispatch] = useReducer(voluntariosReducer, initialState);
+  const { voluntarios, openModalConfirm, selectedVoluntario } = state;
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    fetchVoluntarios();
+  }, []);
+
+  async function fetchVoluntarios() {
+    const { voluntarios, error } = await getVoluntarios();
+
+    if (!error) {
+      dispatch({ type: 'SET_VOLUNTARIOS', payload: voluntarios });
+    } else {
+      console.error('Erro ao buscar voluntários:', error);
+    }
+  }
+
+  const handleDelete = async () => {
+    if (selectedVoluntario) {
+      await deleteVoluntario(selectedVoluntario.id);
+      fetchVoluntarios();
+      dispatch({ type: 'CLOSE_MODALCONFIRM' });
+    }
+  };
+
+  const columns = [
+    { name: 'Email', selector: (row) => row.email, sortable: true },
+    { name: 'Senha', selector: (row) => row.senha, sortable: true },
+  ];
+
+  const handleSearch = (query) => {
+    setFilteredData(search(voluntarios, 'email', query));
+  };
+
+  return (
+    <div className="admin-pages-margin">
+      <div className="admin-title-container">
+        <h2 className="text-display">Voluntários</h2>
+      </div>
+
+      <Container style={{ width: '1224px' }}>
+        <div className="admin-subtitle-description">
+          <p className="text-body admin-subtitle">Lista de voluntários</p>
+          <p className="text-body">
+            Consulte os dados dos voluntários cadastrados e acesse ações como
+            edição, bloqueio, exclusão e cadastro de novos membros.
+          </p>
+        </div>
+
+        <div className="header-actions">
+          <div style={{ width: '324px' }}>
+            <SearchArea onChange={handleSearch} />
+          </div>
+          <Button
+            variant="secondary"
+            size="medium"
+            onClick={() => navigate('cadastro')}
+          >
+            Cadastrar Voluntário
+          </Button>
+        </div>
+        <Table
+          columns={columns}
+          data={filteredData.length === 0 ? voluntarios : filteredData}
+          onDelete={(v) => dispatch({ type: 'OPEN_MODALCONFIRM', payload: v })}
+        />
+
+        <Modal
+          open={openModalConfirm}
+          onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
+        >
+          <div className="delete-modal-content">
+            <p>Tem certeza que deseja excluir este contato?</p>
+            <div className="delete-modal-actions">
+              <Button size="small" variant="danger" onClick={handleDelete}>
+                Excluir
+              </Button>
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      </Container>
+    </div>
+  );
 }
