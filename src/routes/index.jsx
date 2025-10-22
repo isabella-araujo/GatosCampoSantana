@@ -27,13 +27,13 @@ const router = createBrowserRouter([
             { path: 'sobre-nos', Component: SobreNos },
             { path: 'como-ajudar', Component: ComoAjudar },
             { path: 'doe', Component: Doe },
-            { 
-                element: <PublicOnlyRoute />,
-                children: [
-                    { path: 'login', Component: Login }
-                ]
-            }
         ],
+    },
+    { 
+        element: <PublicOnlyRoute />,
+        children: [
+            { path: 'login', Component: Login }
+        ]
     },
     {
         element: <ProtectedRoute />,
