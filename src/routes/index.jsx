@@ -43,7 +43,13 @@ const router = createBrowserRouter([
           { index: true, Component: Gatos },
           { path: 'pontos-coleta', Component: PontosColeta },
           { path: 'parceiros', Component: Parceiros },
-          { path: 'voluntarios', Component: Voluntarios },
+          {
+            path: 'voluntarios',
+            children: [
+              { index: true, Component: Voluntarios },
+              { path: 'cadastro', Component: VoluntariosCadastro },
+            ],
+          },
           { path: 'objetivos', Component: Objetivos },
         ],
       },

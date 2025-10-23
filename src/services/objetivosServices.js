@@ -3,26 +3,22 @@ import {
   collection,
   getDocs,
   getDoc,
-  updateDoc,
   doc,
-  serverTimestamp,
+  writeBatch,
 } from 'firebase/firestore';
 
 export async function getObjetivos() {
   try {
-    const objetivos = [];
-    const snapshot = await getDocs(collection(db, 'objetivos'));
-    snapshot.forEach((doc) => {
-      objetivos.push({
-        id: doc.id,
-        ...doc.data(),
-        createAt: serverTimestamp(),
-      });
-    });
-    return objetivos;
+    const objetivosCol = collection(db, 'objetivos');
+    const snapshot = await getDocs(objetivosCol);
+    const objetivos = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return { objetivos, error: null };
   } catch (error) {
-    console.error('Error fetching objetivos:', error);
-    throw error;
+    console.error('Error:', error);
+    return { objetivos: [], error };
   }
 }
 
@@ -40,13 +36,19 @@ export async function getObjetivoById(id) {
   }
 }
 
-export async function updateObjetivo(id, objetivoData) {
+export async function updateObjetivos(objetivos) {
   try {
-    const docRef = doc(db, 'objetivos', id);
-    await updateDoc(docRef, objetivoData);
-    console.log('Objetivo atualizado com sucesso');
+    const batch = writeBatch(db);
+    objetivos.forEach((objetivo) => {
+      const docRef = doc(db, 'objetivos', objetivo.id);
+      batch.update(docRef, {
+        titulo: objetivo.titulo,
+        descricao: objetivo.descricao,
+      });
+    });
+    await batch.commit();
   } catch (error) {
-    console.error('Erro ao atualizar objetivo:', error);
+    console.error('Erro ao atualizar objetivos:', error);
     throw error;
   }
 }
