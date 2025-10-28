@@ -1,4 +1,4 @@
-.container {
+.group-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +41,7 @@
     display: none;
 }
 
-.btn {
+.btn-image-uploader {
     width: 173;
     height: 52;
     border: 2px solid var(--color-primary-blue);

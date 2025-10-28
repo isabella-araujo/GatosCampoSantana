@@ -1,17 +1,21 @@
-import { db } from '../services/firebase.js';
+import { db } from '../config/firebase.js';
 import {
   collection,
   getDocs,
   getDoc,
   addDoc,
   doc,
-  Timestamp,
   deleteDoc,
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { storage } from '../services/firebase.js';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../config/firebase.js';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
 ///Função para fazer upload da imagem da logo para o Firebase Storage
@@ -19,16 +23,22 @@ export async function uploadParceiroLogo(logoFile) {
   if (!logoFile) {
     throw new Error('Nenhum arquivo fornecido para upload.');
   }
-  const storageRef = ref(storage, `parceiros/${uuidv4()}_${logoFile.name}`);
+  const logoPath = `parceiros/${uuidv4()}_${logoFile.name}`;
+  const storageRef = ref(storage, logoPath);
+
   try {
     await uploadBytes(storageRef, logoFile);
     const downloadURL = await getDownloadURL(storageRef);
-    return downloadURL;
+    return {
+      logoURL: downloadURL,
+      logoPath,
+    };
   } catch (error) {
     console.error('Erro ao fazer upload da imagem:', error);
     throw error;
   }
 }
+
 /// Função para criar um novo parceiro no Firestore
 export async function createParceiro(parceiroData) {
   const camposObrigatorios = ['nome', 'logoFile'];
@@ -37,17 +47,28 @@ export async function createParceiro(parceiroData) {
       throw new Error(`Campo obrigatório faltando: ${campo}`);
     }
   }
-  const logoURL = await uploadParceiroLogo(parceiroData.logoFile);
-  const parceiro = {
-    ...parceiroData,
-    logo: logoURL,
-  };
-  delete parceiro.logoFile;
 
   try {
+    const { logoURL, logoPath } = await uploadParceiroLogo(
+      parceiroData.logoFile,
+    );
+    const parceiro = {
+      ...parceiroData,
+      logoURL,
+      logoPath,
+      ativo: true,
+      createdAt: serverTimestamp(),
+    };
+    delete parceiro.logoFile;
+    delete parceiro.logo;
+
     const parceirosCollection = collection(db, 'parceiros');
     const docRef = await addDoc(parceirosCollection, parceiro);
-    return { id: docRef.id, ...parceiro };
+
+    return {
+      id: docRef.id,
+      ...parceiro,
+    };
   } catch (error) {
     console.error('Erro ao criar parceiro:', error);
     throw error;
@@ -62,9 +83,10 @@ export async function getParceiros() {
       const data = doc.data();
       return {
         id: doc.id,
+        ...data,
         descricao: data.descricao || 'sem descrição',
         site: data.site || 'nenhum site informado',
-        ...data,
+        createdAt: data.createdAt ? data.createdAt.toDate() : null,
       };
     });
   } catch (error) {
@@ -82,7 +104,6 @@ export async function getParceiroById(id) {
       return {
         id: snapshot.id,
         ...snapshot.data(),
-        createAt: serverTimestamp(),
       };
     } else {
       return null;
@@ -92,41 +113,54 @@ export async function getParceiroById(id) {
     throw error;
   }
 }
+
 /// Função para atualizar um parceiro existente
 export async function updateParceiro(id, parceiroData) {
-  if (!id) {
-    throw new Error('ID do parceiro invalido.');
+  if (!id) throw new Error('ID do parceiro inválido');
+  if (!parceiroData || Object.keys(parceiroData).length === 0)
+    throw new Error('Nenhum dado fornecido');
+
+  const docRef = doc(db, 'parceiros', id);
+  const docSnap = await getDoc(docRef);
+  const oldData = docSnap.exists() ? docSnap.data() : {};
+
+  delete parceiroData.logo;
+  const newLogoFile = parceiroData.logoFile;
+  delete parceiroData.logoFile;
+
+  if (newLogoFile) {
+    const { logoURL, logoPath } = await uploadParceiroLogo(newLogoFile);
+
+    parceiroData.logoURL = logoURL;
+    parceiroData.logoPath = logoPath;
+
+    if (oldData.logoPath && oldData.logoPath !== logoPath) {
+      const oldLogoRef = ref(storage, oldData.logoPath);
+      try {
+        await deleteObject(oldLogoRef);
+        console.log('Logo antiga deletada com sucesso');
+      } catch (error) {
+        console.warn('Erro ao deletar logo antiga:', error);
+      }
+    }
   }
-  if (!parceiroData || Object.keys(parceiroData).length === 0) {
-    throw new Error('Nenhum dado fornecido para atualização.');
+  await updateDoc(docRef, parceiroData);
+
+  return { id, ...oldData, ...parceiroData };
+}
+
+//Função para atualizar o status ativo/inativo de um parceiro
+export async function toggleParceiroStatus(id, currentStatus) {
+  if (!id) {
+    throw new Error('ID do parceiro inválido.');
   }
   try {
     const docRef = doc(db, 'parceiros', id);
-    if (parceiroData.logoFile) {
-      const logoSnapshot = await getDoc(docRef);
-      const oldData = logoSnapshot.data();
-      const oldLogoURL = oldData ? oldData.logoURL : null;
-
-      const newLogoURL = await uploadParceiroLogo(parceiroData.logoFile);
-      parceiroData.logoURL = newLogoURL;
-      delete parceiroData.logoFile;
-
-      if (oldLogoURL && oldLogoURL !== newLogoURL) {
-        try {
-          const oldLogoRef = ref(storage, oldLogoURL);
-          await deleteDoc(oldLogoRef);
-        } catch (warning) {
-          console.warn('Erro ao deletar a logo antiga:', warning);
-        }
-      }
-    } else {
-      delete parceiroData.logoURL;
-      delete parceiroData.logoFile;
-    }
-    await updateDoc(docRef, parceiroData);
-    console.log('Parceiro atualizado com sucesso');
+    const novoStatus = !currentStatus;
+    await updateDoc(docRef, { ativo: novoStatus });
+    return novoStatus;
   } catch (error) {
-    console.error('Erro ao atualizar parceiro:', error);
+    console.error('Erro ao atualizar status do parceiro:', error);
     throw error;
   }
 }

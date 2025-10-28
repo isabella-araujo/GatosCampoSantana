@@ -14,7 +14,7 @@ export async function createVoluntario(voluntario) {
   try {
     const docRef = await addDoc(collection(db, 'voluntarios'), {
       ...voluntario,
-      createAt: serverTimestamp(),
+      createdAt: serverTimestamp(),
     });
 
     response.voluntarioId = docRef.id;

@@ -15,7 +15,7 @@ export async function createEndereco(endereco) {
   try {
     const docRef = await addDoc(collection(db, 'enderecos'), {
       ...endereco,
-      createAt: serverTimestamp(),
+      createdAt: serverTimestamp(),
     });
     response.enderecoId = docRef.id;
   } catch (error) {

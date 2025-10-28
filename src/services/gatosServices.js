@@ -64,7 +64,7 @@ export async function createGato(gatoData) {
   try {
     const gatosCollection = collection(db, 'gatos');
     const docRef = await addDoc(gatosCollection, gato);
-    return { id: docRef.id, ...gato, createAt: serverTimestamp() };
+    return { id: docRef.id, ...gato, createdAt: serverTimestamp() };
   } catch (error) {
     console.error('Erro ao criar gato:', error);
     throw error;

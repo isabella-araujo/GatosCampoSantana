@@ -110,7 +110,7 @@ export default function Voluntarios() {
           onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
         >
           <div className="delete-modal-content">
-            <p>Tem certeza que deseja excluir este contato?</p>
+            <p>Tem certeza que deseja excluir este voluntário?</p>
             <div className="delete-modal-actions">
               <Button size="small" variant="danger" onClick={handleDelete}>
                 Excluir

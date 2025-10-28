@@ -37,10 +37,10 @@ const Table = ({
       cell: (row) => (
         <>
           <span>
-            {row.createAt
-              ? row.createAt.toDate
-                ? row.createAt.toDate().toLocaleDateString('pt-BR')
-                : new Date(row.createAt).toLocaleDateString('pt-BR')
+            {row.createdAt
+              ? row.createdAt.toDate
+                ? row.createdAt.toDate().toLocaleDateString('pt-BR')
+                : new Date(row.createdAt).toLocaleDateString('pt-BR')
               : 'DD/MM/AAAA'}
           </span>
           <IoCalendarClearOutline size={16} color="#545F71" />
