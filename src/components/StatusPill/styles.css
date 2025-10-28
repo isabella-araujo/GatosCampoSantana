@@ -1,0 +1,9 @@
+.status-pill {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: var(--font-caption-size);
+  font-weight: 800;
+  background-color: var( --color-support-green);
+  color: var(--color-neutral-white);
+}

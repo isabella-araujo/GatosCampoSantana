@@ -16,6 +16,7 @@ import VoluntariosCadastro from '../pages/admin/Voluntarios/VoluntariosCadastro'
 import Objetivos from '../pages/admin/Objetivos';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
+import ParceirosCadastro from '../pages/admin/Parceiros/ParceirosCadastro';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,13 @@ const router = createBrowserRouter([
         children: [
           { index: true, Component: Gatos },
           { path: 'pontos-coleta', Component: PontosColeta },
-          { path: 'parceiros', Component: Parceiros },
+          {
+            path: 'parceiros',
+            children: [
+              { index: true, Component: Parceiros },
+              { path: 'cadastro', Component: ParceirosCadastro },
+            ],
+          },
           {
             path: 'voluntarios',
             children: [
