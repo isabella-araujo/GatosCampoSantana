@@ -55,6 +55,9 @@ export default function ParceirosEdit({
             <Controller
               name="logoFile"
               control={control}
+              rules={
+                parceiros?.logoURL ? {} : { required: 'Logo é obrigatória' }
+              }
               render={({ field: { onChange, value } }) => (
                 <ImageUploader
                   file={value}

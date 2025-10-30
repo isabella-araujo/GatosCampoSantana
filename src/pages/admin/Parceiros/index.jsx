@@ -88,7 +88,7 @@ export default function Parceiros() {
     dispatch({ type: 'OPEN_EDIT_MODAL', payload: parceiro });
   };
 
-  const handleClick = async (row) => {
+  const handleStatusClick = async (row) => {
     try {
       const updatedStatus = await toggleParceiroStatus(row.id, row.ativo);
       const updatedParceiros = parceiros.map((parceiro) =>
@@ -119,7 +119,10 @@ export default function Parceiros() {
     {
       name: 'Status',
       selector: (row) => (
-        <div onClick={() => handleClick(row)} style={{ cursor: 'pointer' }}>
+        <div
+          onClick={() => handleStatusClick(row)}
+          style={{ cursor: 'pointer' }}
+        >
           <StatusPill
             bgColor={
               row.ativo ? 'rgba(91, 190, 114, 0.5)' : 'rgba(254, 50, 49, 0.5)'

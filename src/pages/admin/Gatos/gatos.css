@@ -1,0 +1,91 @@
+.admin-pages-margin{
+  margin: 142px 0 42px 0;
+}
+
+.admin-title-container{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 54px;
+}
+.admin-subtitle{
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-subtitle-description{
+  max-width: 770px;
+  padding: 8px;
+  margin: 14px 0px;
+}
+
+.header-actions{
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container-img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+
+.form-buttons{
+  display: flex;
+  align-self: flex-start;
+  gap: 22px;
+  padding: 0 26px;
+}
+
+.delete-modal-content{
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 1rem;
+}
+
+.delete-modal-actions{
+  display: flex;
+  gap: 1rem;
+}
+
+.form-inputs-gatos {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.form-inputs__group-container {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+}
+
+.form-inputs__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 0;    
+  box-sizing: border-box;
+}
+
+.form-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group{
+  display: flex;
+  align-items: center;
+}

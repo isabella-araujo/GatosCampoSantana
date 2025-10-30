@@ -5,6 +5,7 @@ import { IoPencilOutline } from 'react-icons/io5';
 import { IoBanOutline } from 'react-icons/io5';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import IconButton from '../IconButton';
+import { formatDate } from '../../utils/validateDate';
 
 const Table = ({
   columns = [],
@@ -36,13 +37,7 @@ const Table = ({
       },
       cell: (row) => (
         <>
-          <span>
-            {row.createdAt
-              ? row.createdAt.toDate
-                ? row.createdAt.toDate().toLocaleDateString('pt-BR')
-                : new Date(row.createdAt).toLocaleDateString('pt-BR')
-              : 'DD/MM/AAAA'}
-          </span>
+          <span>{formatDate(row.createdAt)}</span>
           <IoCalendarClearOutline size={16} color="#545F71" />
         </>
       ),

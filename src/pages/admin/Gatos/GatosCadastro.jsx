@@ -1,0 +1,222 @@
+import './gatos.css';
+import Container from '../../../components/Container';
+import { useState } from 'react';
+import { createGato } from '../../../services/gatosServices';
+import { Controller, useForm } from 'react-hook-form';
+import ImageUploader from '../../../components/ImageUploader';
+import Input from '../../../components/Input';
+import Textarea from '../../../components/Textarea';
+import Button from '../../../components/Button';
+import Snackbar from '../../../components/Snackbar';
+import Dropdown from '../../../components/Dropdown';
+import Checkbox from '../../../components/Checkbox';
+
+export default function GatosCadastro() {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const optionsGenero = [
+    { value: 'macho', title: 'Macho' },
+    { value: 'femea', title: 'Fêmea' },
+    { value: 'nao-informado', title: 'Não informado' },
+  ];
+  const optionsFivFelv = [
+    { value: 'possui', title: 'Possui' },
+    { value: 'nao-possui', title: 'Não Possui' },
+    { value: 'nao-testado', title: 'Não testado' },
+  ];
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setError,
+  } = useForm({
+    defaultValues: {
+      nome: '',
+      nascimento: '',
+      descricao: '',
+      fotoFile: null,
+      genero: '',
+      castrado: false,
+      possuiFievFelv: false,
+      disponivelAdocao: true,
+      disponivelLarTemporario: false,
+    },
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      setIsSubmitting(true);
+      const response = await createGato(data);
+      if (response.error) throw new Error(response.error.message);
+      setShowConfirmation(true);
+      reset();
+    } catch (error) {
+      setError('root', {
+        message: error.message || 'Erro ao cadastrar parceiro',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="admin-pages-margin">
+      <div className="admin-title-container">
+        <h2 className="text-display">Cadastrar Gatos</h2>
+      </div>
+
+      <Container style={{ width: '984px' }}>
+        <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-container-img">
+            <Controller
+              name="fotoFile"
+              control={control}
+              rules={{ required: 'Foto é obrigatória' }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <ImageUploader
+                  file={value}
+                  onFile={(file) => onChange(file)}
+                  error={error?.message}
+                  onError={() => {}}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Carregar imagem
+                </ImageUploader>
+              )}
+            />
+            <div className="form-inputs-gatos">
+              <div className="form-inputs__group-container">
+                <div className="form-inputs__group">
+                  <Input
+                    id="nome"
+                    label="Nome"
+                    type="text"
+                    placeholder="Nome do Gatinho"
+                    {...register('nome', {
+                      required: 'Nome é obrigatório',
+                      minLength: {
+                        value: 3,
+                        message: 'Nome tem que ter pelo menos 3 caracteres',
+                      },
+                    })}
+                    error={errors.nome?.message}
+                  />
+                  <div className="form-group">
+                    <div className="input-nascimento">
+                      <Input
+                        id="nascimento"
+                        label="Nascimento"
+                        type="date"
+                        placeholder="DD/MM/AAAA"
+                        {...register('nascimento', {
+                          required: 'Nascimento é obrigatório',
+                        })}
+                        error={errors.nascimento?.message}
+                      />
+                    </div>
+                    <div className="input-genero">
+                      <label>Gênero</label>
+                      <Controller
+                        name="genero"
+                        control={control}
+                        render={({ field }) => (
+                          <Dropdown
+                            label="Selecione o gênero"
+                            options={optionsGenero}
+                            onSelect={(option) => field.onChange(option.value)}
+                          />
+                        )}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="form-inputs__group">
+                  <div>
+                    <label>Fiv/Felv</label>
+                    <Controller
+                      name="possuiFievFelv"
+                      control={control}
+                      render={({ field }) => (
+                        <Dropdown
+                          label="possui Fiev/Felv?"
+                          options={optionsFivFelv}
+                          onSelect={(option) => field.onChange(option.value)}
+                        />
+                      )}
+                    />
+                  </div>
+                  <div className="form-checkboxes">
+                    <Controller
+                      name="castrado"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          label="Castrado(a)"
+                          checked={field.value}
+                          onChecked={(val) => field.onChange(val)}
+                        />
+                      )}
+                    />
+
+                    <Controller
+                      name="disponivelAdocao"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          label="Disponível para Adoção"
+                          checked={field.value}
+                          onChecked={(val) => field.onChange(val)}
+                        />
+                      )}
+                    />
+
+                    <Controller
+                      name="disponivelLarTemporario"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          label="Disponível para Lar Temporário"
+                          checked={field.value}
+                          onChecked={(val) => field.onChange(val)}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+              </div>
+              <Textarea
+                id="descricao"
+                label="Descrição"
+                placeholder="Descrição do gatinho..."
+                rows="8"
+                {...register('descricao', {
+                  required: 'Descrição é obrigatório',
+                  maxLength: {
+                    value: 350,
+                    message: 'Máximo de 350 caracteres',
+                  },
+                })}
+                error={errors.descricao?.message}
+              />
+            </div>
+          </div>
+
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando...' : 'Cadastrar'}
+          </Button>
+        </form>
+      </Container>
+      <Snackbar
+        open={showConfirmation}
+        message="Gato cadastrado com sucesso!"
+        onClose={() => setShowConfirmation(false)}
+      />
+    </div>
+  );
+}

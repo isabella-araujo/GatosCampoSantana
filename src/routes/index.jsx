@@ -17,6 +17,7 @@ import Objetivos from '../pages/admin/Objetivos';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
 import ParceirosCadastro from '../pages/admin/Parceiros/ParceirosCadastro';
+import GatosCadastro from '../pages/admin/Gatos/GatosCadastro';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,13 @@ const router = createBrowserRouter([
         Component: AdminLayout,
         children: [
           { index: true, Component: Gatos },
+          {
+            path: 'gatos',
+            children: [
+              { index: true, Component: Gatos },
+              { path: 'cadastro', Component: GatosCadastro },
+            ],
+          },
           { path: 'pontos-coleta', Component: PontosColeta },
           {
             path: 'parceiros',
