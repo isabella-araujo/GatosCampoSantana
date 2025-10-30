@@ -14,25 +14,32 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { storage } from '../services/firebase.js';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../config/firebase.js';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
 ///Função para fazer upload da imagem do gato para o Firebase Storage
 export async function uploadGatoImage(fotoFile) {
-  if (!fotoFile) {
-    throw new Error('Nenhum arquivo fornecido para upload.');
-  }
-  const storageRef = ref(storage, `gatos/${uuidv4()}_${fotoFile.name}`);
+  if (!fotoFile) throw new Error('Nenhum arquivo fornecido para upload.');
+
+  const fotoPath = `gatos/${uuidv4()}_${fotoFile.name}`;
+  const storageRef = ref(storage, fotoPath);
+
   try {
     await uploadBytes(storageRef, fotoFile);
     const downloadURL = await getDownloadURL(storageRef);
-    return downloadURL;
+    return { fotoURL: downloadURL, fotoPath };
   } catch (error) {
     console.error('Erro ao fazer upload da imagem:', error);
     throw error;
   }
 }
+
 /// Função para criar um novo gato no Firestore
 export async function createGato(gatoData) {
   const camposObrigatorios = ['nome', 'nascimento', 'descricao', 'fotoFile'];
@@ -47,28 +54,26 @@ export async function createGato(gatoData) {
       ? gatoData.nascimento
       : new Date(gatoData.nascimento);
 
-  const fotoURL = await uploadGatoImage(gatoData.fotoFile);
+  const { fotoURL, fotoPath } = await uploadGatoImage(gatoData.fotoFile);
 
   const gato = {
     castrado: false,
     disponivelAdocao: true,
     disponivelLarTemporario: false,
     possuiFievFelv: false,
+    genero: 'não informado',
     ...gatoData,
     nascimento: Timestamp.fromDate(nascimentoDate),
-    foto: fotoURL,
+    fotoURL,
+    fotoPath,
+    createdAt: serverTimestamp(),
   };
 
   delete gato.fotoFile;
 
-  try {
-    const gatosCollection = collection(db, 'gatos');
-    const docRef = await addDoc(gatosCollection, gato);
-    return { id: docRef.id, ...gato, createdAt: serverTimestamp() };
-  } catch (error) {
-    console.error('Erro ao criar gato:', error);
-    throw error;
-  }
+  const gatosCollection = collection(db, 'gatos');
+  const docRef = await addDoc(gatosCollection, gato);
+  return { id: docRef.id, ...gato };
 }
 
 /// Função para buscar um gato pelo ID
@@ -134,13 +139,22 @@ export async function getGatosNextPage(lastDoc) {
 export async function getAllGatos() {
   try {
     const gatosCollection = collection(db, 'gatos');
-    //const q = query(gatosCollection, orderBy("nascimento", "desc"));
     const snapshot = await getDocs(gatosCollection);
 
-    return snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    return snapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        id: doc.id,
+        ...data,
+        nascimento: data.nascimento?.toDate
+          ? data.nascimento.toDate()
+          : data.nascimento,
+        createdAt: data.createdAt?.toDate
+          ? data.createdAt.toDate()
+          : data.createdAt,
+      };
+    });
   } catch (error) {
     console.error('Erro ao buscar todos os gatos:', error);
     throw error;
@@ -164,39 +178,34 @@ export async function deleteGato(id) {
 
 /// Função para atualizar os dados de um gato pelo ID
 export async function updateGato(id, gatoData) {
-  if (!id) {
-    throw new Error('ID do gato inválido.');
-  }
-  if (!gatoData || Object.keys(gatoData).length === 0) {
+  if (!id) throw new Error('ID do gato inválido.');
+  if (!gatoData || Object.keys(gatoData).length === 0)
     throw new Error('Nenhum dado fornecido para atualização.');
-  }
+
+  const docRef = doc(db, 'gatos', id);
+  const gatoSnapshot = await getDoc(docRef);
+  if (!gatoSnapshot.exists()) throw new Error('Gato não encontrado.');
+
+  const oldData = gatoSnapshot.data();
 
   try {
-    const docRef = doc(db, 'gatos', id);
-    if (!docRef) {
-      throw new Error('Referência do documento inválida.');
-    }
     if (gatoData.fotoFile) {
-      const gatoSnapshot = await getDoc(docRef);
-      const oldData = gatoSnapshot.data();
-      const oldFotoURL = oldData ? oldData.fotoURL : null;
+      const newFotoFile = gatoData.fotoFile;
+      const { fotoURL, fotoPath } = await uploadGatoImage(newFotoFile);
+      gatoData.fotoURL = fotoURL;
+      gatoData.fotoPath = fotoPath;
 
-      const newFotoURL = await uploadGatoImage(gatoData.fotoFile);
-      gatoData.fotoURL = newFotoURL;
-      delete gatoData.fotoFile;
-
-      if (oldFotoURL && oldFotoURL !== newFotoURL) {
+      if (oldData.fotoPath && oldData.fotoPath !== fotoPath) {
         try {
-          const oldFotoRef = ref(storage, oldFotoURL);
-          await oldFotoRef.delete();
+          await deleteObject(ref(storage, oldData.fotoPath));
+          console.log('Imagem antiga deletada com sucesso.');
         } catch (warning) {
-          console.warn('Erro ao deletar a imagem antiga:', warning);
+          console.warn('Erro ao deletar imagem antiga:', warning);
         }
       }
-    } else {
-      delete gatoData.fotoURL;
       delete gatoData.fotoFile;
     }
+
     if (gatoData.nascimento) {
       gatoData.nascimento =
         gatoData.nascimento instanceof Date
@@ -204,6 +213,7 @@ export async function updateGato(id, gatoData) {
           : gatoData.nascimento;
     }
     await updateDoc(docRef, gatoData);
+
     const updatedSnapshot = await getDoc(docRef);
     return { id: updatedSnapshot.id, ...updatedSnapshot.data() };
   } catch (error) {
@@ -211,3 +221,36 @@ export async function updateGato(id, gatoData) {
     throw error;
   }
 }
+
+/** *
+ * export async function uppdateDisponivelAdocao(id, currentDisponivelAdocao) {
+  if (!id) {
+    throw new Error('ID do gato inválido.');
+  }
+  try {
+    const docRef = doc(db, 'gatos', id);
+    const novoStatus = !currentDisponivelAdocao;
+    await updateDoc(docRef, { disponivelAdocao: novoStatus });
+    return novoStatus;
+  } catch (error) {
+    console.error('Erro ao atualizar disponibilidade para adoção:', error);
+    throw error;
+  }
+}
+
+export async function updateCastrado(id, currentCastrado) {
+  if (!id) {
+    throw new Error('ID do gato inválido.');
+  }
+  try {
+    const docRef = doc(db, 'gatos', id);
+    const novoStatus = !currentCastrado;
+    await updateDoc(docRef, { castrado: novoStatus });
+    return novoStatus;
+  } catch (error) {
+    console.error('Erro ao atualizar status de castração:', error);
+    throw error;
+  }
+}
+ * 
+*/

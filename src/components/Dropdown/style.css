@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    position: relative;
 }
 
-.dropdown-label {
+.dropdown-label-cointainer {
     width: fit-content;
     height: 50px;
     border: none;
@@ -18,15 +19,15 @@
     gap: 8px;
 }
 
-.dropdown-label:focus {
+.dropdown-label-cointainer:focus {
     outline: none;
 }
 
-.dropdown-label:hover {
+.dropdown-label-cointainer:hover {
     cursor: pointer;
 }
 
-.label {
+.dropdown-label {
     display: flex;
     justify-content: center;
     font-weight: bold;
@@ -38,6 +39,9 @@
 }
 
 .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -52,4 +56,3 @@
     cursor: pointer;
     text-decoration: underline;
 }
-

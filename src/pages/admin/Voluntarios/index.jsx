@@ -83,7 +83,7 @@ export default function Voluntarios() {
           <p className="text-body admin-subtitle">Lista de voluntários</p>
           <p className="text-body">
             Consulte os dados dos voluntários cadastrados e acesse ações como
-            edição, bloqueio, exclusão e cadastro de novos membros.
+            exclusão e cadastro de novos membros.
           </p>
         </div>
 

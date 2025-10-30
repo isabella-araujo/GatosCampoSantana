@@ -7,7 +7,6 @@ import Textarea from '../../../components/Textarea';
 import Button from '../../../components/Button';
 import Snackbar from '../../../components/Snackbar';
 import Container from '../../../components/Container';
-//ParceirosCadastro.jsx
 export default function ParceirosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
