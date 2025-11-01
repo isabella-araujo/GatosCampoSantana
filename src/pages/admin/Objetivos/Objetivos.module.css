@@ -1,0 +1,48 @@
+.confirmModalContent{
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 1rem;
+}
+
+.confirmModalActions{
+  display: flex;
+  gap: 1rem;
+}
+
+.listGroup{
+  margin: 14px 0 52px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.listContainer{
+  background-color: rgba(120, 120, 128, 0.16);
+  border-radius: 24px;
+  padding: 22px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.listItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listItemTitle{
+  display: flex;
+  gap: 18px;
+  font-weight: 700;
+}
+.listItemTitleNumber{
+  background-color: var(--color-neutral-white);
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

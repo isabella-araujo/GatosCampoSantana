@@ -1,13 +1,11 @@
-import './voluntarios.css';
+import styles from '../styles/AdminCommon.module.css';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import Snackbar from '../../../components/Snackbar';
 import { regexEmail } from '../../../utils/regex';
 import { signUpUser } from '../../../services/authServices';
 import { createVoluntario } from '../../../services/voluntariosServices';
 import { IoPersonCircleSharp } from 'react-icons/io5';
+import { Input, Button, Snackbar } from '../../../components';
 
 export default function VoluntariosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -46,15 +44,15 @@ export default function VoluntariosCadastro() {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h2 className="text-display">Cadastrar Voluntário</h2>
       </div>
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-icon">
+      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formIcon}>
           <IoPersonCircleSharp size={134} color="var(--color-primary-blue)" />
         </div>
-        <div className="form-inputs">
+        <div className={styles.formInputs}>
           <Input
             id="email"
             label={'Email'}

@@ -1,5 +1,5 @@
+import styles from '../styles/AdminCommon.module.css';
 import { useEffect, useReducer, useState } from 'react';
-import './parceiros.css';
 import {
   deleteParceiro,
   getParceiros,
@@ -7,13 +7,15 @@ import {
 } from '../../../services/parceirosServices';
 import { search } from '../../../utils/searchUtils';
 import { useNavigate } from 'react-router-dom';
-import Container from '../../../components/Container';
-import SearchArea from '../../../components/SearchArea';
-import Button from '../../../components/Button';
-import Table from '../../../components/Table';
-import Modal from '../../../components/Modal';
-import StatusPill from '../../../components/StatusPill';
 import ParceirosEdit from './ParceirosEdit';
+import {
+  Container,
+  SearchArea,
+  Table,
+  StatusPill,
+  Button,
+  Modal,
+} from '../../../components';
 
 const initialState = {
   parceiros: [],
@@ -146,21 +148,23 @@ export default function Parceiros() {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h2 className="text-display">Parceiros</h2>
       </div>
 
       <Container style={{ width: '1224px' }}>
-        <div className="admin-subtitle-description">
-          <p className="text-body admin-subtitle">Lista de parceiros</p>
+        <div className={styles.subtitleDescription}>
+          <p className={`${styles.adminSubtitle} text-body`}>
+            Lista de parceiros
+          </p>
           <p className="text-body">
             Consulte os registros dos parceiros cadastrados e realize ações como
             editar, excluir ou adicionar novos.
           </p>
         </div>
 
-        <div className="header-actions">
+        <div className={styles.headerActions}>
           <div style={{ width: '324px' }}>
             <SearchArea onChange={handleSearch} />
           </div>
@@ -185,9 +189,9 @@ export default function Parceiros() {
           open={openModalConfirm}
           onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
         >
-          <div className="delete-modal-content">
+          <div className={styles.deleteModalContent}>
             <p>Tem certeza que deseja excluir este parceiro?</p>
-            <div className="delete-modal-actions">
+            <div className={styles.deleteModalActions}>
               <Button size="small" variant="danger" onClick={handleDelete}>
                 Excluir
               </Button>

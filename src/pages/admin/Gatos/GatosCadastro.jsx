@@ -1,15 +1,18 @@
-import './gatos.css';
-import Container from '../../../components/Container';
+import styles from '../styles/AdminCommon.module.css';
+import localStyles from './Gatos.module.css';
 import { useState } from 'react';
 import { createGato } from '../../../services/gatosServices';
 import { Controller, useForm } from 'react-hook-form';
-import ImageUploader from '../../../components/ImageUploader';
-import Input from '../../../components/Input';
-import Textarea from '../../../components/Textarea';
-import Button from '../../../components/Button';
-import Snackbar from '../../../components/Snackbar';
-import Dropdown from '../../../components/Dropdown';
-import Checkbox from '../../../components/Checkbox';
+import {
+  Container,
+  Input,
+  Textarea,
+  Button,
+  Snackbar,
+  ImageUploader,
+  Dropdown,
+  Checkbox,
+} from '../../../components';
 
 export default function GatosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -63,14 +66,17 @@ export default function GatosCadastro() {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h2 className="text-display">Cadastrar Gatos</h2>
       </div>
 
       <Container style={{ width: '984px' }}>
-        <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-container-img">
+        <form
+          className={styles.formContainer}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className={styles.formContainerImg}>
             <Controller
               name="fotoFile"
               control={control}
@@ -90,9 +96,9 @@ export default function GatosCadastro() {
                 </ImageUploader>
               )}
             />
-            <div className="form-inputs-gatos">
-              <div className="form-inputs__group-container">
-                <div className="form-inputs__group">
+            <div className={localStyles.formInputsGatos}>
+              <div className={localStyles.groupContainer}>
+                <div className={localStyles.group}>
                   <Input
                     id="nome"
                     label="Nome"
@@ -107,8 +113,8 @@ export default function GatosCadastro() {
                     })}
                     error={errors.nome?.message}
                   />
-                  <div className="form-group">
-                    <div className="input-nascimento">
+                  <div className={localStyles.formGroup}>
+                    <div>
                       <Input
                         id="nascimento"
                         label="Nascimento"
@@ -120,7 +126,7 @@ export default function GatosCadastro() {
                         error={errors.nascimento?.message}
                       />
                     </div>
-                    <div className="input-genero">
+                    <div>
                       <label>Gênero</label>
                       <Controller
                         name="genero"
@@ -136,7 +142,7 @@ export default function GatosCadastro() {
                     </div>
                   </div>
                 </div>
-                <div className="form-inputs__group">
+                <div className={localStyles.group}>
                   <div>
                     <label>Fiv/Felv</label>
                     <Controller
@@ -151,7 +157,7 @@ export default function GatosCadastro() {
                       )}
                     />
                   </div>
-                  <div className="form-checkboxes">
+                  <div className={localStyles.formCheckboxes}>
                     <Controller
                       name="castrado"
                       control={control}

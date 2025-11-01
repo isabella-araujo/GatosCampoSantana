@@ -1,10 +1,8 @@
 import { Controller, useForm } from 'react-hook-form';
-import { updateParceiro } from '../../../services/parceirosServices';
-import ImageUploader from '../../../components/ImageUploader';
-import Input from '../../../components/Input';
-import Textarea from '../../../components/Textarea';
-import Button from '../../../components/Button';
+import styles from '../styles/AdminCommon.module.css';
 import { useEffect } from 'react';
+import { updateParceiro } from '../../../services/parceirosServices';
+import { Input, Textarea, Button, ImageUploader } from '../../../components';
 
 export default function ParceirosEdit({
   parceiros,
@@ -44,14 +42,14 @@ export default function ParceirosEdit({
   };
 
   return (
-    <div className="form-container">
+    <div className={styles.formContainer}>
       <div className="text-subtitle">
         <h3>Editar Parceiro</h3>
       </div>
 
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-container-img">
-          <div className="form-img-uploader">
+      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formContainerImg}>
+          <div className={styles.formImgUploader}>
             <Controller
               name="logoFile"
               control={control}
@@ -71,7 +69,7 @@ export default function ParceirosEdit({
             />
           </div>
 
-          <div className="form-inputs">
+          <div className={styles.formInputs}>
             <Input
               id="nome"
               label="Nome"
@@ -109,7 +107,7 @@ export default function ParceirosEdit({
           </div>
         </div>
 
-        <div className="form-buttons">
+        <div className={styles.formButtons}>
           <Button size="small" variant="secondary" type="submit">
             Editar
           </Button>

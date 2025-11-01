@@ -1,16 +1,18 @@
-import './voluntarios.css';
-import Container from '../../../components/Container';
-import SearchArea from '../../../components/SearchArea';
-import Button from '../../../components/Button';
-import Table from '../../../components/Table';
-import Modal from '../../../components/Modal';
 import { useNavigate } from 'react-router-dom';
+import styles from '../styles/AdminCommon.module.css';
 import { useEffect, useReducer, useState } from 'react';
 import {
   deleteVoluntario,
   getVoluntarios,
 } from '../../../services/voluntariosServices';
 import { search } from '../../../utils/searchUtils';
+import {
+  Container,
+  SearchArea,
+  Table,
+  Modal,
+  Button,
+} from '../../../components';
 
 const initialState = {
   voluntarios: [],
@@ -73,21 +75,23 @@ export default function Voluntarios() {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h2 className="text-display">Voluntários</h2>
       </div>
 
       <Container style={{ width: '1224px' }}>
-        <div className="admin-subtitle-description">
-          <p className="text-body admin-subtitle">Lista de voluntários</p>
+        <div className={styles.subtitleDescription}>
+          <p className={`${styles.adminSubtitle} text-body`}>
+            Lista de voluntários
+          </p>
           <p className="text-body">
             Consulte os dados dos voluntários cadastrados e acesse ações como
             exclusão e cadastro de novos membros.
           </p>
         </div>
 
-        <div className="header-actions">
+        <div className={styles.headerActions}>
           <div style={{ width: '324px' }}>
             <SearchArea onChange={handleSearch} />
           </div>
@@ -109,9 +113,9 @@ export default function Voluntarios() {
           open={openModalConfirm}
           onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
         >
-          <div className="delete-modal-content">
+          <div className={styles.deleteModalContent}>
             <p>Tem certeza que deseja excluir este voluntário?</p>
-            <div className="delete-modal-actions">
+            <div className={styles.deleteModalActions}>
               <Button size="small" variant="danger" onClick={handleDelete}>
                 Excluir
               </Button>

@@ -1,9 +1,5 @@
-import './objetivos.css';
-import Button from '../../../components/Button';
-import IconButton from '../../../components/IconButton';
-import Container from '../../../components/Container';
-import Modal from '../../../components/Modal';
-import Snackbar from '../../../components/Snackbar';
+import styles from '../styles/AdminCommon.module.css';
+import localStyles from './Objetivos.module.css';
 import { IoPencilOutline } from 'react-icons/io5';
 import { useEffect, useReducer } from 'react';
 import ObjetivosEdit from './ObjetivosEdit';
@@ -11,6 +7,13 @@ import {
   getObjetivos,
   updateObjetivos,
 } from '../../../services/objetivosServices';
+import {
+  Container,
+  IconButton,
+  Modal,
+  Button,
+  Snackbar,
+} from '../../../components';
 
 const initialState = {
   objetivos: [],
@@ -103,14 +106,14 @@ export default function Objetivos() {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h2 className="text-display">Objetivos</h2>
       </div>
 
       <Container style={{ width: '818px' }}>
-        <div className="admin-subtitle-description">
-          <p className="text-body admin-subtitle">
+        <div className={styles.subtitleDescription}>
+          <p className={`${styles.adminSubtitle} text-body`}>
             Lista de objetivos que serão mostrados na página “home”
           </p>
           <p className="text-body">
@@ -118,13 +121,15 @@ export default function Objetivos() {
           </p>
         </div>
 
-        <div className="admin-list-group">
+        <div className={localStyles.listGroup}>
           {objetivosEditados.slice(0, 3).map((obj, index) => (
-            <div key={index} className="admin-list-container">
-              <div className="admin-list-item">
-                <div className="list-item-title">
-                  <span className="list-item-title__number">{index + 1}</span>
-                  <h3 className="text-body list-item-title__text">
+            <div key={index} className={localStyles.listContainer}>
+              <div className={localStyles.listItem}>
+                <div className={localStyles.listItemTitle}>
+                  <span className={localStyles.listItemTitleNumber}>
+                    {index + 1}
+                  </span>
+                  <h3 className="text-body ">
                     {obj?.titulo || 'Escreva o título do objetivo aqui.'}
                   </h3>
                 </div>
@@ -141,7 +146,7 @@ export default function Objetivos() {
           ))}
         </div>
 
-        <div className="form-button">
+        <div className={styles.formButton}>
           <Button
             variant="secondary"
             size="large"
