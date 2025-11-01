@@ -10,19 +10,17 @@ import {
 import { db } from '../config/firebase';
 
 export async function createVoluntario(voluntario) {
-  let response = new Object();
+  let response = {};
   try {
     const docRef = await addDoc(collection(db, 'voluntarios'), {
       ...voluntario,
       createdAt: serverTimestamp(),
     });
-
     response.voluntarioId = docRef.id;
   } catch (error) {
     console.log(`${error.code} = ${error.message}`);
     response.error = error.message;
   }
-
   return response;
 }
 

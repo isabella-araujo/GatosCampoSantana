@@ -5,6 +5,8 @@ import {
   signOut,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 export async function signInUser(userData) {
   let response = new Object();
@@ -50,6 +52,19 @@ export async function signUpUser(userData) {
       };
     });
   return response;
+}
+export async function createUserDoc(user) {
+  try {
+    const userRef = doc(db, 'users', user.id);
+    await setDoc(userRef, {
+      email: user.email,
+      role: 'volunteer',
+      createdAt: serverTimestamp(),
+    });
+    console.log('Usuário salvo no Firestore com role volunteer');
+  } catch (error) {
+    console.error('Erro ao salvar usuário:', error);
+  }
 }
 
 export async function resetPasswordUser(userData) {

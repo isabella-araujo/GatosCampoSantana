@@ -1,12 +1,10 @@
-import { Navigate, Outlet } from "react-router";
-import { useAuth } from "../hooks/useAuth";
+import { Navigate, Outlet } from 'react-router';
+import { useAuth } from '../hooks/useAuth';
 
 export function PublicOnlyRoute() {
-    const { user } = useAuth()
+  const { user, loading } = useAuth();
 
-    if(user) {
-        return <Navigate to='/admin' replace />
-    } else {
-        return <Outlet />
-    }
+  if (loading) return <div>Carregando...</div>;
+
+  return user ? <Navigate to="/admin" replace /> : <Outlet />;
 }
