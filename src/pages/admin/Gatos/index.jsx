@@ -1,5 +1,5 @@
 import styles from '../styles/AdminCommon.module.css';
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formartBirthDate, formatDate } from '../../../utils/validateDate';
 import { deleteGato, getAllGatos } from '../../../services/gatosServices';
@@ -13,7 +13,9 @@ import {
   Table,
   Modal,
   StatusPill,
+  Tooltip,
 } from '../../../components';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const initialState = {
   gatos: [],
@@ -52,6 +54,12 @@ export default function Gatos() {
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState([]);
   const { gatos, openEditModal, openModalConfirm, selectedGato } = state;
+  const { role } = useContext(AuthContext);
+  const [isAdmin, setIsAdmin] = useState(role === 'admin');
+
+  useEffect(() => {
+    setIsAdmin(role === 'admin');
+  }, [role]);
 
   useEffect(() => {
     fetchGatos();
@@ -85,41 +93,6 @@ export default function Gatos() {
   const handleEditClick = (gato) => {
     dispatch({ type: 'OPEN_EDIT_MODAL', payload: gato });
   };
-
-  /*
-  const handleStatusClick = async (row) => {
-  try {
-    const updatedDisponivelAdocao = await uppdateDisponivelAdocao(
-      row.id,
-      row.disponivelAdocao
-    );
-    const updatedGatos = gatos.map((gato) =>
-      gato.id === row.id
-        ? { ...gato, disponivelAdocao: updatedDisponivelAdocao }
-        : gato
-    );
-    dispatch({ type: "SET_GATOS", payload: updatedGatos });
-  } catch (error) {
-    console.error("Erro ao atualizar disponibilidade para adoção:", error);
-  }
-};
-
-const handleCastradoClick = async (row) => {
-  try {
-    const updatedCastrado = await updateCastrado(row.id, row.castrado);
-
-    const updatedGatos = gatos.map((gato) =>
-      gato.id === row.id
-        ? { ...gato, castrado: updatedCastrado }
-        : gato
-    );
-
-    dispatch({ type: "SET_GATOS", payload: updatedGatos });
-  } catch (error) {
-    console.error("Erro ao atualizar status de castração:", error);
-  }
-};
-*/
 
   const columns = [
     {
@@ -239,9 +212,16 @@ const handleCastradoClick = async (row) => {
           <div className={styles.deleteModalContent}>
             <p>Tem certeza que deseja excluir este gato?</p>
             <div className={styles.deleteModalActions}>
-              <Button size="small" variant="danger" onClick={handleDelete}>
-                Excluir
-              </Button>
+              <Tooltip text="Apenas Admin podem excluir gato">
+                <Button
+                  size="small"
+                  variant="danger"
+                  onClick={handleDelete}
+                  disabled={!isAdmin}
+                >
+                  Excluir
+                </Button>
+              </Tooltip>
               <Button
                 size="small"
                 variant="secondary"

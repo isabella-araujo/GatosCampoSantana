@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/AdminCommon.module.css';
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import {
   deleteVoluntario,
   getVoluntarios,
@@ -12,7 +12,9 @@ import {
   Table,
   Modal,
   Button,
+  Tooltip,
 } from '../../../components';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const initialState = {
   voluntarios: [],
@@ -42,6 +44,12 @@ export default function Voluntarios() {
   const [state, dispatch] = useReducer(voluntariosReducer, initialState);
   const { voluntarios, openModalConfirm, selectedVoluntario } = state;
   const [filteredData, setFilteredData] = useState([]);
+  const { role } = useContext(AuthContext);
+  const [isAdmin, setIsAdmin] = useState(role === 'admin');
+
+  useEffect(() => {
+    setIsAdmin(role === 'admin');
+  }, [role]);
 
   useEffect(() => {
     fetchVoluntarios();
@@ -95,40 +103,60 @@ export default function Voluntarios() {
           <div style={{ width: '324px' }}>
             <SearchArea onChange={handleSearch} />
           </div>
-          <Button
-            variant="secondary"
-            size="medium"
-            onClick={() => navigate('cadastro')}
-          >
-            Cadastrar Voluntário
-          </Button>
+          <Tooltip text="Apenas Admin podem cadastrar voluntário">
+            <Button
+              variant="secondary"
+              size="medium"
+              onClick={() => navigate('cadastro')}
+              disabled={!isAdmin}
+            >
+              Cadastrar Voluntário
+            </Button>
+          </Tooltip>
         </div>
-        <Table
-          columns={columns}
-          data={filteredData.length === 0 ? voluntarios : filteredData}
-          onDelete={(v) => dispatch({ type: 'OPEN_MODALCONFIRM', payload: v })}
-        />
+        {!isAdmin ? (
+          <p
+            className="text-body"
+            style={{
+              color: 'var(--color-support-red)',
+              textAlign: 'center',
+              marginTop: '32px',
+            }}
+          >
+            Apenas administradores tem acesso aos voluntários.
+          </p>
+        ) : (
+          <>
+            <Table
+              columns={columns}
+              data={filteredData.length === 0 ? voluntarios : filteredData}
+              onDelete={(v) =>
+                dispatch({ type: 'OPEN_MODALCONFIRM', payload: v })
+              }
+            />
 
-        <Modal
-          open={openModalConfirm}
-          onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
-        >
-          <div className={styles.deleteModalContent}>
-            <p>Tem certeza que deseja excluir este voluntário?</p>
-            <div className={styles.deleteModalActions}>
-              <Button size="small" variant="danger" onClick={handleDelete}>
-                Excluir
-              </Button>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
-              >
-                Cancelar
-              </Button>
-            </div>
-          </div>
-        </Modal>
+            <Modal
+              open={openModalConfirm}
+              onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
+            >
+              <div className={styles.deleteModalContent}>
+                <p>Tem certeza que deseja excluir este voluntário?</p>
+                <div className={styles.deleteModalActions}>
+                  <Button size="small" variant="danger" onClick={handleDelete}>
+                    Excluir
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="secondary"
+                    onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
+                  >
+                    Cancelar
+                  </Button>
+                </div>
+              </div>
+            </Modal>
+          </>
+        )}
       </Container>
     </div>
   );

@@ -13,3 +13,4 @@ export { default as Table } from './Table/Table.jsx';
 export { default as Textarea } from './Textarea/Textarea.jsx';
 export { default as Modal } from './Modal/Modal.jsx';
 export { default as StatusPill } from './StatusPill/StatusPill.jsx';
+export { default as Tooltip } from './Tooltip/Tooltip.jsx';
