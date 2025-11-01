@@ -1,11 +1,13 @@
 import styles from '../styles/AdminCommon.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { regexEmail } from '../../../utils/regex';
 import { signUpUser } from '../../../services/authServices';
 import { createVoluntario } from '../../../services/voluntariosServices';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { Input, Button, Snackbar } from '../../../components';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 export default function VoluntariosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -18,6 +20,11 @@ export default function VoluntariosCadastro() {
     setError,
   } = useForm();
   const senha = watch('senha');
+  const { role } = useContext(AuthContext);
+
+  if (role !== 'admin') {
+    return <Navigate to="/admin/voluntarios" replace />;
+  }
 
   const onSubmit = async (data) => {
     const signUpResponse = await signUpUser({
@@ -38,7 +45,14 @@ export default function VoluntariosCadastro() {
       return;
     }
 
-    await createVoluntario(data);
+    const user = signUpResponse.user;
+    await createVoluntario({
+      ...data,
+      userId: user.id,
+      email: user.email,
+      role: 'volunteer', // papel padrão
+    });
+
     setShowConfirmation(true);
     reset();
   };
