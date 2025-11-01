@@ -1,0 +1,5 @@
+.errorMessage {
+    margin: 0 2px;
+    color: var(--color-support-red);
+    font-style: italic;
+}

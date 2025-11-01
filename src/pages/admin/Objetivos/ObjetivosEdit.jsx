@@ -1,7 +1,6 @@
+import styles from '../styles/AdminCommon.module.css';
 import { useForm } from 'react-hook-form';
-import Button from '../../../components/Button';
-import Input from '../../../components/Input';
-import Textarea from '../../../components/Textarea';
+import { Input, Textarea, Button } from '../../../components';
 export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
   const {
     register,
@@ -22,13 +21,13 @@ export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
   };
 
   return (
-    <div className="form-container">
+    <div className={styles.formContainer}>
       <div className="text-subtitle">
         <h3>Edite Objetivo</h3>
       </div>
 
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-inputs">
+      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formInputs}>
           <Input
             id="titulo"
             label="Título"
@@ -69,7 +68,7 @@ export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
           />
         </div>
 
-        <div className="form-buttons">
+        <div className={styles.formButtons}>
           <Button size="small" variant="secondary" type="submit">
             Editar
           </Button>

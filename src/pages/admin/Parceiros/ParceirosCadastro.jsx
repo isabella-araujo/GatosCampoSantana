@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import styles from '../styles/AdminCommon.module.css';
 import { Controller, useForm } from 'react-hook-form';
 import { createParceiro } from '../../../services/parceirosServices';
-import ImageUploader from '../../../components/ImageUploader';
-import Input from '../../../components/Input';
-import Textarea from '../../../components/Textarea';
-import Button from '../../../components/Button';
-import Snackbar from '../../../components/Snackbar';
-import Container from '../../../components/Container';
+import {
+  Container,
+  Input,
+  Textarea,
+  Button,
+  Snackbar,
+  ImageUploader,
+} from '../../../components';
 export default function ParceirosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,14 +40,17 @@ export default function ParceirosCadastro() {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h1 className="text-display">Cadastrar Parceiros</h1>
       </div>
 
       <Container style={{ width: '646px' }}>
-        <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-container-img">
+        <form
+          className={styles.formContainer}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className={styles.formContainerImg}>
             <Controller
               name="logoFile"
               control={control}
@@ -65,7 +71,7 @@ export default function ParceirosCadastro() {
               )}
             />
 
-            <div className="form-inputs">
+            <div className={styles.formInputs}>
               <Input
                 id="nome"
                 label="Nome"

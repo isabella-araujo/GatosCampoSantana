@@ -1,18 +1,19 @@
-import './gatos.css';
+import styles from '../styles/AdminCommon.module.css';
 import { useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Container from '../../../components/Container';
-import SearchArea from '../../../components/SearchArea';
-import Button from '../../../components/Button';
-import Table from '../../../components/Table';
+import { formartBirthDate, formatDate } from '../../../utils/validateDate';
 import { deleteGato, getAllGatos } from '../../../services/gatosServices';
 import { search } from '../../../utils/searchUtils';
-import { IoCheckmarkCircleSharp } from 'react-icons/io5';
-import { IoCloseCircleSharp } from 'react-icons/io5';
+import { IoCheckmarkCircleSharp, IoCloseCircleSharp } from 'react-icons/io5';
 import GatosEdit from './GatosEdit';
-import Modal from '../../../components/Modal';
-import StatusPill from '../../../components/StatusPill';
-import { formartBirthDate, formatDate } from '../../../utils/validateDate';
+import {
+  Container,
+  SearchArea,
+  Button,
+  Table,
+  Modal,
+  StatusPill,
+} from '../../../components';
 
 const initialState = {
   gatos: [],
@@ -197,21 +198,21 @@ const handleCastradoClick = async (row) => {
   };
 
   return (
-    <div className="admin-pages-margin">
-      <div className="admin-title-container">
+    <div className={styles.pagesMargin}>
+      <div className={styles.titleContainer}>
         <h2 className="text-display">Gatos</h2>
       </div>
 
       <Container style={{ width: '1224px' }}>
-        <div className="admin-subtitle-description">
-          <p className="text-body admin-subtitle">Lista de gatos</p>
+        <div className={styles.subtitleDescription}>
+          <p className={`${styles.adminSubtitle} text-body`}>Lista de gatos</p>
           <p className="text-body">
             Consulte os registros dos gatos cadastrados e realize ações como
             editar, excluir ou adicionar novos.
           </p>
         </div>
 
-        <div className="header-actions">
+        <div className={styles.headerActions}>
           <div style={{ width: '324px' }}>
             <SearchArea onChange={handleSearch} />
           </div>
@@ -235,9 +236,9 @@ const handleCastradoClick = async (row) => {
           open={openModalConfirm}
           onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
         >
-          <div className="delete-modal-content">
+          <div className={styles.deleteModalContent}>
             <p>Tem certeza que deseja excluir este gato?</p>
-            <div className="delete-modal-actions">
+            <div className={styles.deleteModalActions}>
               <Button size="small" variant="danger" onClick={handleDelete}>
                 Excluir
               </Button>

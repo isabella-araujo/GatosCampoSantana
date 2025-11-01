@@ -1,13 +1,17 @@
+import styles from '../styles/AdminCommon.module.css';
+import localStyles from './Gatos.module.css';
 import { Controller, useForm } from 'react-hook-form';
 import { updateGato } from '../../../services/gatosServices';
 import { useEffect } from 'react';
-import Container from '../../../components/Container';
-import ImageUploader from '../../../components/ImageUploader';
-import Input from '../../../components/Input';
-import Textarea from '../../../components/Textarea';
-import Button from '../../../components/Button';
-import Dropdown from '../../../components/Dropdown';
-import Checkbox from '../../../components/Checkbox';
+import {
+  Input,
+  Textarea,
+  Button,
+  Snackbar,
+  ImageUploader,
+  Dropdown,
+  Checkbox,
+} from '../../../components';
 
 export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
   const optionsGenero = [
@@ -45,8 +49,8 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
     if (gatos) {
       const nascimentoDate = gatos.nascimento
         ? gatos.nascimento.toDate
-          ? gatos.nascimento.toDate().toISOString().split('T')[0] // caso seja Timestamp
-          : new Date(gatos.nascimento).toISOString().split('T')[0] // caso já seja string/data
+          ? gatos.nascimento.toDate().toISOString().split('T')[0]
+          : new Date(gatos.nascimento).toISOString().split('T')[0]
         : '';
       reset({
         nome: gatos.nome || '',
@@ -74,12 +78,12 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
     }
   };
   return (
-    <div className="form-container">
+    <div className={styles.formContainer}>
       <div className="text-subtitle">
         <h3>Gato</h3>
       </div>
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-container-img">
+      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formContainerImg}>
           <Controller
             name="fotoFile"
             control={control}
@@ -95,9 +99,9 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
               </ImageUploader>
             )}
           />
-          <div className="form-inputs-gatos">
-            <div className="form-inputs__group-container">
-              <div className="form-inputs__group">
+          <div className={localStyles.formInputsGatos}>
+            <div className={localStyles.groupContainer}>
+              <div className={localStyles.group}>
                 <Input
                   id="nome"
                   label="Nome"
@@ -112,8 +116,8 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
                   })}
                   error={errors.nome?.message}
                 />
-                <div className="form-group">
-                  <div className="input-nascimento">
+                <div className={localStyles.formGroup}>
+                  <div>
                     <Input
                       id="nascimento"
                       label="Nascimento"
@@ -125,7 +129,7 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
                       error={errors.nascimento?.message}
                     />
                   </div>
-                  <div className="input-genero">
+                  <div>
                     <label>Gênero</label>
                     <Controller
                       name="genero"
@@ -142,7 +146,7 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
                   </div>
                 </div>
               </div>
-              <div className="form-inputs__group">
+              <div className={localStyles.group}>
                 <div>
                   <label>Fiv/Felv</label>
                   <Controller
@@ -158,7 +162,7 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
                     )}
                   />
                 </div>
-                <div className="form-checkboxes">
+                <div className={localStyles.formCheckboxes}>
                   <Controller
                     name="castrado"
                     control={control}
@@ -213,7 +217,7 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
             />
           </div>
         </div>
-        <div className="form-buttons">
+        <div className={styles.formButtons}>
           <Button size="small" variant="secondary" type="submit">
             Editar
           </Button>

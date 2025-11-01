@@ -1,0 +1,72 @@
+.pagesMargin{
+  margin: 142px 0 42px 0;
+}
+
+.titleContainer{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 54px;
+}
+.adminSubtitle{
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitleDescription{
+  max-width: 770px;
+  padding: 8px;
+  margin: 14px 0px;
+}
+
+.headerActions{
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0px;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainerImg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.formInputs{
+  width: 324px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 20px 0px;
+}
+
+.formButtons{
+  display: flex;
+  align-self: flex-start;
+  gap: 22px;
+  padding: 0 26px;
+}
+
+.formButton{
+  display: flex;
+  justify-content: center;
+}
+
+.deleteModalContent{
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 1rem;
+}
+
+.deleteModalActions{
+  display: flex;
+  gap: 1rem;
+}
