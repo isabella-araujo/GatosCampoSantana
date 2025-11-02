@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
 
       if (firebaseUser) {
         const baseUser = { id: firebaseUser.uid, email: firebaseUser.email };
-        setUser(baseUser);
 
         try {
           const voluntariosRef = collection(db, 'voluntarios');
@@ -35,13 +34,28 @@ export function AuthProvider({ children }) {
           if (!querySnapshot.empty) {
             const userDoc = querySnapshot.docs[0];
             const data = userDoc.data();
+
+            if (data.disabled) {
+              await signOutUser();
+              alert(
+                'Sua conta foi desativada. Entre em contato com o administrador.',
+              );
+              setUser(null);
+              setRole(null);
+              setLoading(false);
+              return;
+            }
+
             const roleFromDB = data?.role?.toLowerCase() || 'volunteer';
+            setUser(baseUser);
             setRole(roleFromDB);
           } else {
+            setUser(baseUser);
             setRole('volunteer');
           }
         } catch (error) {
-          console.error(error);
+          console.error('Erro ao buscar dados do usuário:', error);
+          setUser(baseUser);
           setRole('volunteer');
         }
       } else {
@@ -59,8 +73,29 @@ export function AuthProvider({ children }) {
     setLoading(true);
     try {
       const response = await signInUser(userData);
-      if (response?.user) setUser(response.user);
+
+      if (response?.user) {
+        const uid = response.user.uid;
+
+        const voluntariosRef = collection(db, 'voluntarios');
+        const q = query(voluntariosRef, where('userId', '==', uid));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const data = querySnapshot.docs[0].data();
+          if (data.disabled) {
+            await signOutUser();
+            return { error: 'disabled-account' };
+          }
+        }
+
+        setUser(response.user);
+      }
+
       return response;
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      return { error: error.message };
     } finally {
       setLoading(false);
     }

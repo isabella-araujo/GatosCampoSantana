@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/AdminCommon.module.css';
 import { useContext, useEffect, useReducer, useState } from 'react';
 import {
-  deleteVoluntario,
+  disableVoluntario,
   getVoluntarios,
 } from '../../../services/voluntariosServices';
 import { search } from '../../../utils/searchUtils';
@@ -66,10 +66,20 @@ export default function Voluntarios() {
   }
 
   const handleDelete = async () => {
-    if (selectedVoluntario) {
-      await deleteVoluntario(selectedVoluntario.id);
-      fetchVoluntarios();
+    if (!selectedVoluntario) return;
+    try {
+      await disableVoluntario(
+        selectedVoluntario.id,
+        !selectedVoluntario.disabled,
+      );
+      await fetchVoluntarios();
       dispatch({ type: 'CLOSE_MODALCONFIRM' });
+      console.log('Voluntário atualizado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao atualizar voluntário:', error.message);
+      alert(
+        'Não foi possível atualizar o status do voluntário. Tente novamente.',
+      );
     }
   };
 
@@ -130,7 +140,7 @@ export default function Voluntarios() {
             <Table
               columns={columns}
               data={filteredData.length === 0 ? voluntarios : filteredData}
-              onDelete={(v) =>
+              onBlock={(v) =>
                 dispatch({ type: 'OPEN_MODALCONFIRM', payload: v })
               }
             />
@@ -140,10 +150,10 @@ export default function Voluntarios() {
               onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
             >
               <div className={styles.deleteModalContent}>
-                <p>Tem certeza que deseja excluir este voluntário?</p>
+                <p>Tem certeza que deseja desativar este voluntário?</p>
                 <div className={styles.deleteModalActions}>
                   <Button size="small" variant="danger" onClick={handleDelete}>
-                    Excluir
+                    Desativar
                   </Button>
                   <Button
                     size="small"

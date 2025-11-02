@@ -52,3 +52,24 @@
     cursor: pointer;
     text-decoration: underline;
 }
+.forgot-password p {
+    color: var(--color-neutral-white);
+    cursor: pointer;
+    outline: inherit;
+    text-align: right;
+    font-weight: 700;
+}
+
+.backHome-link {
+    margin-top: 16px;
+    color: var(--color-neutral-white);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+}

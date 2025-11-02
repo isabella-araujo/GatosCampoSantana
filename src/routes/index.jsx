@@ -6,7 +6,7 @@ import SobreNos from '../pages/public/SobreNos';
 import Adote from '../pages/public/Adote';
 import ComoAjudar from '../pages/public/ComoAjudar';
 import Doe from '../pages/public/Doe';
-import Login from '../pages/public/Login';
+import Login from '../pages/public/Login/index.jsx';
 import { AdminLayout } from '../pages/admin/AdminLayout';
 import Gatos from '../pages/admin/Gatos';
 import PontosColeta from '../pages/admin/PontosColeta';
