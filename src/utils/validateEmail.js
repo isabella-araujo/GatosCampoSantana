@@ -1,4 +1,5 @@
+import { regexEmail } from './regex';
+
 export function validateEmail(email) {
-  var regex = /\S+@\S+\.\S+/;
-  return regex.test(email);
+  return regexEmail.test(email);
 }

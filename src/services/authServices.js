@@ -67,13 +67,12 @@ export async function createUserDoc(user) {
   }
 }
 
-export async function resetPasswordUser(userData) {
-  let response = new Object();
+export async function resetPasswordUser({ email }) {
   try {
-    await sendPasswordResetEmail(auth, userData.email);
+    await sendPasswordResetEmail(auth, email);
+    return { success: true };
   } catch (error) {
-    console.log(`${error.code} = ${error.message}`);
-    response.error = error.message;
+    console.error(`${error.code} = ${error.message}`);
+    return { error: error.message };
   }
-  return response;
 }

@@ -1,13 +1,13 @@
 import styles from '../styles/AdminCommon.module.css';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { regexEmail } from '../../../utils/regex';
 import { signUpUser } from '../../../services/authServices';
 import { createVoluntario } from '../../../services/voluntariosServices';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { Input, Button, Snackbar } from '../../../components';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { validateEmail } from '../../../utils/validateEmail';
 
 export default function VoluntariosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -50,7 +50,6 @@ export default function VoluntariosCadastro() {
       ...data,
       userId: user.id,
       email: user.email,
-      role: 'volunteer', // papel padrão
     });
 
     setShowConfirmation(true);
@@ -82,7 +81,7 @@ export default function VoluntariosCadastro() {
                 value: 30,
                 message: 'Email não pode ter mais que 30 caracteres',
               },
-              pattern: { value: regexEmail, message: 'Email inválido' },
+              validate: (value) => validateEmail(value) || 'Email inválido',
             })}
             error={errors.email?.message}
           />
