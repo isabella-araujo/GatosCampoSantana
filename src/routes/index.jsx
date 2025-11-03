@@ -9,10 +9,7 @@ import Doe from '../pages/public/Doe';
 import Login from '../pages/public/Login/index.jsx';
 import { AdminLayout } from '../pages/admin/AdminLayout';
 import Gatos from '../pages/admin/Gatos';
-import PontosColeta from '../pages/admin/PontosColeta';
 import Parceiros from '../pages/admin/Parceiros';
-import Voluntarios from '../pages/admin/Voluntarios';
-import VoluntariosCadastro from '../pages/admin/Voluntarios/VoluntariosCadastro';
 import Objetivos from '../pages/admin/Objetivos';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
@@ -50,19 +47,11 @@ const router = createBrowserRouter([
               { path: 'cadastro', Component: GatosCadastro },
             ],
           },
-          { path: 'pontos-coleta', Component: PontosColeta },
           {
             path: 'parceiros',
             children: [
               { index: true, Component: Parceiros },
               { path: 'cadastro', Component: ParceirosCadastro },
-            ],
-          },
-          {
-            path: 'voluntarios',
-            children: [
-              { index: true, Component: Voluntarios },
-              { path: 'cadastro', Component: VoluntariosCadastro },
             ],
           },
           { path: 'objetivos', Component: Objetivos },

@@ -18,7 +18,6 @@ import {
 } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
-///Função para fazer upload da imagem da logo para o Firebase Storage
 export async function uploadParceiroLogo(logoFile) {
   if (!logoFile) {
     throw new Error('Nenhum arquivo fornecido para upload.');
@@ -39,7 +38,6 @@ export async function uploadParceiroLogo(logoFile) {
   }
 }
 
-/// Função para criar um novo parceiro no Firestore
 export async function createParceiro(parceiroData) {
   const camposObrigatorios = ['nome', 'logoFile'];
   for (const campo of camposObrigatorios) {
@@ -75,7 +73,6 @@ export async function createParceiro(parceiroData) {
   }
 }
 
-/// Função para buscar todos os parceiros no Firestore
 export async function getParceiros() {
   try {
     const snapshot = await getDocs(collection(db, 'parceiros'));
@@ -95,7 +92,6 @@ export async function getParceiros() {
   }
 }
 
-/// Função para buscar um parceiro pelo ID
 export async function getParceiroById(id) {
   try {
     const docRef = doc(db, 'parceiros', id);
@@ -114,7 +110,6 @@ export async function getParceiroById(id) {
   }
 }
 
-/// Função para atualizar um parceiro existente
 export async function updateParceiro(id, parceiroData) {
   if (!id) throw new Error('ID do parceiro inválido');
   if (!parceiroData || Object.keys(parceiroData).length === 0)
@@ -149,7 +144,6 @@ export async function updateParceiro(id, parceiroData) {
   return { id, ...oldData, ...parceiroData };
 }
 
-//Função para atualizar o status ativo/inativo de um parceiro
 export async function toggleParceiroStatus(id, currentStatus) {
   if (!id) {
     throw new Error('ID do parceiro inválido.');
@@ -165,7 +159,6 @@ export async function toggleParceiroStatus(id, currentStatus) {
   }
 }
 
-/// Função para deletar um parceiro existente
 export async function deleteParceiro(id) {
   try {
     if (!id) {

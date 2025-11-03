@@ -54,12 +54,7 @@ export default function Gatos() {
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState([]);
   const { gatos, openEditModal, openModalConfirm, selectedGato } = state;
-  const { role } = useContext(AuthContext);
-  const [isAdmin, setIsAdmin] = useState(role === 'admin');
-
-  useEffect(() => {
-    setIsAdmin(role === 'admin');
-  }, [role]);
+  const { isAdmin } = useContext(AuthContext);
 
   useEffect(() => {
     fetchGatos();

@@ -11,6 +11,7 @@ import { resetPasswordUser } from '../../../services/authServices';
 
 export default function Login() {
   const { signIn, loading } = useAuth();
+  const [loadingLocal, setLoadingLocal] = useState(false);
   const [resetPasswordModal, setResetPasswordModal] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [formErrors, setFormErrors] = useState({
@@ -65,32 +66,26 @@ export default function Login() {
 
   async function handleSignIn() {
     if (!validateOnSubmit()) return;
-
+    setLoadingLocal(true);
     setFormErrors((prev) => ({ ...prev, auth: '' }));
 
-    try {
-      const response = await signIn(formData);
+    const response = await signIn(formData);
+    setLoadingLocal(false);
 
-      if (response?.error === 'disabled-account') {
-        setFormErrors((prev) => ({
-          ...prev,
-          auth: 'Sua conta foi desativada. Entre em contato com o administrador.',
-        }));
-      } else if (response?.error?.includes('invalid-credential')) {
-        setFormErrors((prev) => ({
-          ...prev,
-          auth: 'Credenciais incorretas.',
-        }));
-      } else if (response?.error) {
-        setFormErrors((prev) => ({
-          ...prev,
-          auth: 'Erro ao fazer login. Tente novamente.',
-        }));
-      }
-    } catch (error) {
+    if (response?.error === 'disabled-account') {
       setFormErrors((prev) => ({
         ...prev,
-        auth: `Ocorreu um erro inesperado: ${error.message}. Tente novamente.`,
+        auth: 'Sua conta foi desativada. Entre em contato com o administrador.',
+      }));
+    } else if (response?.error?.includes('invalid-credential')) {
+      setFormErrors((prev) => ({
+        ...prev,
+        auth: 'Credenciais incorretas.',
+      }));
+    } else if (response?.error) {
+      setFormErrors((prev) => ({
+        ...prev,
+        auth: 'Erro ao fazer login. Tente novamente.',
       }));
     }
   }
@@ -157,11 +152,11 @@ export default function Login() {
             <p> Esqueceu sua senha? </p>
           </div>
           <Button
-            onClick={handleSignIn}
+            onClick={(e) => handleSignIn(e)}
             variant="secondary"
             disabled={isButtonDisabled}
           >
-            {loading ? 'Carregando...' : 'Entrar'}
+            {loadingLocal ? 'Carregando...' : 'Entrar'}
           </Button>
 
           <ErrorMessage>{formErrors.auth}</ErrorMessage>

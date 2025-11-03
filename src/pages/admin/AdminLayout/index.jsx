@@ -16,7 +16,6 @@ export function AdminLayout() {
     { to: '/admin/voluntarios', label: 'Voluntários' },
     { to: '/admin/objetivos', label: 'Objetivos' },
     { to: '/admin/parceiros', label: 'Parceiros' },
-    { to: '/admin/pontos-coleta', label: 'Pontos de Coleta' },
   ];
 
   return (
