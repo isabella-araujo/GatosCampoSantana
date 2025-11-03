@@ -1,27 +1,25 @@
 import {
-  createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../config/firebase';
 
-export async function signInUser(userData) {
-  let response = new Object();
-  await signInWithEmailAndPassword(auth, userData.email, userData.password)
-    .then((credentials) => {
-      response.user = {
+export async function signInUser({ email, password }) {
+  try {
+    const credentials = await signInWithEmailAndPassword(auth, email, password);
+    return {
+      user: {
         id: credentials.user.uid,
-        email: userData.email,
-      };
-    })
-    .catch((error) => {
-      console.log(`${error.code} = ${error.message}`);
-      response.error = error.message;
-    });
-  return response;
+        email: credentials.user.email,
+      },
+    };
+  } catch (error) {
+    console.error(`Erro Firebase: ${error.code} - ${error.message}`);
+    return {
+      error: error.code || error.message,
+    };
+  }
 }
 
 export async function signOutUser() {
@@ -33,38 +31,6 @@ export async function signOutUser() {
     response.error = error.message;
   }
   return response;
-}
-
-export async function signUpUser(userData) {
-  let response = new Object();
-  await createUserWithEmailAndPassword(auth, userData.email, userData.password)
-    .then((credentials) => {
-      response.user = {
-        id: credentials.user.uid,
-        email: credentials.user.email,
-      };
-    })
-    .catch((error) => {
-      console.log(`${error.code} = ${error.message}`);
-      response.error = {
-        code: error.code,
-        message: error.message,
-      };
-    });
-  return response;
-}
-export async function createUserDoc(user) {
-  try {
-    const userRef = doc(db, 'users', user.id);
-    await setDoc(userRef, {
-      email: user.email,
-      role: 'volunteer',
-      createdAt: serverTimestamp(),
-    });
-    console.log('Usuário salvo no Firestore com role volunteer');
-  } catch (error) {
-    console.error('Erro ao salvar usuário:', error);
-  }
 }
 
 export async function resetPasswordUser({ email }) {
