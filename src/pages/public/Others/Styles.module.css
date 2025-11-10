@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.title {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  color: var(--color-neutral-black);
+}
+
+.imageContainer{
+  width: 100%;
+  max-width: 500px;
+  min-width: 400px;
+}
+
+.message {
+  margin: 2rem;
+  color: var(--color-neutral-black);
+}
+
+.homeLink {
+  text-decoration: none;
+  color: var(--color-primary-yellow);
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .imageContainer{
+    max-width: 400px;
+    min-width: 200px;
+  }
+  .title{
+    margin-top: 2rem;
+  }
+
+}

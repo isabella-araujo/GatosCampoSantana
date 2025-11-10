@@ -1,5 +1,6 @@
 import Logo from '../../../assets/Logo/Logo.svg';
 import { Button, Input, ErrorMessage, Modal } from '../../../components';
+import { IoArrowBack } from 'react-icons/io5';
 
 import { useState } from 'react';
 import { useAuth } from '../../../hooks/useAuth';
@@ -8,6 +9,7 @@ import { validateEmail } from '../../../utils/validateEmail';
 import './style.css';
 import { Link } from 'react-router-dom';
 import { resetPasswordUser } from '../../../services/authServices';
+import { Helmet } from 'react-helmet-async';
 
 export default function Login() {
   const { signIn, loading } = useAuth();
@@ -91,8 +93,28 @@ export default function Login() {
   }
 
   async function handleResetPassword() {
+    const email = formData.email.trim();
+
+    if (!email) {
+      setFormErrors((prev) => ({
+        ...prev,
+        email: 'O campo é obrigatório.',
+        auth: '',
+      }));
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        email: 'O formato do e-mail é inválido.',
+        auth: '',
+      }));
+      return;
+    }
+
     try {
-      const response = await resetPasswordUser({ email: formData.email });
+      const response = await resetPasswordUser({ email });
 
       if (response?.error) {
         setFormErrors((prev) => ({
@@ -101,6 +123,7 @@ export default function Login() {
         }));
         return;
       }
+
       setFormErrors((prev) => ({
         ...prev,
         auth: 'Instruções de redefinição de senha enviadas para seu e-mail.',
@@ -116,81 +139,97 @@ export default function Login() {
   }
 
   const isButtonDisabled = !formData.email || !formData.password || loading;
+  const isResetDisabled = !formData.email.trim();
 
   return (
-    <div className="login">
-      <div className="container-img">
-        <img className="logo" src={Logo} alt="Logo" />
-      </div>
+    <>
+      <Helmet>
+        <title>Login | Gatos do Campo de Santana</title>
+        <meta name="robots" content="noindex,nofollow" />
+      </Helmet>
+      <div className="login">
+        <div className="container-img">
+          <img className="logo" src={Logo} alt="Logo" />
+        </div>
 
-      <div className="container-login">
-        <span className="title text-display">Entre</span>
+        <div className="container-login">
+          <span className="title text-display">Entre</span>
 
-        <div className="container-inputs">
-          <Input
-            value={formData.email}
-            onChange={handleChange}
-            error={formErrors.email}
-            label="Email"
-            placeholder="usuario@email.com"
-            type="email"
-            name="email"
-          />
-          <Input
-            value={formData.password}
-            onChange={handleChange}
-            error={formErrors.password}
-            label="Senha"
-            placeholder="Digite sua senha"
-            type="password"
-            name="password"
-          />
-          <div
-            className="forgot-password"
-            onClick={() => setResetPasswordModal(true)}
-          >
-            <p> Esqueceu sua senha? </p>
-          </div>
-          <Button
-            onClick={(e) => handleSignIn(e)}
-            variant="secondary"
-            disabled={isButtonDisabled}
-          >
-            {loadingLocal ? 'Carregando...' : 'Entrar'}
-          </Button>
-
-          <ErrorMessage>{formErrors.auth}</ErrorMessage>
-          <Link to="/" className="backHome-link text-caption">
-            ⭠ Voltar para "Gatos Campo Santana"
-          </Link>
-          <Modal
-            open={resetPasswordModal}
-            onClose={() => setResetPasswordModal(false)}
-          >
-            <div className="modal-content">
-              <div>
-                <h2>Redefinir Senha</h2>
-                <p>
-                  Insira seu e-mail para receber um link de redefinição de
-                  senha.
-                </p>
-              </div>
-              <Input
-                value={formData.email}
-                onChange={handleChange}
-                error={formErrors.email}
-                label="Email"
-                placeholder="usuario@email.com"
-                type="email"
-                name="email"
-              />
-              <Button onClick={handleResetPassword} variant="primary">
-                Enviar
-              </Button>
+          <div className="container-inputs">
+            <Input
+              value={formData.email}
+              onChange={handleChange}
+              error={formErrors.email}
+              label="Email"
+              placeholder="usuario@email.com"
+              type="email"
+              name="email"
+            />
+            <Input
+              value={formData.password}
+              onChange={handleChange}
+              error={formErrors.password}
+              label="Senha"
+              placeholder="Digite sua senha"
+              type="password"
+              name="password"
+            />
+            <div
+              className="forgot-password"
+              onClick={() => setResetPasswordModal(true)}
+            >
+              <p> Esqueceu sua senha? </p>
             </div>
-          </Modal>
+            <Button
+              onClick={(e) => handleSignIn(e)}
+              variant="secondary"
+              disabled={isButtonDisabled}
+            >
+              {loadingLocal ? 'Carregando...' : 'Entrar'}
+            </Button>
+
+            <ErrorMessage>{formErrors.auth}</ErrorMessage>
+            <Link to="/" className="backHome-link text-caption">
+              <IoArrowBack /> Voltar para "Gatos Campo Santana"
+            </Link>
+            <Modal
+              open={resetPasswordModal}
+              onClose={() => setResetPasswordModal(false)}
+            >
+              <div className="modal-content">
+                <div>
+                  <h2>Redefinir Senha</h2>
+                  <p>
+                    Insira seu e-mail para receber um link de redefinição de
+                    senha.
+                  </p>
+                </div>
+                <Input
+                  value={formData.email}
+                  onChange={handleChange}
+                  error={formErrors.email}
+                  label="Email"
+                  placeholder="usuario@email.com"
+                  type="email"
+                  name="email"
+                />
+
+                {formErrors.auth && (
+                  <ErrorMessage>{formErrors.auth}</ErrorMessage>
+                )}
+
+                <Button
+                  onClick={handleResetPassword}
+                  variant="primary"
+                  disabled={isResetDisabled}
+                >
+                  Enviar
+                </Button>
+              </div>
+            </Modal>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

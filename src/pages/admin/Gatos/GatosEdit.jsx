@@ -12,6 +12,7 @@ import {
   Dropdown,
   Checkbox,
 } from '../../../components';
+import { validateBirthDate } from '../../../utils/validateDate';
 
 export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
   const optionsGenero = [
@@ -126,6 +127,10 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
                       {...register('nascimento', {
                         required: 'Nascimento é obrigatório',
                       })}
+                      validate={(value) => {
+                        validateBirthDate(value) ||
+                          'Data de nascimento inválida';
+                      }}
                       error={errors.nascimento?.message}
                     />
                   </div>

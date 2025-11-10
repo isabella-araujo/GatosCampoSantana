@@ -17,6 +17,7 @@ import {
   deleteObject,
 } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 export async function uploadParceiroLogo(logoFile) {
   if (!logoFile) {
@@ -33,7 +34,7 @@ export async function uploadParceiroLogo(logoFile) {
       logoPath,
     };
   } catch (error) {
-    console.error('Erro ao fazer upload da imagem:', error);
+    toast.error(`Erro ao fazer upload da imagem: ${error}`);
     throw error;
   }
 }
@@ -68,7 +69,7 @@ export async function createParceiro(parceiroData) {
       ...parceiro,
     };
   } catch (error) {
-    console.error('Erro ao criar parceiro:', error);
+    toast.error(`Erro ao criar parceiro: ${error}`);
     throw error;
   }
 }
@@ -87,7 +88,7 @@ export async function getParceiros() {
       };
     });
   } catch (error) {
-    console.error('Error fetching parceiros:', error);
+    toast.error(`Error fetching parceiros: ${error}`);
     throw error;
   }
 }
@@ -105,7 +106,7 @@ export async function getParceiroById(id) {
       return null;
     }
   } catch (error) {
-    console.error('Erro ao buscar parceiro por ID:', error);
+    toast.error(`Erro ao buscar parceiro por ID: ${error}`);
     throw error;
   }
 }
@@ -133,9 +134,8 @@ export async function updateParceiro(id, parceiroData) {
       const oldLogoRef = ref(storage, oldData.logoPath);
       try {
         await deleteObject(oldLogoRef);
-        console.log('Logo antiga deletada com sucesso');
       } catch (error) {
-        console.warn('Erro ao deletar logo antiga:', error);
+        toast.warn(`Erro ao deletar logo antiga: ${error}`);
       }
     }
   }
@@ -154,7 +154,7 @@ export async function toggleParceiroStatus(id, currentStatus) {
     await updateDoc(docRef, { ativo: novoStatus });
     return novoStatus;
   } catch (error) {
-    console.error('Erro ao atualizar status do parceiro:', error);
+    toast.error(`Erro ao atualizar status do parceiro: ${error}`);
     throw error;
   }
 }
@@ -166,9 +166,8 @@ export async function deleteParceiro(id) {
     }
     const docRef = doc(db, 'parceiros', id);
     await deleteDoc(docRef);
-    console.log('Parceiro deletado com sucesso');
   } catch (error) {
-    console.error('Erro ao deletar parceiro:', error);
+    toast.error(`Erro ao deletar parceiro: ${error}`);
     throw error;
   }
 }

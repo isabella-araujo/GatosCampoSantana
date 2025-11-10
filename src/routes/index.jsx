@@ -15,6 +15,8 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
 import ParceirosCadastro from '../pages/admin/Parceiros/ParceirosCadastro';
 import GatosCadastro from '../pages/admin/Gatos/GatosCadastro';
+import MobileNotSupported from '../pages/public/Others/MobileNotSupported.jsx';
+import PageNotFound from '../pages/public/Others/PageNotFound.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,8 @@ const router = createBrowserRouter([
     element: <PublicOnlyRoute />,
     children: [{ path: 'login', Component: Login }],
   },
+  { path: '/mobile-not-supported', Component: MobileNotSupported },
+  { path: '*', Component: PageNotFound },
   {
     element: <ProtectedRoute />,
     children: [
@@ -55,6 +59,7 @@ const router = createBrowserRouter([
             ],
           },
           { path: 'objetivos', Component: Objetivos },
+          { path: '*', Component: Gatos },
         ],
       },
     ],

@@ -22,6 +22,7 @@ import {
   deleteObject,
 } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 export async function uploadGatoImage(fotoFile) {
   if (!fotoFile) throw new Error('Nenhum arquivo fornecido para upload.');
@@ -34,7 +35,7 @@ export async function uploadGatoImage(fotoFile) {
     const downloadURL = await getDownloadURL(storageRef);
     return { fotoURL: downloadURL, fotoPath };
   } catch (error) {
-    console.error('Erro ao fazer upload da imagem:', error);
+    toast.error(`Erro ao fazer upload da imagem: ${error}`);
     throw error;
   }
 }
@@ -84,7 +85,7 @@ export async function getGatoById(id) {
       return null;
     }
   } catch (error) {
-    console.error('Erro ao buscar gato por ID:', error);
+    toast.error(`Erro ao buscar gato por ID: ${error}`);
     throw error;
   }
 }
@@ -101,7 +102,7 @@ export async function getGatosFirstPage() {
     const gatos = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return { gatos, lastDoc };
   } catch (error) {
-    console.error('Erro ao buscar gatos:', error);
+    toast.error(`Erro ao buscar gatos: ${error}`);
     throw error;
   }
 }
@@ -126,7 +127,7 @@ export async function getGatosNextPage(lastDoc) {
     const gatos = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return { gatos, lastDoc: newLastDoc };
   } catch (error) {
-    console.error('Erro ao buscar gatos:', error);
+    toast.error(`Erro ao buscar gatos: ${error}`);
     throw error;
   }
 }
@@ -151,7 +152,7 @@ export async function getAllGatos() {
       };
     });
   } catch (error) {
-    console.error('Erro ao buscar todos os gatos:', error);
+    toast.error(`Erro ao buscar todos os gatos: ${error}`);
     throw error;
   }
 }
@@ -165,7 +166,7 @@ export async function deleteGato(id) {
     await deleteDoc(docRef);
     return { message: 'Gato deletado com sucesso' };
   } catch (error) {
-    console.error('Erro ao deletar gato:', error);
+    toast.error(`Erro ao deletar gato: ${error}`);
     throw error;
   }
 }
@@ -191,9 +192,8 @@ export async function updateGato(id, gatoData) {
       if (oldData.fotoPath && oldData.fotoPath !== fotoPath) {
         try {
           await deleteObject(ref(storage, oldData.fotoPath));
-          console.log('Imagem antiga deletada com sucesso.');
         } catch (warning) {
-          console.warn('Erro ao deletar imagem antiga:', warning);
+          toast.warn(`Erro ao deletar imagem antiga: ${warning}`);
         }
       }
       delete gatoData.fotoFile;
@@ -210,7 +210,7 @@ export async function updateGato(id, gatoData) {
     const updatedSnapshot = await getDoc(docRef);
     return { id: updatedSnapshot.id, ...updatedSnapshot.data() };
   } catch (error) {
-    console.error('Erro ao atualizar gato:', error);
+    toast.error(`Erro ao atualizar gato: ${error}`);
     throw error;
   }
 }

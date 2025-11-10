@@ -4,6 +4,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { toast } from 'react-toastify';
 
 export async function signInUser({ email, password }) {
   try {
@@ -15,7 +16,6 @@ export async function signInUser({ email, password }) {
       },
     };
   } catch (error) {
-    console.error(`Erro Firebase: ${error.code} - ${error.message}`);
     return {
       error: error.code || error.message,
     };
@@ -27,7 +27,7 @@ export async function signOutUser() {
   try {
     await signOut(auth);
   } catch (error) {
-    console.log(`${error.code} = ${error.message}`);
+    toast.error(`${error.code} = ${error.message}`);
     response.error = error.message;
   }
   return response;
@@ -38,7 +38,6 @@ export async function resetPasswordUser({ email }) {
     await sendPasswordResetEmail(auth, email);
     return { success: true };
   } catch (error) {
-    console.error(`${error.code} = ${error.message}`);
     return { error: error.message };
   }
 }

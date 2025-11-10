@@ -6,6 +6,7 @@ import {
   doc,
   writeBatch,
 } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 export async function getObjetivos() {
   try {
@@ -17,7 +18,7 @@ export async function getObjetivos() {
     }));
     return { objetivos, error: null };
   } catch (error) {
-    console.error('Error:', error);
+    toast.error(`Error: ${error}`);
     return { objetivos: [], error };
   }
 }
@@ -31,7 +32,7 @@ export async function getObjetivoById(id) {
     }
     return { id: snapshot.id, ...snapshot.data() };
   } catch (error) {
-    console.error('Erro ao buscar objetivo:', error);
+    toast.error(`Erro ao buscar objetivo: ${error}`);
     throw error;
   }
 }
@@ -48,7 +49,7 @@ export async function updateObjetivos(objetivos) {
     });
     await batch.commit();
   } catch (error) {
-    console.error('Erro ao atualizar objetivos:', error);
+    toast.error(`Erro ao atualizar objetivos: ${error}`);
     throw error;
   }
 }
