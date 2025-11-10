@@ -16,6 +16,8 @@ import {
   Button,
   Modal,
 } from '../../../components';
+import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const initialState = {
   parceiros: [],
@@ -67,10 +69,10 @@ export default function Parceiros() {
       if (Array.isArray(parceiros)) {
         dispatch({ type: 'SET_PARCEIROS', payload: parceiros });
       } else {
-        console.error('Erro ao buscar parceiros: retorno inválido', parceiros);
+        toast.error(`Erro ao buscar parceiros: retorno inválido ${parceiros}`);
       }
     } catch (error) {
-      console.error('Erro inesperado ao buscar parceiros:', error);
+      toast.error(`Erro inesperado ao buscar parceiros: ${error}`);
     }
   }
 
@@ -100,7 +102,7 @@ export default function Parceiros() {
       );
       dispatch({ type: 'SET_PARCEIROS', payload: updatedParceiros });
     } catch (error) {
-      console.error('Erro ao atualizar status do parceiro:', error);
+      toast.error(`Erro ao atualizar status do parceiro: ${error}`);
     }
   };
 
@@ -148,76 +150,81 @@ export default function Parceiros() {
   };
 
   return (
-    <div className={styles.pagesMargin}>
-      <div className={styles.titleContainer}>
-        <h2 className="text-display">Parceiros</h2>
-      </div>
-
-      <Container style={{ width: '1224px' }}>
-        <div className={styles.subtitleDescription}>
-          <p className={`${styles.adminSubtitle} text-body`}>
-            Lista de parceiros
-          </p>
-          <p className="text-body">
-            Consulte os registros dos parceiros cadastrados e realize ações como
-            editar, excluir ou adicionar novos.
-          </p>
+    <>
+      <Helmet>
+        <title>Administração de Parceiros | Gatinhos Admin</title>
+      </Helmet>
+      <div className={styles.pagesMargin}>
+        <div className={styles.titleContainer}>
+          <h2 className="text-display">Parceiros</h2>
         </div>
 
-        <div className={styles.headerActions}>
-          <div style={{ width: '324px' }}>
-            <SearchArea onChange={handleSearch} />
+        <Container style={{ width: '1224px' }}>
+          <div className={styles.subtitleDescription}>
+            <p className={`${styles.adminSubtitle} text-body`}>
+              Lista de parceiros
+            </p>
+            <p className="text-body">
+              Consulte os registros dos parceiros cadastrados e realize ações
+              como editar, excluir ou adicionar novos.
+            </p>
           </div>
-          <Button
-            variant="secondary"
-            size="medium"
-            onClick={() => navigate('cadastro')}
-          >
-            Cadastrar Parceiro
-          </Button>
-        </div>
-        <Table
-          columns={columns}
-          data={filteredData.length === 0 ? parceiros : filteredData}
-          onDelete={(parceiro) =>
-            dispatch({ type: 'OPEN_MODALCONFIRM', payload: parceiro })
-          }
-          onEdit={(parceiro) => handleEditClick(parceiro)}
-        />
 
-        <Modal
-          open={openModalConfirm}
-          onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
-        >
-          <div className={styles.deleteModalContent}>
-            <p>Tem certeza que deseja excluir este parceiro?</p>
-            <div className={styles.deleteModalActions}>
-              <Button size="small" variant="danger" onClick={handleDelete}>
-                Excluir
-              </Button>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
-              >
-                Cancelar
-              </Button>
+          <div className={styles.headerActions}>
+            <div style={{ width: '324px' }}>
+              <SearchArea onChange={handleSearch} />
             </div>
+            <Button
+              variant="secondary"
+              size="medium"
+              onClick={() => navigate('cadastro')}
+            >
+              Cadastrar Parceiro
+            </Button>
           </div>
-        </Modal>
-        {openEditModal && (
+          <Table
+            columns={columns}
+            data={filteredData.length === 0 ? parceiros : filteredData}
+            onDelete={(parceiro) =>
+              dispatch({ type: 'OPEN_MODALCONFIRM', payload: parceiro })
+            }
+            onEdit={(parceiro) => handleEditClick(parceiro)}
+          />
+
           <Modal
-            open={openEditModal}
-            onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
+            open={openModalConfirm}
+            onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
           >
-            <ParceirosEdit
-              parceiros={selectedParceiro}
-              onParceiroUpdate={handleParceiroUpdate}
-              onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
-            />
+            <div className={styles.deleteModalContent}>
+              <p>Tem certeza que deseja excluir este parceiro?</p>
+              <div className={styles.deleteModalActions}>
+                <Button size="small" variant="danger" onClick={handleDelete}>
+                  Excluir
+                </Button>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </div>
           </Modal>
-        )}
-      </Container>
-    </div>
+          {openEditModal && (
+            <Modal
+              open={openEditModal}
+              onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
+            >
+              <ParceirosEdit
+                parceiros={selectedParceiro}
+                onParceiroUpdate={handleParceiroUpdate}
+                onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
+              />
+            </Modal>
+          )}
+        </Container>
+      </div>
+    </>
   );
 }

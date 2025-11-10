@@ -14,6 +14,8 @@ import {
   Button,
   Snackbar,
 } from '../../../components';
+import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const initialState = {
   objetivos: [],
@@ -79,10 +81,10 @@ export default function Objetivos() {
       if (!error && Array.isArray(objetivos)) {
         dispatch({ type: 'SET_OBJETIVOS', payload: objetivos });
       } else {
-        console.error('Erro ao buscar objetivos:', error);
+        toast.error(`Erro ao buscar objetivos: ${error}`);
       }
     } catch (err) {
-      console.error('Erro inesperado:', err);
+      toast.error(`Erro inesperado ao buscar objetivos: ${err}`);
     }
   }
 
@@ -101,81 +103,86 @@ export default function Objetivos() {
       dispatch({ type: 'MODAL_CONFIRM_OPEN' });
       fetchObjetivos();
     } catch (err) {
-      console.error('Erro ao atualizar objetivos:', err);
+      toast.error(`Erro ao atualizar objetivos: ${err}`);
     }
   };
 
   return (
-    <div className={styles.pagesMargin}>
-      <div className={styles.titleContainer}>
-        <h2 className="text-display">Objetivos</h2>
-      </div>
-
-      <Container style={{ width: '818px' }}>
-        <div className={styles.subtitleDescription}>
-          <p className={`${styles.adminSubtitle} text-body`}>
-            Lista de objetivos que serão mostrados na página “home”
-          </p>
-          <p className="text-body">
-            Ao editar, a descrição deve ser uma frase curta e completa.
-          </p>
+    <>
+      <Helmet>
+        <title>Administração de Objetivos | Gatinhos Admin</title>
+      </Helmet>
+      <div className={styles.pagesMargin}>
+        <div className={styles.titleContainer}>
+          <h2 className="text-display">Objetivos</h2>
         </div>
 
-        <div className={localStyles.listGroup}>
-          {objetivosEditados.slice(0, 3).map((obj, index) => (
-            <div key={index} className={localStyles.listContainer}>
-              <div className={localStyles.listItem}>
-                <div className={localStyles.listItemTitle}>
-                  <span className={localStyles.listItemTitleNumber}>
-                    {index + 1}
-                  </span>
-                  <h3 className="text-body ">
-                    {obj?.titulo || 'Escreva o título do objetivo aqui.'}
-                  </h3>
+        <Container style={{ width: '818px' }}>
+          <div className={styles.subtitleDescription}>
+            <p className={`${styles.adminSubtitle} text-body`}>
+              Lista de objetivos que serão mostrados na página “home”
+            </p>
+            <p className="text-body">
+              Ao editar, a descrição deve ser uma frase curta e completa.
+            </p>
+          </div>
+
+          <div className={localStyles.listGroup}>
+            {objetivosEditados.slice(0, 3).map((obj, index) => (
+              <div key={index} className={localStyles.listContainer}>
+                <div className={localStyles.listItem}>
+                  <div className={localStyles.listItemTitle}>
+                    <span className={localStyles.listItemTitleNumber}>
+                      {index + 1}
+                    </span>
+                    <h3 className="text-body ">
+                      {obj?.titulo || 'Escreva o título do objetivo aqui.'}
+                    </h3>
+                  </div>
+                  <IconButton
+                    icon={IoPencilOutline}
+                    color="var(--color-neutral-black)"
+                    onClick={() => handleEditClick(obj)}
+                  />
                 </div>
-                <IconButton
-                  icon={IoPencilOutline}
-                  color="var(--color-neutral-black)"
-                  onClick={() => handleEditClick(obj)}
-                />
+                <p className="text-body2">
+                  {obj?.descricao || 'Escreva a descrição do objetivo aqui.'}
+                </p>
               </div>
-              <p className="text-body2">
-                {obj?.descricao || 'Escreva a descrição do objetivo aqui.'}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className={styles.formButton}>
-          <Button
-            variant="secondary"
-            size="large"
-            onClick={handleUpdateClick}
-            disabled={!hasChanges}
-          >
-            Atualizar
-          </Button>
-        </div>
-      </Container>
-      {openEditModal && (
-        <Modal
-          open={openEditModal}
-          onClose={() => dispatch({ type: 'MODAL_EDIT_CLOSE' })}
-        >
-          <ObjetivosEdit
-            objetivos={selectedObjetivo}
-            onObjetivoSave={handleObjetivoEdit}
+          <div className={styles.formButton}>
+            <Button
+              variant="secondary"
+              size="large"
+              onClick={handleUpdateClick}
+              disabled={!hasChanges}
+            >
+              Atualizar
+            </Button>
+          </div>
+        </Container>
+        {openEditModal && (
+          <Modal
+            open={openEditModal}
             onClose={() => dispatch({ type: 'MODAL_EDIT_CLOSE' })}
+          >
+            <ObjetivosEdit
+              objetivos={selectedObjetivo}
+              onObjetivoSave={handleObjetivoEdit}
+              onClose={() => dispatch({ type: 'MODAL_EDIT_CLOSE' })}
+            />
+          </Modal>
+        )}
+        {openConfirmModal && (
+          <Snackbar
+            open={openConfirmModal}
+            message="Objetivos atualizados com sucesso!"
+            onClose={() => dispatch({ type: 'MODAL_CONFIRM_CLOSE' })}
           />
-        </Modal>
-      )}
-      {openConfirmModal && (
-        <Snackbar
-          open={openConfirmModal}
-          message="Objetivos atualizados com sucesso!"
-          onClose={() => dispatch({ type: 'MODAL_CONFIRM_CLOSE' })}
-        />
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }

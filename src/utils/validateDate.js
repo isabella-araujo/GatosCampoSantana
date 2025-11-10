@@ -13,7 +13,31 @@ export function formatDate(value) {
   }
 }
 
-export function formartBirthDate(date) {
+export function validateBirthDate(date) {
+  if (!date) return false;
+
+  const data = new Date(date);
+  if (isNaN(data.getTime())) return false;
+
+  const hoje = new Date();
+  const maxAge = 30;
+
+  if (data > hoje) return false;
+
+  let idade = hoje.getFullYear() - data.getFullYear();
+  const mes = hoje.getMonth() - data.getMonth();
+  const dia = hoje.getDate() - data.getDate();
+
+  if (mes < 0 || (mes === 0 && dia < 0)) {
+    idade--;
+  }
+
+  if (idade < 0 || idade > maxAge) return false;
+
+  return true;
+}
+
+export function formatBirthDate(date) {
   if (!date) return '';
   const [dia, mes, ano] = date.split('/').map(Number);
   if (!dia || !mes || !ano) return '';

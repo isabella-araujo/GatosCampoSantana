@@ -6,6 +6,7 @@ import {
 } from '../services/authServices';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext();
 
@@ -33,7 +34,7 @@ export function AuthProvider({ children }) {
           setIsAdmin(false);
         }
       } catch (error) {
-        console.error('Erro ao obter claims do usuário:', error);
+        toast.error(`Erro ao obter claims do usuário: ${error.message}`);
         setUser(null);
         setIsAdmin(false);
       } finally {
@@ -51,7 +52,7 @@ export function AuthProvider({ children }) {
       setUser(response.user);
       return response;
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
+      toast.error(`Erro ao fazer login: ${error.message}`);
       return { error: error.message };
     }
   }

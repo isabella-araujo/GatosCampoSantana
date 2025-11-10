@@ -1,7 +1,7 @@
 import styles from '../styles/AdminCommon.module.css';
 import { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formartBirthDate, formatDate } from '../../../utils/validateDate';
+import { formatBirthDate, formatDate } from '../../../utils/validateDate';
 import { deleteGato, getAllGatos } from '../../../services/gatosServices';
 import { search } from '../../../utils/searchUtils';
 import { IoCheckmarkCircleSharp, IoCloseCircleSharp } from 'react-icons/io5';
@@ -14,8 +14,11 @@ import {
   Modal,
   StatusPill,
   Tooltip,
+  Loading,
 } from '../../../components';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const initialState = {
   gatos: [],
@@ -66,10 +69,10 @@ export default function Gatos() {
       if (Array.isArray(gatos)) {
         dispatch({ type: 'SET_GATOS', payload: gatos });
       } else {
-        console.error('Erro ao buscar gatos: retorno inválido', gatos);
+        toast.error(`Erro ao buscar gatos: retorno inválido ${gatos}`);
       }
     } catch (error) {
-      console.error('Erro inesperado ao buscar gatos:', error);
+      toast.error(`Erro inesperado ao buscar gatos: ${error}`);
     }
   }
 
@@ -116,7 +119,7 @@ export default function Gatos() {
       name: 'Idade',
       selector: (row) => {
         const dataFormatada = formatDate(row.nascimento);
-        return formartBirthDate(dataFormatada);
+        return formatBirthDate(dataFormatada);
       },
       sortable: true,
     },
@@ -166,80 +169,87 @@ export default function Gatos() {
   };
 
   return (
-    <div className={styles.pagesMargin}>
-      <div className={styles.titleContainer}>
-        <h2 className="text-display">Gatos</h2>
-      </div>
-
-      <Container style={{ width: '1224px' }}>
-        <div className={styles.subtitleDescription}>
-          <p className={`${styles.adminSubtitle} text-body`}>Lista de gatos</p>
-          <p className="text-body">
-            Consulte os registros dos gatos cadastrados e realize ações como
-            editar, excluir ou adicionar novos.
-          </p>
+    <>
+      <Helmet>
+        <title>Administração de Gatos | Gatinhos Admin</title>
+      </Helmet>
+      <div className={styles.pagesMargin}>
+        <div className={styles.titleContainer}>
+          <h2 className="text-display">Gatos</h2>
         </div>
 
-        <div className={styles.headerActions}>
-          <div style={{ width: '324px' }}>
-            <SearchArea onChange={handleSearch} />
+        <Container style={{ width: '1224px' }}>
+          <div className={styles.subtitleDescription}>
+            <p className={`${styles.adminSubtitle} text-body`}>
+              Lista de gatos
+            </p>
+            <p className="text-body">
+              Consulte os registros dos gatos cadastrados e realize ações como
+              editar, excluir ou adicionar novos.
+            </p>
           </div>
-          <Button
-            variant="secondary"
-            size="medium"
-            onClick={() => navigate('/admin/gatos/cadastro')}
+
+          <div className={styles.headerActions}>
+            <div style={{ width: '324px' }}>
+              <SearchArea onChange={handleSearch} />
+            </div>
+            <Button
+              variant="secondary"
+              size="medium"
+              onClick={() => navigate('/admin/gatos/cadastro')}
+            >
+              Cadastrar Gato
+            </Button>
+          </div>
+          <Table
+            columns={columns}
+            data={filteredData.length === 0 ? gatos : filteredData}
+            onDelete={(gato) =>
+              dispatch({ type: 'OPEN_MODALCONFIRM', payload: gato })
+            }
+            onEdit={(gato) => handleEditClick(gato)}
+          />
+          <Modal
+            open={openModalConfirm}
+            onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
           >
-            Cadastrar Gato
-          </Button>
-        </div>
-        <Table
-          columns={columns}
-          data={filteredData.length === 0 ? gatos : filteredData}
-          onDelete={(gato) =>
-            dispatch({ type: 'OPEN_MODALCONFIRM', payload: gato })
-          }
-          onEdit={(gato) => handleEditClick(gato)}
-        />
-        <Modal
-          open={openModalConfirm}
-          onClose={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
-        >
-          <div className={styles.deleteModalContent}>
-            <p>Tem certeza que deseja excluir este gato?</p>
-            <div className={styles.deleteModalActions}>
-              <Tooltip text="Apenas Admin podem excluir gato">
+            <div className={styles.deleteModalContent}>
+              <p>Tem certeza que deseja excluir este gato?</p>
+              <div className={styles.deleteModalActions}>
+                <Tooltip text="Apenas Admin podem excluir gato">
+                  <Button
+                    size="small"
+                    variant="danger"
+                    onClick={handleDelete}
+                    disabled={!isAdmin}
+                  >
+                    Excluir
+                  </Button>
+                </Tooltip>
                 <Button
                   size="small"
-                  variant="danger"
-                  onClick={handleDelete}
-                  disabled={!isAdmin}
+                  variant="secondary"
+                  onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
                 >
-                  Excluir
+                  Cancelar
                 </Button>
-              </Tooltip>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={() => dispatch({ type: 'CLOSE_MODALCONFIRM' })}
-              >
-                Cancelar
-              </Button>
+              </div>
             </div>
-          </div>
-        </Modal>
-        {openEditModal && (
-          <Modal
-            open={openEditModal}
-            onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
-          >
-            <GatosEdit
-              gatos={selectedGato}
-              onGatoUpdate={handleGatoUpdate}
-              onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
-            />
           </Modal>
-        )}
-      </Container>
-    </div>
+          {openEditModal && (
+            <Modal
+              open={openEditModal}
+              onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
+            >
+              <GatosEdit
+                gatos={selectedGato}
+                onGatoUpdate={handleGatoUpdate}
+                onClose={() => dispatch({ type: 'CLOSE_EDIT_MODAL' })}
+              />
+            </Modal>
+          )}
+        </Container>
+      </div>
+    </>
   );
 }

@@ -13,6 +13,8 @@ import {
   Dropdown,
   Checkbox,
 } from '../../../components';
+import { validateBirthDate } from '../../../utils/validateDate';
+import { Helmet } from 'react-helmet-async';
 
 export default function GatosCadastro() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -66,163 +68,174 @@ export default function GatosCadastro() {
   };
 
   return (
-    <div className={styles.pagesMargin}>
-      <div className={styles.titleContainer}>
-        <h2 className="text-display">Cadastrar Gatos</h2>
-      </div>
+    <>
+      <Helmet>
+        <title>Cadastro de Gatos | Gatinhos Admin</title>
+      </Helmet>
+      <div className={styles.pagesMargin}>
+        <div className={styles.titleContainer}>
+          <h2 className="text-display">Cadastrar Gatos</h2>
+        </div>
 
-      <Container style={{ width: '984px' }}>
-        <form
-          className={styles.formContainer}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className={styles.formContainerImg}>
-            <Controller
-              name="fotoFile"
-              control={control}
-              rules={{ required: 'Foto é obrigatória' }}
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <ImageUploader
-                  file={value}
-                  onFile={(file) => onChange(file)}
-                  error={error?.message}
-                  onError={() => {}}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Carregar imagem
-                </ImageUploader>
-              )}
-            />
-            <div className={localStyles.formInputsGatos}>
-              <div className={localStyles.groupContainer}>
-                <div className={localStyles.group}>
-                  <Input
-                    id="nome"
-                    label="Nome"
-                    type="text"
-                    placeholder="Nome do Gatinho"
-                    {...register('nome', {
-                      required: 'Nome é obrigatório',
-                      minLength: {
-                        value: 3,
-                        message: 'Nome tem que ter pelo menos 3 caracteres',
-                      },
-                    })}
-                    error={errors.nome?.message}
-                  />
-                  <div className={localStyles.formGroup}>
-                    <div>
-                      <Input
-                        id="nascimento"
-                        label="Nascimento"
-                        type="date"
-                        placeholder="DD/MM/AAAA"
-                        {...register('nascimento', {
-                          required: 'Nascimento é obrigatório',
-                        })}
-                        error={errors.nascimento?.message}
-                      />
+        <Container style={{ width: '984px' }}>
+          <form
+            className={styles.formContainer}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className={styles.formContainerImg}>
+              <Controller
+                name="fotoFile"
+                control={control}
+                rules={{ required: 'Foto é obrigatória' }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <ImageUploader
+                    file={value}
+                    onFile={(file) => onChange(file)}
+                    error={error?.message}
+                    onError={() => {}}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Carregar imagem
+                  </ImageUploader>
+                )}
+              />
+              <div className={localStyles.formInputsGatos}>
+                <div className={localStyles.groupContainer}>
+                  <div className={localStyles.group}>
+                    <Input
+                      id="nome"
+                      label="Nome"
+                      type="text"
+                      placeholder="Nome do Gatinho"
+                      {...register('nome', {
+                        required: 'Nome é obrigatório',
+                        minLength: {
+                          value: 3,
+                          message: 'Nome tem que ter pelo menos 3 caracteres',
+                        },
+                      })}
+                      error={errors.nome?.message}
+                    />
+                    <div className={localStyles.formGroup}>
+                      <div>
+                        <Input
+                          id="nascimento"
+                          label="Nascimento"
+                          type="date"
+                          placeholder="DD/MM/AAAA"
+                          {...register('nascimento', {
+                            required: 'Nascimento é obrigatório',
+                          })}
+                          validate={(value) => {
+                            validateBirthDate(value) ||
+                              'Data de nascimento inválida';
+                          }}
+                          error={errors.nascimento?.message}
+                        />
+                      </div>
+                      <div>
+                        <label>Gênero</label>
+                        <Controller
+                          name="genero"
+                          control={control}
+                          render={({ field }) => (
+                            <Dropdown
+                              label="Selecione o gênero"
+                              options={optionsGenero}
+                              onSelect={(option) =>
+                                field.onChange(option.value)
+                              }
+                            />
+                          )}
+                        />
+                      </div>
                     </div>
+                  </div>
+                  <div className={localStyles.group}>
                     <div>
-                      <label>Gênero</label>
+                      <label>Fiv/Felv</label>
                       <Controller
-                        name="genero"
+                        name="possuiFievFelv"
                         control={control}
                         render={({ field }) => (
                           <Dropdown
-                            label="Selecione o gênero"
-                            options={optionsGenero}
+                            label="possui Fiev/Felv?"
+                            options={optionsFivFelv}
                             onSelect={(option) => field.onChange(option.value)}
+                          />
+                        )}
+                      />
+                    </div>
+                    <div className={localStyles.formCheckboxes}>
+                      <Controller
+                        name="castrado"
+                        control={control}
+                        render={({ field }) => (
+                          <Checkbox
+                            label="Castrado(a)"
+                            checked={field.value}
+                            onChecked={(val) => field.onChange(val)}
+                          />
+                        )}
+                      />
+
+                      <Controller
+                        name="disponivelAdocao"
+                        control={control}
+                        render={({ field }) => (
+                          <Checkbox
+                            label="Disponível para Adoção"
+                            checked={field.value}
+                            onChecked={(val) => field.onChange(val)}
+                          />
+                        )}
+                      />
+
+                      <Controller
+                        name="disponivelLarTemporario"
+                        control={control}
+                        render={({ field }) => (
+                          <Checkbox
+                            label="Disponível para Lar Temporário"
+                            checked={field.value}
+                            onChecked={(val) => field.onChange(val)}
                           />
                         )}
                       />
                     </div>
                   </div>
                 </div>
-                <div className={localStyles.group}>
-                  <div>
-                    <label>Fiv/Felv</label>
-                    <Controller
-                      name="possuiFievFelv"
-                      control={control}
-                      render={({ field }) => (
-                        <Dropdown
-                          label="possui Fiev/Felv?"
-                          options={optionsFivFelv}
-                          onSelect={(option) => field.onChange(option.value)}
-                        />
-                      )}
-                    />
-                  </div>
-                  <div className={localStyles.formCheckboxes}>
-                    <Controller
-                      name="castrado"
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox
-                          label="Castrado(a)"
-                          checked={field.value}
-                          onChecked={(val) => field.onChange(val)}
-                        />
-                      )}
-                    />
-
-                    <Controller
-                      name="disponivelAdocao"
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox
-                          label="Disponível para Adoção"
-                          checked={field.value}
-                          onChecked={(val) => field.onChange(val)}
-                        />
-                      )}
-                    />
-
-                    <Controller
-                      name="disponivelLarTemporario"
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox
-                          label="Disponível para Lar Temporário"
-                          checked={field.value}
-                          onChecked={(val) => field.onChange(val)}
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
+                <Textarea
+                  id="descricao"
+                  label="Descrição"
+                  placeholder="Descrição do gatinho..."
+                  rows="8"
+                  {...register('descricao', {
+                    required: 'Descrição é obrigatório',
+                    maxLength: {
+                      value: 350,
+                      message: 'Máximo de 350 caracteres',
+                    },
+                  })}
+                  error={errors.descricao?.message}
+                />
               </div>
-              <Textarea
-                id="descricao"
-                label="Descrição"
-                placeholder="Descrição do gatinho..."
-                rows="8"
-                {...register('descricao', {
-                  required: 'Descrição é obrigatório',
-                  maxLength: {
-                    value: 350,
-                    message: 'Máximo de 350 caracteres',
-                  },
-                })}
-                error={errors.descricao?.message}
-              />
             </div>
-          </div>
 
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Enviando...' : 'Cadastrar'}
-          </Button>
-        </form>
-      </Container>
-      <Snackbar
-        open={showConfirmation}
-        message="Gato cadastrado com sucesso!"
-        onClose={() => setShowConfirmation(false)}
-      />
-    </div>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Enviando...' : 'Cadastrar'}
+            </Button>
+          </form>
+        </Container>
+        <Snackbar
+          open={showConfirmation}
+          message="Gato cadastrado com sucesso!"
+          onClose={() => setShowConfirmation(false)}
+        />
+      </div>
+    </>
   );
 }

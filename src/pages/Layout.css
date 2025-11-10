@@ -1,0 +1,20 @@
+:root {
+  --navbar-height: 104px; 
+}
+
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+
+.layout-content {
+  padding-top: var(--navbar-height);
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 64px;
+  }
+}
