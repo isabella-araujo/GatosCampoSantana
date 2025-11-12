@@ -1,0 +1,325 @@
+.homeContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  
+  width: 100%;
+  margin-top: calc(var(--navbar-height) * -1);
+}
+ 
+.bannerWrapper {
+  position: relative;
+  width: 100%;
+  min-height: clamp(400px, 40vw, 1200px);
+}
+
+.bannerShape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  z-index: -999;
+}
+
+.bannerContainer {
+  padding-top: var(--navbar-height);
+  width: 100%;
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  width: min(1200px, 100% - 2rem);
+  margin: 0 auto;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.bannerText {
+  max-width: 520px;
+}
+
+.bannerTitle{
+  font-family: var(--font-display-family);
+  font-weight: var(--font-display-weight);
+  font-size: var(--font-display-size);
+  line-height: var(--font-display-line-height);
+  letter-spacing: var(--font-display-letter-spacing);
+}
+
+.gatobannerImageMobile{
+  display: none;
+}
+.bannerSubtitle{
+  margin-top: 1rem;
+  font-family: var(--font-subtitle-family);
+  font-weight: var(--font-subtitle-weight);
+  font-size: 16px;
+  line-height: var(--font-body2-line-height);
+  letter-spacing: var(--font-subtitle-letter-spacing);
+}
+
+.bannerButtons{
+  margin-top: 2rem;
+  display: flex;
+  gap:0.75rem;
+}
+.bannerButton{
+  box-shadow:  0px 8px 8px rgba(0, 0, 0, 0.2);
+}
+.cardsHomeContainer {
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  display: flex;
+  justify-content: center;
+  gap: 2.6rem;
+  z-index: 2;
+}
+
+.cardWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quemSomosSection {
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.quemSomosText {
+  max-width: 634px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quemSomosButton {
+  align-self: center;
+  box-shadow:  0px 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quemSomosContent {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+
+}
+.nossosObjWrapper{
+  padding: 1.5rem 1rem;
+  width: 100%;
+  background-color: var(--color-primary-yellow);
+  min-height: clamp(300px, 40vw, 450px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.nossosObjContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.nossosObjHeader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nossosObjContent{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.nossosObjItem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nossosObjItem h3{
+  max-width: 250px;
+}
+
+.nossosObjIcon{
+position: relative;
+  width: fit-content;
+}
+
+.nossosObjNumber{
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: var(--color-neutral-white);
+}
+
+.parceirosSection{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 6rem;
+}
+
+.parceirosHeader{
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.parceirosIcon {
+  position: absolute;
+  top: 0;
+  left: 55%;
+  transform: translateX(-100px) rotate(25deg);
+  font-size: 40px;
+  z-index: -1;
+}
+
+.parceirosText{
+ text-align: center;
+  width: 100%;
+  
+}
+
+@media (max-width: 992px) {
+
+  .bannerWrapper {
+    min-height: clamp(300px, 45vw, 800px);
+  }
+
+  .bannerContent {
+    width: 100%;
+    margin: 0;
+    padding-inline: 2rem; 
+    justify-content: flex-start;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 3rem);
+
+  }
+
+  .bannerText {
+    min-width: 300px;
+  }
+
+  .bannerTitle{
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: var(--font-title-line-height);
+  }
+
+
+  .gatobannerImage {
+    display: none;
+  }
+
+  .gatobannerImageMobile {
+    display: block;
+    flex-shrink: 0;
+    width: clamp(350px, 45vw, 450px);
+    min-width: 350px;
+  }
+
+  .cardsHomeContainer {
+    gap: 1rem;
+  }
+
+  .quemSomosContent{
+    flex-direction: column;
+  }
+
+  .quemSomosImage{
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .quemSomosText {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .nossosObjContainer{
+  gap: 2rem;
+  }
+
+  .nossosObjContent{
+  gap: 1rem;
+  }
+
+  .nossosObjItem{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+ 
+}
+
+@media (max-width: 768px) {
+  .bannerContent {
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-inline: 1rem;
+  }
+
+  .bannerShape {
+    height: 50%;
+  }
+
+  .bannerTitle{
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+  letter-spacing: var(--font-title-letter-spacing);
+ }
+  .bannerText {
+    align-self: start;
+  }
+
+  .bannerSubtitle{
+  font-weight: 500;
+}
+
+  .cardsHomeContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .parceirosIcon {
+    font-size: 35px;
+    left: 57%;
+  }
+
+  .nossosObjContent{
+  flex-direction: column;
+  }
+  
+}
+
+@media (max-width: 576px) {
+  .parceirosIcon {
+    font-size: 35px;
+    left: 62%;
+  }
+  .parceirosText{
+    font-size: 22px;
+  }
+
+}

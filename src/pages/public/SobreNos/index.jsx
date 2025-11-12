@@ -1,4 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+import styles from './SobreNos.module.css';
+import { Button, NossosObjetivosList } from '../../../components';
+import { Link } from 'react-router-dom';
+import { IoHeart } from 'react-icons/io5';
+import { GoArrowUpRight } from 'react-icons/go';
+import NossaHistoriaImg from '../../../assets/SobreNos/nossa-historia.jpg';
+import EllipseBlue from '../../../assets/SobreNos/Ellipse_1.svg';
+import EllipseYellow from '../../../assets/SobreNos/Ellipse_2.svg';
+import ComoAtuamosImg from '../../../assets/SobreNos/como-atuamos.png';
+import FeirasAdocaoImg from '../../../assets/SobreNos/feiras-adocao.png';
 
 export default function SobreNos() {
   return (
@@ -25,6 +35,180 @@ export default function SobreNos() {
           content="https://gatosdocampodesantana.com.br/sobre-nos"
         />
       </Helmet>
+      <div className={styles.sobreNosSection}>
+        <div className={styles.nossaHistoriaContainer}>
+          <div className={styles.nossaHistoriaHeader}>
+            <h2 className="text-title">Nossa História</h2>
+            <span className={styles.underline}></span>
+          </div>
+          <div className={styles.nossaHistoriaContent}>
+            <div className={styles.nossaHistoriaText}>
+              <p className="text-body">
+                O Projeto Gatos do Campo de Santana surgiu em 2018 com a missão
+                de oferecer proteção, cuidados e a chance de uma vida melhor aos
+                gatos que vivem na colônia do Campo de Santana, no coração do
+                Rio de Janeiro.
+              </p>
+              <p className="text-body">
+                Desde o início, atuamos de forma voluntária, resgatando,
+                alimentando e cuidando dos felinos, além de incentivar a adoção
+                responsável. Nosso trabalho busca minimizar o sofrimento desses
+                animais, que muitas vezes enfrentam abandono, doenças e
+                maus-tratos.
+              </p>
+              <p className="text-body">
+                Tudo o que realizamos é sustentado pela dedicação de pessoas
+                apaixonadas pela causa e pelo apoio de quem acredita em um
+                futuro mais digno e amoroso para esses gatinhos. Cada doação,
+                cada gesto de solidariedade e cada adoção responsável nos ajuda
+                a transformar vidas.
+              </p>
+            </div>
+            <div className={styles.nossaHistoriaImgContainer}>
+              <img
+                src={EllipseBlue}
+                alt="Ellipse Azul"
+                className={styles.ellipseBlue}
+              />
+              <img
+                src={NossaHistoriaImg}
+                alt="Imagem dos voluntarios do projeto Gatos do Campo de Santana"
+                className={styles.nossaHistoriaImage}
+              />
+              <img
+                src={EllipseYellow}
+                alt="Ellipse Amarelo"
+                className={styles.ellipseYellow}
+              />
+            </div>
+          </div>
+          <div className={styles.nossaHistoriaButton}>
+            <Link to="/como-ajudar">
+              <Button variant="secondary">Como Ajudar</Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className={`${styles.comoAtuamosSection} sectionMargin`}>
+          <div className={styles.comoAtuamosShapeWrapper}>
+            <img src="" alt="" />
+            <div className={styles.comoAtuamosContainer}>
+              <div className={styles.comoAtuamosContent}>
+                <div className={styles.comoAtuamosHeader}>
+                  <h2 className="text-title">Como Atuamos</h2>
+                </div>
+                <div className={styles.comoAtuamosText}>
+                  <p className="text-body">
+                    Levamos regularmente os animais da colônia para consultas,
+                    exames e diversos procedimentos veterinários, incluindo
+                    testes de FIV e FeLV, garantindo que cada gatinho receba os
+                    cuidados necessários para uma vida saudável.
+                  </p>
+                  <p className="text-body">
+                    Em 2024, realizamos 29 internações ao longo do ano, todas
+                    viabilizadas graças à parceria com a Clínica Veterinária de
+                    Botafogo, que nos apoia com dedicação e profissionalismo.
+                    Além disso, contamos com os serviços oferecidos pela
+                    Prefeitura do Rio de Janeiro, como o Posto de Atendimento do
+                    Flamengo e o Hospital Veterinário da Mangueira, ampliando
+                    ainda mais nossa capacidade de cuidado e atendimento.
+                  </p>
+                </div>
+                <Link to="/adote">
+                  <Button
+                    size="small"
+                    icon={IoHeart}
+                    className={styles.bannerButton}
+                  >
+                    Adote
+                  </Button>
+                </Link>
+              </div>
+              <div className={styles.comoAtuamosImgContainer}>
+                <img
+                  src={ComoAtuamosImg}
+                  className={styles.comoAtuamosImage}
+                  alt="Gato do projeto Gatos do Campo de Santana sendo cuidado"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.feirasAdocaoSection} sectionMargin`}>
+          <div className={styles.feirasAdocaoContainer}>
+            <div className={styles.feirasAdocaoContent}>
+              <div className={styles.feirasAdocaoTitle}>
+                <h2 className="text-title">Feiras de Adoção</h2>
+              </div>
+              <div className={styles.feirasAdocaoText}>
+                <p className="text-body">
+                  Mantemos parcerias com diversos locais que nos oferecem espaço
+                  e estruturas, como gaiolas, para a realização de feiras de
+                  adoção.
+                </p>
+                <p className="text-body">
+                  Além de incentivar novas famílias a acolherem nossos felinos,
+                  as feiras também funcionam como um importante canal de
+                  recolhimento de doações, divulgação do projeto e
+                  conscientização da comunidade sobre a importância de cuidar e
+                  proteger os animais. Cada feira é um momento de encontro,
+                  aprendizado e carinho, aproximando voluntários, apoiadores e
+                  animais que buscam um lar cheio de amor.
+                </p>
+              </div>
+            </div>
+            <div className={styles.feirasAdocaoImageContainer}>
+              <img
+                src={FeirasAdocaoImg}
+                className={styles.feirasAdocaoImage}
+                alt="Imagem de um gato as feiras de adoção do projeto Gatos do Campo de Santana"
+              />
+            </div>
+          </div>
+          <div className={styles.feirasAdocaoCaption}>
+            <p className="text-caption">
+              Para ficar por dentro das próximas feiras de adoção e conhecer os
+              gatinhos disponíveis, {''}
+              <Link
+                to="https://www.instagram.com/gatosdocampodesantana"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.instagramLink}`}
+              >
+                siga nosso Instagram
+              </Link>{' '}
+              <GoArrowUpRight size={16} color="var(--color-primary-yellow)" />
+            </p>
+          </div>
+        </div>
+        <div className={`${styles.nossosObjSection} sectionMargin`}>
+          <div className={styles.nossosObjHeader}>
+            <div className={styles.nossosObjTitle}>
+              <h2 className="text-title">Nossos Objetivos</h2>
+            </div>
+            <div className={styles.nossosObjText}>
+              <p className="text-body">
+                Temos como objetivo principal a extinção da colônia, mas para
+                isso outros meios são constantes mobilizados para serem
+                expandidos no projeto:
+              </p>
+            </div>
+          </div>
+          <div className={styles.nossosObjList}>
+            <NossosObjetivosList />
+          </div>
+          <Link to="/doe">
+            <Button
+              variant="secondaryOutline"
+              className={styles.nossosObjButton}
+              icon={IoHeart}
+              iconColor="var(--color-primary-yellow)"
+            >
+              Faça uma doação
+            </Button>
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

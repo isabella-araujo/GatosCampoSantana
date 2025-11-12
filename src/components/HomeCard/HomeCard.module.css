@@ -1,0 +1,64 @@
+.card {
+  max-width: 380px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-primary-blue);
+}
+
+.cardTitle {
+  color: var(--color-neutral-white);
+  text-align: center;
+  font-family: var(--font-title-family);
+  font-weight: var(--font-title-weight);
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+  letter-spacing: var(--font-title-letter-spacing);
+}
+
+.text-subtitle {
+  font-family: var(--font-subtitle-family);
+  font-weight: var(--font-subtitle-weight);
+  font-size: var(--font-subtitle-size);
+  line-height: var(--font-subtitle-line-height);
+  letter-spacing: var(--font-subtitle-letter-spacing);
+
+}
+.iconContainer {
+  display: flex;
+  align-items: center;
+}
+.cardDescription {
+  text-align: center;
+  max-width: 320px;
+}
+
+.cardButton{
+  color: var(--color-primary-blue);
+  background-color: var(--color-neutral-white);
+  border-radius: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardButton:hover {
+  background-color: var(--color-neutral-gray);
+}
+
+@media (max-width: 992px) {
+.cardTitle  {
+  font-weight: var(--font-subtitle-weight);
+  font-size: var(--font-subtitle-size);
+  line-height: var(--font-subtitle-line-height);
+}
+}
