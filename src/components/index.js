@@ -15,3 +15,6 @@ export { default as Modal } from './Modal/Modal.jsx';
 export { default as StatusPill } from './StatusPill/StatusPill.jsx';
 export { default as Tooltip } from './Tooltip/Tooltip.jsx';
 export { default as Loading } from './Loading/Loading.jsx';
+export { default as HomeCard } from './HomeCard/HomeCard.jsx';
+export { default as CarroselParceiros } from './CarroselParceiros/CarroselParceiros.jsx';
+export { default as NossosObjetivosList } from './NossosObjetivosList/NossosObjetivosList.jsx';
