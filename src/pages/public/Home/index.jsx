@@ -60,7 +60,7 @@ export default function Home() {
                     <Button
                       size="small"
                       icon={IoHeart}
-                      className={styles.bannerButton}
+                      className={`${styles.bannerButton} buttonBoxShadow`}
                     >
                       Doe
                     </Button>
@@ -69,7 +69,7 @@ export default function Home() {
                     <Button
                       size="small"
                       icon={IoPawSharp}
-                      className={styles.bannerButton}
+                      className={`${styles.bannerButton} buttonBoxShadow`}
                     >
                       Adote
                     </Button>
@@ -146,7 +146,7 @@ export default function Home() {
                 Mais de 1000 gatos encontraram um lar através do nosso trabalho
                 desde 2018
               </h3>
-              <p className="text-body">
+              <p className="text-body1">
                 O Gatos do Campo de Santana surgiu em 2018 como um projeto
                 independente com o objetivo de auxiliar na adoção e qualidade de
                 vida dos gatos da colônia. Naquele momento os números
@@ -156,7 +156,7 @@ export default function Home() {
               <Button
                 size="small"
                 variant="secondary"
-                className={styles.quemSomosButton}
+                className={`${styles.quemSomosButton} buttonBoxShadow`}
                 href="/quem-somos"
               >
                 Saiba mais
@@ -223,7 +223,10 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button variant="secondary" className={styles.parceirosButton}>
+            <Button
+              variant="secondary"
+              className={`${styles.parceirosButton} buttonBoxShadow`}
+            >
               Seja um parceiro
             </Button>
           </Link>

@@ -180,10 +180,10 @@ export default function Gatos() {
 
         <Container style={{ width: '1224px' }}>
           <div className={styles.subtitleDescription}>
-            <p className={`${styles.adminSubtitle} text-body`}>
+            <p className={`${styles.adminSubtitle} text-body1`}>
               Lista de gatos
             </p>
-            <p className="text-body">
+            <p className="text-body1">
               Consulte os registros dos gatos cadastrados e realize ações como
               editar, excluir ou adicionar novos.
             </p>

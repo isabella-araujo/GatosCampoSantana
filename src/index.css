@@ -5,9 +5,14 @@
 body {
   margin: 0;
   color: var(--color-neutral-black);
-  font-family: var(--font-body1-family);
   background: var(--color-neutral-white);
+  font-family: var(--font-body1-family);
+  font-weight: var(--font-body1-weight);
+  font-size: var(--font-body1-size);
+  line-height: var(--font-body1-line-height);
+  letter-spacing: var(--font-body1-letter-spacing);
 }
+
 h1,h2,h3,h4,p{
   margin: 0;
 }

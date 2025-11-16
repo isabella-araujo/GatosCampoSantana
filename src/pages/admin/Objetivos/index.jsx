@@ -119,10 +119,10 @@ export default function Objetivos() {
 
         <Container style={{ width: '818px' }}>
           <div className={styles.subtitleDescription}>
-            <p className={`${styles.adminSubtitle} text-body`}>
+            <p className={`${styles.adminSubtitle} text-body1`}>
               Lista de objetivos que serão mostrados na página “home”
             </p>
-            <p className="text-body">
+            <p className="text-body1">
               Ao editar, a descrição deve ser uma frase curta e completa.
             </p>
           </div>
@@ -135,7 +135,7 @@ export default function Objetivos() {
                     <span className={localStyles.listItemTitleNumber}>
                       {index + 1}
                     </span>
-                    <h3 className="text-body ">
+                    <h3 className="text-body1 ">
                       {obj?.titulo || 'Escreva o título do objetivo aqui.'}
                     </h3>
                   </div>

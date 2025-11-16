@@ -1,0 +1,69 @@
+.cardPagamento{
+  border-radius: 8px;
+  padding: 24px 16px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--color-neutral-white);
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.cardPagamento:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.24);
+}
+
+.cardHeader{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.iconeContainer{
+  font-size: 32px;
+}
+.conteudoContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.qrCodeContainer{
+  display: flex;
+  justify-content: center;
+}
+
+.qrCodeImage{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+
+.copiaColarContainer{
+  display: flex;
+  gap: 8px;
+}
+
+.botaoCopiar{
+  border: 2px solid var(--color-neutral-white);
+  border-radius: 4px;
+  padding: 24px 12px;
+  color: var(--color-neutral-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.botaoCopiar:hover {
+  background-color: rgba(250, 249, 250, 0.3);
+}
+
+.small{
+  display: flex;
+  flex-direction: column;
+}

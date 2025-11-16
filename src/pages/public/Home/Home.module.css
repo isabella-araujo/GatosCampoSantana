@@ -67,9 +67,7 @@
   display: flex;
   gap:0.75rem;
 }
-.bannerButton{
-  box-shadow:  0px 8px 8px rgba(0, 0, 0, 0.2);
-}
+
 .cardsHomeContainer {
   padding-inline: clamp(1rem, 4vw, 2rem);
   display: flex;
@@ -101,7 +99,6 @@
 
 .quemSomosButton {
   align-self: center;
-  box-shadow:  0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .quemSomosContent {
