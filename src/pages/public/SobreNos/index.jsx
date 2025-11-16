@@ -43,20 +43,20 @@ export default function SobreNos() {
           </div>
           <div className={styles.nossaHistoriaContent}>
             <div className={styles.nossaHistoriaText}>
-              <p className="text-body">
+              <p className="text-body1">
                 O Projeto Gatos do Campo de Santana surgiu em 2018 com a missão
                 de oferecer proteção, cuidados e a chance de uma vida melhor aos
                 gatos que vivem na colônia do Campo de Santana, no coração do
                 Rio de Janeiro.
               </p>
-              <p className="text-body">
+              <p className="text-body1">
                 Desde o início, atuamos de forma voluntária, resgatando,
                 alimentando e cuidando dos felinos, além de incentivar a adoção
                 responsável. Nosso trabalho busca minimizar o sofrimento desses
                 animais, que muitas vezes enfrentam abandono, doenças e
                 maus-tratos.
               </p>
-              <p className="text-body">
+              <p className="text-body1">
                 Tudo o que realizamos é sustentado pela dedicação de pessoas
                 apaixonadas pela causa e pelo apoio de quem acredita em um
                 futuro mais digno e amoroso para esses gatinhos. Cada doação,
@@ -84,7 +84,9 @@ export default function SobreNos() {
           </div>
           <div className={styles.nossaHistoriaButton}>
             <Link to="/como-ajudar">
-              <Button variant="secondary">Como Ajudar</Button>
+              <Button variant="secondary" className="buttonBoxShadow">
+                Como Ajudar
+              </Button>
             </Link>
           </div>
         </div>
@@ -98,13 +100,13 @@ export default function SobreNos() {
                   <h2 className="text-title">Como Atuamos</h2>
                 </div>
                 <div className={styles.comoAtuamosText}>
-                  <p className="text-body">
+                  <p className="text-body1">
                     Levamos regularmente os animais da colônia para consultas,
                     exames e diversos procedimentos veterinários, incluindo
                     testes de FIV e FeLV, garantindo que cada gatinho receba os
                     cuidados necessários para uma vida saudável.
                   </p>
-                  <p className="text-body">
+                  <p className="text-body1">
                     Em 2024, realizamos 29 internações ao longo do ano, todas
                     viabilizadas graças à parceria com a Clínica Veterinária de
                     Botafogo, que nos apoia com dedicação e profissionalismo.
@@ -118,7 +120,7 @@ export default function SobreNos() {
                   <Button
                     size="small"
                     icon={IoHeart}
-                    className={styles.bannerButton}
+                    className={`${styles.bannerButton} buttonBoxShadow`}
                   >
                     Adote
                   </Button>
@@ -141,12 +143,12 @@ export default function SobreNos() {
                 <h2 className="text-title">Feiras de Adoção</h2>
               </div>
               <div className={styles.feirasAdocaoText}>
-                <p className="text-body">
+                <p className="text-body1">
                   Mantemos parcerias com diversos locais que nos oferecem espaço
                   e estruturas, como gaiolas, para a realização de feiras de
                   adoção.
                 </p>
-                <p className="text-body">
+                <p className="text-body1">
                   Além de incentivar novas famílias a acolherem nossos felinos,
                   as feiras também funcionam como um importante canal de
                   recolhimento de doações, divulgação do projeto e
@@ -187,7 +189,7 @@ export default function SobreNos() {
               <h2 className="text-title">Nossos Objetivos</h2>
             </div>
             <div className={styles.nossosObjText}>
-              <p className="text-body">
+              <p className="text-body1">
                 Temos como objetivo principal a extinção da colônia, mas para
                 isso outros meios são constantes mobilizados para serem
                 expandidos no projeto:

@@ -33,7 +33,7 @@ const NavBar = ({ links, navButton, logoutButton }) => {
       </ul>
       {navButton && (
         <Link to={navButton.to} className={styles.navButton}>
-          <Button variant="secondary" size="small">
+          <Button variant="secondary" size="small" className="buttonBoxShadow">
             {navButton.label}
           </Button>
         </Link>

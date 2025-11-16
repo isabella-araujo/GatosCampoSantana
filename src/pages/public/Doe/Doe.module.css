@@ -1,0 +1,149 @@
+.doeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: auto;
+  max-width: 1200px;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.headerContainer {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+.donationMethods {
+  display: flex;
+  justify-content: center;
+  gap: clamp(3rem, 4vw, 6rem);
+}
+
+.apadrinhamentoSection, .vakinhaSection {
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.apadrinhamentoHeader, .vakinhaHeader{
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.apadrinhamentoContainer, .vakinhaContainer {
+  display: flex;
+  gap: clamp(2rem, 4vw, 6rem);
+  width: 100%;
+}
+
+.apadrinhamentoImage, .vakinhaImage {
+  width: 100%;
+  max-width: 500px;   
+  height: auto;
+  object-fit: cover;
+  display: block;      
+  flex-shrink: 1;      
+  min-width: 0;       
+}
+
+.apadrinhamentoContent, .vakinhaContent {
+  width: 100%;
+  max-width: 600px;
+  min-width: 0;        
+  flex-shrink: 1;        
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.apadrinhamentoDescription{
+  text-align: justify;
+}
+
+.apoiaSeLink{
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  color: var(--color-support-red);
+  transition: color 0.2s ease;
+}
+
+.apoiaSeLink:hover{
+  color: var(--color-primary-yellow);
+}
+
+.apadrinhamentoBulletsList{
+  display: flex;
+  flex-direction: column;
+  justify-content:start;
+  align-items: flex-start;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.bulletItem{
+  display: flex;
+  align-items: flex-start; 
+  gap: 0.5rem;
+}
+
+.vakinhaContainer {
+  flex-direction: row-reverse;
+}
+
+.vakinhaHeader{
+  text-align: left;
+}
+
+.vakinhaSection {
+  margin-bottom: 6rem;
+}
+
+@media (max-width: 992px) {
+  .apadrinhamentoHeader {
+    text-align: center;
+    align-items: center;
+  }
+
+  .apadrinhamentoContainer {
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .apadrinhamentoImage {
+    max-width: 100%;
+    align-self: start;
+  }
+
+  .apadrinhamentoContent {
+    max-width: 100%;
+  }
+  .donationMethods {
+    flex-direction: column;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .headerContent p{
+  font-size: var(--font-body1-size);
+  line-height: var(--font-body1-line-height);
+  letter-spacing: var(--font-body1-letter-spacing);
+  }
+  .apadrinhamentoContainer, .vakinhaContainer {
+    flex-direction: column;
+  }
+  .apadrinhamentoButton, .apadrinhamentoImage, .vakinhaImage, .vakinhaButton {
+    align-self: center;
+  }
+}

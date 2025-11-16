@@ -18,3 +18,4 @@ export { default as Loading } from './Loading/Loading.jsx';
 export { default as HomeCard } from './HomeCard/HomeCard.jsx';
 export { default as CarroselParceiros } from './CarroselParceiros/CarroselParceiros.jsx';
 export { default as NossosObjetivosList } from './NossosObjetivosList/NossosObjetivosList.jsx';
+export { default as CardPagamentoPix } from './CardsPagamento/CardPagamentoPix.jsx';
