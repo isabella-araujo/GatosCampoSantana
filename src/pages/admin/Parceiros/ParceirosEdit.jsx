@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 import styles from '../styles/AdminCommon.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { updateParceiro } from '../../../services/parceirosServices';
 import { Input, Textarea, Button, ImageUploader } from '../../../components';
 
@@ -9,6 +9,8 @@ export default function ParceirosEdit({
   onParceiroUpdate,
   onClose,
 }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { clearErrors } = useForm();
   const {
     register,
     control,
@@ -31,6 +33,7 @@ export default function ParceirosEdit({
 
   const onSubmit = async (data) => {
     try {
+      setIsSubmitting(true);
       const response = await updateParceiro(parceiros.id, data);
       onParceiroUpdate(response);
       reset();
@@ -38,6 +41,8 @@ export default function ParceirosEdit({
       setError('root', {
         message: error.message || 'Erro ao atualizar parceiro',
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -56,12 +61,20 @@ export default function ParceirosEdit({
               rules={
                 parceiros?.logoURL ? {} : { required: 'Logo é obrigatória' }
               }
-              render={({ field: { onChange, value } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <ImageUploader
                   file={value}
                   onFile={(file) => {
+                    clearErrors('logoFile');
                     onChange(file);
                   }}
+                  error={error?.message}
+                  onError={(msg) =>
+                    setError('logoFile', { type: 'manual', message: msg })
+                  }
                 >
                   Carregar nova imagem
                 </ImageUploader>
@@ -77,7 +90,17 @@ export default function ParceirosEdit({
               placeholder="Nome do parceiro"
               {...register('nome', {
                 required: 'Nome é obrigatório',
-                maxLength: { value: 50, message: 'Máximo de 50 caracteres' },
+                maxLength: {
+                  value: 50,
+                  message: 'Máximo de 50 caracteres',
+                },
+                minLength: {
+                  value: 2,
+                  message: 'Mínimo de 2 caracteres',
+                },
+                validate: (value) =>
+                  value.trim().length > 0 ||
+                  'O nome não pode conter apenas espaços',
               })}
               error={errors.nome?.message}
             />
@@ -109,7 +132,7 @@ export default function ParceirosEdit({
 
         <div className={styles.formButtons}>
           <Button size="small" variant="secondary" type="submit">
-            Editar
+            {isSubmitting ? 'Salvando...' : 'Salvar Alterações'}
           </Button>
           <Button size="small" variant="danger" onClick={onClose}>
             Cancelar
