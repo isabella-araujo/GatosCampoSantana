@@ -1,11 +1,14 @@
-import { Helmet } from 'react-helmet-async';
 import styles from './Doe.module.css';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import ApadrinhamentoImg from '../../../assets/Doe/apadrinhamento.png';
 import VakinhaImg from '../../../assets/Doe/vakinha.png';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
-import { Button, CardPagamentoPix } from '../../../components';
-import CardPagamentoPicPay from '../../../components/CardsPagamento/CardPagamentoPicPay';
+import {
+  Button,
+  CardPagamentoPix,
+  CardPagamentoPicPay,
+} from '../../../components';
 
 export default function Doe() {
   return (
@@ -49,20 +52,20 @@ export default function Doe() {
               showQrCode={true}
             />
             <CardPagamentoPicPay
-              metodoKey="@gatosdocampodesantana"
+              metodoKey="gatosdocampodesantana"
               showQrCode={true}
             />
           </div>
         </div>
         <div className={`${styles.apadrinhamentoSection} sectionMargin`}>
-          <div className={styles.apadrinhamentoHeader}>
-            <h2 className="text-title">Apadrinhamento dos Gatos do Campo</h2>
-          </div>
           <div className={styles.apadrinhamentoContainer}>
-            <div className={styles.apadrinhamentoImage}>
+            <div className={styles.title}>
+              <h2 className="text-title">Apadrinhamento dos Gatos do Campo</h2>
+            </div>
+            <div className={styles.imagem}>
               <img src={ApadrinhamentoImg} alt="Apadrinhe um Gatinho" />
             </div>
-            <div className={styles.apadrinhamentoContent}>
+            <div className={styles.content}>
               <div className={styles.apadrinhamentoDescription}>
                 <p className="text-body1">
                   Desde 2018, cuidamos de uma das maiores colônias felinas do
@@ -127,17 +130,17 @@ export default function Doe() {
           </div>
         </div>
         <div className={`${styles.vakinhaSection} sectionMargin`}>
-          <div className={styles.vakinhaHeader}>
-            <h2>Vakinha da Clínica Veterinária</h2>
-          </div>
           <div className={styles.vakinhaContainer}>
-            <div className={styles.vakinhaImage}>
+            <div className={styles.title}>
+              <h2 className="text-title">Vakinha da Clínica Veterinária</h2>
+            </div>
+            <div className={styles.imagem}>
               <img
                 src={VakinhaImg}
                 alt="Ajude na vakinha da Clínica Veterinária"
               />
             </div>
-            <div className={styles.vakinhaContent}>
+            <div className={styles.content}>
               <div className={styles.vakinhaDescription}>
                 <p>
                   Com a nossa dívida veterinária em nível crítico, sua ajuda é

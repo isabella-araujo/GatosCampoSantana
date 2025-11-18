@@ -130,7 +130,7 @@ export default function ComoAjudar() {
                 uma nova chance.
               </p>
               <Link
-                to="https://instagram.com/_u/gatosdocampodesantana"
+                to="https://ig.me/m/gatosdocampodesantana"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.sejaLarTemporarioLink}
