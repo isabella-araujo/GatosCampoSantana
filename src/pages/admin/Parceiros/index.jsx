@@ -159,7 +159,7 @@ export default function Parceiros() {
           <h2 className="text-display">Parceiros</h2>
         </div>
 
-        <Container style={{ width: '1224px' }}>
+        <Container style={{ width: '1400px' }}>
           <div className={styles.subtitleDescription}>
             <p className={`${styles.adminSubtitle} text-body1`}>
               Lista de parceiros

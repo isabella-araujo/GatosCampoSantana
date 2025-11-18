@@ -165,6 +165,24 @@ export async function deleteParceiro(id) {
       throw new Error('ID do parceiro invalido.');
     }
     const docRef = doc(db, 'parceiros', id);
+    const snapshot = await getDoc(docRef);
+
+    if (!snapshot.exists()) {
+      throw new Error('Parceiro não encontrado.');
+    }
+
+    const data = snapshot.data();
+    const logoPath = data.logoPath;
+
+    if (logoPath) {
+      const logoRef = ref(storage, logoPath);
+      try {
+        await deleteObject(logoRef);
+      } catch (error) {
+        toast.warn(`Erro ao deletar logo: ${error}`);
+      }
+    }
+
     await deleteDoc(docRef);
   } catch (error) {
     toast.error(`Erro ao deletar parceiro: ${error}`);
