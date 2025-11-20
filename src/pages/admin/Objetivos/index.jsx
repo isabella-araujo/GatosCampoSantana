@@ -19,7 +19,6 @@ import { Helmet } from 'react-helmet-async';
 
 const initialState = {
   objetivos: [],
-  objetivosEditados: [],
   openEditModal: false,
   openConfirmModal: false,
   selectedObjetivo: null,
@@ -31,14 +30,7 @@ function objetivosReducer(state, action) {
       return {
         ...state,
         objetivos: action.payload,
-        objetivosEditados: action.payload,
       };
-    case 'UPDATE_OBJETIVO_LOCAL': {
-      const updatedObjetivos = state.objetivosEditados.map((obj) =>
-        obj.id === action.payload.id ? action.payload : obj,
-      );
-      return { ...state, objetivosEditados: updatedObjetivos };
-    }
     case 'MODAL_EDIT_OPEN':
       return {
         ...state,
@@ -51,10 +43,9 @@ function objetivosReducer(state, action) {
       return {
         ...state,
         openConfirmModal: true,
-        selectedObjetivo: action.payload,
       };
     case 'MODAL_CONFIRM_CLOSE':
-      return { ...state, openConfirmModal: false, selectedObjetivo: null };
+      return { ...state, openConfirmModal: false };
     default:
       return state;
   }
@@ -62,14 +53,9 @@ function objetivosReducer(state, action) {
 
 export default function Objetivos() {
   const [state, dispatch] = useReducer(objetivosReducer, initialState);
-  const hasChanges =
-    JSON.stringify(state.objetivos) !== JSON.stringify(state.objetivosEditados);
-  const {
-    objetivosEditados,
-    openEditModal,
-    openConfirmModal,
-    selectedObjetivo,
-  } = state;
+
+  const { objetivos, openEditModal, openConfirmModal, selectedObjetivo } =
+    state;
 
   useEffect(() => {
     fetchObjetivos();
@@ -92,18 +78,16 @@ export default function Objetivos() {
     dispatch({ type: 'MODAL_EDIT_OPEN', payload: objetivo });
   };
 
-  const handleObjetivoEdit = (objetivoEditado) => {
-    dispatch({ type: 'UPDATE_OBJETIVO_LOCAL', payload: objetivoEditado });
-    dispatch({ type: 'MODAL_EDIT_CLOSE' });
-  };
-
-  const handleUpdateClick = async () => {
+  const handleObjetivoEdit = async (objetivoEditado) => {
     try {
-      await updateObjetivos(state.objetivosEditados);
+      await updateObjetivos([objetivoEditado]);
+
+      dispatch({ type: 'MODAL_EDIT_CLOSE' });
       dispatch({ type: 'MODAL_CONFIRM_OPEN' });
-      fetchObjetivos();
+
+      await fetchObjetivos();
     } catch (err) {
-      toast.error(`Erro ao atualizar objetivos: ${err}`);
+      toast.error(`Erro ao salvar objetivo: ${err}`);
     }
   };
 
@@ -112,6 +96,7 @@ export default function Objetivos() {
       <Helmet>
         <title>Administração de Objetivos | Gatinhos Admin</title>
       </Helmet>
+
       <div className={styles.pagesMargin}>
         <div className={styles.titleContainer}>
           <h2 className="text-display">Objetivos</h2>
@@ -128,41 +113,33 @@ export default function Objetivos() {
           </div>
 
           <div className={localStyles.listGroup}>
-            {objetivosEditados.slice(0, 3).map((obj, index) => (
-              <div key={index} className={localStyles.listContainer}>
+            {objetivos.slice(0, 3).map((obj, index) => (
+              <div key={obj.id} className={localStyles.listContainer}>
                 <div className={localStyles.listItem}>
                   <div className={localStyles.listItemTitle}>
                     <span className={localStyles.listItemTitleNumber}>
                       {index + 1}
                     </span>
-                    <h3 className="text-body1 ">
+                    <h3 className="text-body1">
                       {obj?.titulo || 'Escreva o título do objetivo aqui.'}
                     </h3>
                   </div>
+
                   <IconButton
                     icon={IoPencilOutline}
                     color="var(--color-neutral-black)"
                     onClick={() => handleEditClick(obj)}
                   />
                 </div>
+
                 <p className="text-body2">
                   {obj?.descricao || 'Escreva a descrição do objetivo aqui.'}
                 </p>
               </div>
             ))}
           </div>
-
-          <div className={styles.formButton}>
-            <Button
-              variant="secondary"
-              size="large"
-              onClick={handleUpdateClick}
-              disabled={!hasChanges}
-            >
-              Atualizar
-            </Button>
-          </div>
         </Container>
+
         {openEditModal && (
           <Modal
             open={openEditModal}
@@ -178,7 +155,7 @@ export default function Objetivos() {
         {openConfirmModal && (
           <Snackbar
             open={openConfirmModal}
-            message="Objetivos atualizados com sucesso!"
+            message="Objetivo atualizado com sucesso!"
             onClose={() => dispatch({ type: 'MODAL_CONFIRM_CLOSE' })}
           />
         )}

@@ -1,11 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
-import VectorHomeBanner from '../../../assets/Home/VectorHomeBanner.svg';
-import GatoShapeHome from '../../../assets/Home/GatoShapeHome.svg';
-import QuemSomosSection from '../../../assets/Home/QuemSomosSection.png';
+import VectorHomeBanner from '../../../assets/Home/vector-banner.svg';
+import GatoShapeHome from '../../../assets/Home/gato-shape-banner.svg';
+import QuemSomosSection from '../../../assets/Home/quem-somos.png';
 import CatSilhouette from '../../../assets/Home/CatSilhouette.svg';
-import GatoImgHomeBanner from '../../../assets/Home/GatoImgHomeBanner.png';
-import Star from '../../../assets/Home/Star.svg';
+import GatoImgHomeBanner from '../../../assets/Home/gato-banner.png';
+import patinhasGroup from '../../../assets/Home/patinhas-group.svg';
+import Star from '../../../assets/Home/star.svg';
 import { Link } from 'react-router-dom';
 import { Button, CarroselParceiros, HomeCard } from '../../../components';
 import {
@@ -134,9 +135,7 @@ export default function Home() {
           </div>
         </div>
         <div className={`${styles.quemSomosSection} sectionMargin`}>
-          <div>
-            <h2 className="text-title">Quem Somos</h2>
-          </div>
+          <h2 className="text-title">Quem Somos</h2>
           <div className={styles.quemSomosContent}>
             <div className={styles.quemSomosImage}>
               <img src={QuemSomosSection} alt="Quem Somos Section" />
@@ -161,6 +160,11 @@ export default function Home() {
               >
                 Saiba mais
               </Button>
+              <img
+                src={patinhasGroup}
+                alt="Patinhas Group"
+                className={styles.quemSomosIcon}
+              />
             </div>
           </div>
         </div>

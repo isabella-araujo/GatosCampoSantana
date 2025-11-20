@@ -39,16 +39,24 @@ export async function getObjetivoById(id) {
 
 export async function updateObjetivos(objetivos) {
   try {
+    console.log('Objetivos recebidos para update:', objetivos);
+
     const batch = writeBatch(db);
+
     objetivos.forEach((objetivo) => {
+      console.log('Atualizando objetivo:', objetivo);
+
       const docRef = doc(db, 'objetivos', objetivo.id);
       batch.update(docRef, {
         titulo: objetivo.titulo,
         descricao: objetivo.descricao,
       });
     });
-    await batch.commit();
+
+    const result = await batch.commit();
+    console.log('Batch commit result:', result);
   } catch (error) {
+    console.error('Erro ao atualizar:', error);
     toast.error(`Erro ao atualizar objetivos: ${error}`);
     throw error;
   }

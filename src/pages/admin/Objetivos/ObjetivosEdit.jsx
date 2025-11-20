@@ -1,7 +1,9 @@
 import styles from '../styles/AdminCommon.module.css';
 import { useForm } from 'react-hook-form';
 import { Input, Textarea, Button } from '../../../components';
+import { useState } from 'react';
 export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -15,9 +17,11 @@ export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
   });
 
   const onSubmit = (data) => {
+    setIsSubmitting(true);
     const atualizado = { ...objetivos, ...data };
     onObjetivoSave(atualizado);
     reset();
+    setIsSubmitting(false);
   };
 
   return (
@@ -43,6 +47,9 @@ export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
                 value: 30,
                 message: 'Título não pode ter mais que 30 caracteres',
               },
+              validate: (value) =>
+                value.trim().length > 0 ||
+                'O título não pode conter apenas espaços',
             })}
             error={errors.titulo?.message}
           />
@@ -56,23 +63,36 @@ export default function ObjetivosEdit({ objetivos, onObjetivoSave, onClose }) {
             {...register('descricao', {
               required: 'Descrição é obrigatória',
               minLength: {
-                value: 5,
-                message: 'Descrição tem que ter pelo menos 5 caracteres',
+                value: 15,
+                message: 'Descrição tem que ter pelo menos 15 caracteres',
               },
               maxLength: {
                 value: 150,
                 message: 'Descrição não pode ter mais que 150 caracteres',
               },
+              validate: (value) =>
+                value.trim().length > 0 ||
+                'A descrição não pode conter apenas espaços',
             })}
             error={errors.descricao?.message}
           />
         </div>
 
         <div className={styles.formButtons}>
-          <Button size="small" variant="secondary" type="submit">
-            Editar
+          <Button
+            size="small"
+            variant="secondary"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Salvando...' : 'Salvar Alterações'}
           </Button>
-          <Button size="small" variant="danger" onClick={onClose}>
+          <Button
+            size="small"
+            variant="danger"
+            onClick={onClose}
+            disabled={isSubmitting}
+          >
             Cancelar
           </Button>
         </div>

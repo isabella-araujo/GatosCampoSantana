@@ -73,19 +73,21 @@ export default function Doe() {
                   há cerca de 130 gatos no local, além de abandonos constantes.
                   Nosso trabalho voluntário garante alimentação, cuidados e
                   busca por lares, mas os custos são altos e contamos com sua
-                  ajuda para continuar. Com a sua ajuda no{' '}
-                  {
-                    <Link
-                      to="https://apoia.se/camposaudavel"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${styles.apoiaSeLink} text-body2`}
-                    >
-                      {' '}
-                      Apoia.se{' '}
-                    </Link>
-                  }{' '}
-                  você coopera com:
+                  ajuda para continuar.
+                  <span className={styles.apoiaSeSpan}>
+                    Com a sua ajuda no{' '}
+                    {
+                      <Link
+                        to="https://apoia.se/camposaudavel"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${styles.apoiaSeLink} text-body2`}
+                      >
+                        Apoia.se
+                      </Link>
+                    }{' '}
+                    você coopera com:
+                  </span>
                 </p>
               </div>
               <ul className={`${styles.apadrinhamentoBulletsList} text-body1`}>
@@ -93,7 +95,7 @@ export default function Doe() {
                   <IoCheckmarkCircleOutline
                     size={23}
                     color="var(--color-primary-yellow)"
-                  />{' '}
+                  />
                   Tratamento veterinário dos gatos do campo
                 </li>
                 <li className={styles.bulletItem}>

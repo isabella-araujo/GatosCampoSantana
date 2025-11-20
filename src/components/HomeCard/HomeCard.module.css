@@ -22,14 +22,6 @@
   letter-spacing: var(--font-title-letter-spacing);
 }
 
-.text-subtitle {
-  font-family: var(--font-subtitle-family);
-  font-weight: var(--font-subtitle-weight);
-  font-size: var(--font-subtitle-size);
-  line-height: var(--font-subtitle-line-height);
-  letter-spacing: var(--font-subtitle-letter-spacing);
-
-}
 .iconContainer {
   display: flex;
   align-items: center;
@@ -37,9 +29,11 @@
 .cardDescription {
   text-align: center;
   max-width: 320px;
+
 }
 
 .cardButton{
+  margin-top: auto; 
   color: var(--color-primary-blue);
   background-color: var(--color-neutral-white);
   border-radius: 4px;
@@ -56,9 +50,12 @@
 }
 
 @media (max-width: 992px) {
-.cardTitle  {
-  font-weight: var(--font-subtitle-weight);
-  font-size: var(--font-subtitle-size);
-  line-height: var(--font-subtitle-line-height);
-}
+  .cardTitle  {
+    font-weight: var(--font-subtitle-weight);
+    font-size: var(--font-subtitle-size);
+    line-height: var(--font-subtitle-line-height);
+  }
+  .cardDescription {
+    line-height: var(--font-body2-line-height);
+  }
 }
