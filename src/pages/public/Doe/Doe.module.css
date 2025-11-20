@@ -78,7 +78,7 @@
 
 .apadrinhamentoDescription{
   text-align: justify;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .apoiaSeLink{
@@ -133,7 +133,7 @@
     align-self: center;
   }
 
-  .apadrinhamentoBulletsList{
+  .apadrinhamentoBulletsList, .apoiaSeSpan{
     display: none;
   }
 }
@@ -155,7 +155,7 @@
       "imagem"
       "content";
   }
-   .apadrinhamentoBulletsList{
+   .apadrinhamentoBulletsList, .apoiaSeSpan{
     display: block;
   }
 

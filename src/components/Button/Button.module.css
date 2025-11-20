@@ -45,8 +45,7 @@
   color: var(--color-primary-yellow);
 }
 .secondaryOutline:hover {
-  background-color: var(--color-primary-yellow);
-  color: var(--color-neutral-white);
+  box-shadow: 0 0 10px var(--color-primary-yellow);
 }
 
 .danger {
@@ -60,6 +59,7 @@
 .small {
   padding: 8px 12px;
   min-width: 64px;
+  
 }
 .medium {
   padding: 12px 24px;

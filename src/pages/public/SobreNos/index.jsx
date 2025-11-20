@@ -35,7 +35,7 @@ export default function SobreNos() {
           content="https://gatosdocampodesantana.com.br/sobre-nos"
         />
       </Helmet>
-      <div className={styles.sobreNosSection}>
+      <div className={styles.sobreNosContainer}>
         <div className={styles.nossaHistoriaContainer}>
           <div className={styles.nossaHistoriaHeader}>
             <h2 className="text-title">Nossa História</h2>
@@ -92,47 +92,44 @@ export default function SobreNos() {
         </div>
 
         <div className={`${styles.comoAtuamosSection} sectionMargin`}>
-          <div className={styles.comoAtuamosShapeWrapper}>
-            <img src="" alt="" />
-            <div className={styles.comoAtuamosContainer}>
-              <div className={styles.comoAtuamosContent}>
-                <div className={styles.comoAtuamosHeader}>
-                  <h2 className="text-title">Como Atuamos</h2>
-                </div>
-                <div className={styles.comoAtuamosText}>
-                  <p className="text-body1">
-                    Levamos regularmente os animais da colônia para consultas,
-                    exames e diversos procedimentos veterinários, incluindo
-                    testes de FIV e FeLV, garantindo que cada gatinho receba os
-                    cuidados necessários para uma vida saudável.
-                  </p>
-                  <p className="text-body1">
-                    Em 2024, realizamos 29 internações ao longo do ano, todas
-                    viabilizadas graças à parceria com a Clínica Veterinária de
-                    Botafogo, que nos apoia com dedicação e profissionalismo.
-                    Além disso, contamos com os serviços oferecidos pela
-                    Prefeitura do Rio de Janeiro, como o Posto de Atendimento do
-                    Flamengo e o Hospital Veterinário da Mangueira, ampliando
-                    ainda mais nossa capacidade de cuidado e atendimento.
-                  </p>
-                </div>
-                <Link to="/adote">
-                  <Button
-                    size="small"
-                    icon={IoHeart}
-                    className={`${styles.bannerButton} buttonBoxShadow`}
-                  >
-                    Adote
-                  </Button>
-                </Link>
+          <div className={styles.comoAtuamosContainer}>
+            <div className={styles.comoAtuamosContent}>
+              <div className={styles.comoAtuamosHeader}>
+                <h2 className="text-title">Como Atuamos</h2>
               </div>
-              <div className={styles.comoAtuamosImgContainer}>
-                <img
-                  src={ComoAtuamosImg}
-                  className={styles.comoAtuamosImage}
-                  alt="Gato do projeto Gatos do Campo de Santana sendo cuidado"
-                />
+              <div className={styles.comoAtuamosText}>
+                <p className="text-body1">
+                  Levamos regularmente os animais da colônia para consultas,
+                  exames e diversos procedimentos veterinários, incluindo testes
+                  de FIV e FeLV, garantindo que cada gatinho receba os cuidados
+                  necessários para uma vida saudável.
+                </p>
+                <p className="text-body1">
+                  Em 2024, realizamos 29 internações ao longo do ano, todas
+                  viabilizadas graças à parceria com a Clínica Veterinária de
+                  Botafogo, que nos apoia com dedicação e profissionalismo. Além
+                  disso, contamos com os serviços oferecidos pela Prefeitura do
+                  Rio de Janeiro, como o Posto de Atendimento do Flamengo e o
+                  Hospital Veterinário da Mangueira, ampliando ainda mais nossa
+                  capacidade de cuidado e atendimento.
+                </p>
               </div>
+              <Link to="/adote">
+                <Button
+                  size="small"
+                  icon={IoHeart}
+                  className={`${styles.bannerButton} buttonBoxShadow`}
+                >
+                  Adote
+                </Button>
+              </Link>
+            </div>
+            <div className={styles.comoAtuamosImgContainer}>
+              <img
+                src={ComoAtuamosImg}
+                className={styles.comoAtuamosImage}
+                alt="Gato do projeto Gatos do Campo de Santana sendo cuidado"
+              />
             </div>
           </div>
         </div>
@@ -190,9 +187,9 @@ export default function SobreNos() {
             </div>
             <div className={styles.nossosObjText}>
               <p className="text-body1">
-                Temos como objetivo principal a extinção da colônia, mas para
-                isso outros meios são constantes mobilizados para serem
-                expandidos no projeto:
+                Nosso principal objetivo é a extinção da colônia. Para
+                alcançá-lo, mobilizamos continuamente outros meios no
+                desenvolvimento do projeto.
               </p>
             </div>
           </div>

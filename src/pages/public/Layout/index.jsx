@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { NavBar } from '../../../components';
+import { NavBar, ScrollToTop } from '../../../components';
 import '../../Layout.css';
 import { Helmet } from 'react-helmet-async';
 
@@ -17,19 +17,22 @@ export function Layout() {
   ];
 
   return (
-    <div className="layout">
-      <Helmet>
-        <title>Gatos do Campo de Santana 🐾</title>
-        <meta
-          name="description"
-          content="Adote, ajude e conheça os gatos do Campo de Santana."
-        />
-      </Helmet>
+    <>
+      <ScrollToTop enableDebug={true} />
+      <div className="layout">
+        <Helmet>
+          <title>Gatos do Campo de Santana 🐾</title>
+          <meta
+            name="description"
+            content="Adote, ajude e conheça os gatos do Campo de Santana."
+          />
+        </Helmet>
 
-      <NavBar links={links} navButton={navButton} />
-      <div className="layout-content">
-        <Outlet />
+        <NavBar links={links} navButton={navButton} />
+        <div className="layout-content">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

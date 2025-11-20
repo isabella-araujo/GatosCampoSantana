@@ -7,7 +7,7 @@ const Button = ({
   size = 'medium',
   disabled = false,
   variant = 'primary',
-  borderRadius = '4px',
+  borderRadius = '6px',
   icon: Icon,
   iconColor = 'var(--color-neutral-white)',
   iconSize = 18,
