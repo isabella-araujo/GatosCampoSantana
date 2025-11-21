@@ -21,3 +21,4 @@ export { default as NossosObjetivosList } from './NossosObjetivosList/NossosObje
 export { default as CardPagamentoPix } from './CardsPagamento/CardPagamentoPix.jsx';
 export { default as CardPagamentoPicPay } from './CardsPagamento/CardPagamentoPicPay.jsx';
 export { default as ScrollToTop } from './ScrollToTop/ScrollToTop.jsx';
+export { default as Footer } from './Footer/Footer.jsx';

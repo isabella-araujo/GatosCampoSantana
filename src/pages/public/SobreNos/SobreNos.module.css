@@ -305,3 +305,38 @@
   }
 }
 
+@media (max-width: 480px) {
+  .nossaHistoriaImgContainer {
+    max-width: 300px;
+  }
+
+  .comoAtuamosImage {
+    max-width: 300px;
+  }
+
+  .feirasAdocaoImage {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 320px) {
+  .nossaHistoriaImgContainer {
+    max-width: 250px;
+  }
+
+  .comoAtuamosImage {
+    max-width: 250px;
+  }
+
+  .feirasAdocaoImage {
+    max-width: 250px;
+  }
+  .nossaHistoriaContainer {
+    overflow: hidden;
+  }
+
+  .nossosObjTitle, .feirasAdocaoTitle, .comoAtuamosTitle, .nossaHistoriaTitle {
+    justify-content: center;
+    text-align: center;
+  }
+}

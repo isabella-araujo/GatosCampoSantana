@@ -5,7 +5,7 @@ import QRCodeImg from '../../assets/qr-codes/qrcode-pix.png';
 const SomePixIcon = <SiPix size={32} color="var(--color-neutral-white)" />;
 export function CardPagamentoPix({
   metodoKey,
-  showQrCode = true,
+  showQrCode = false,
   icone = SomePixIcon,
   label = 'Copiar chave',
 }) {

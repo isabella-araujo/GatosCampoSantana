@@ -356,3 +356,9 @@ position: relative;
     max-width:  500px;}
 
 }
+
+@media (max-width: 300px) {
+  .nossosObjImg {
+  display: none 
+  }
+}

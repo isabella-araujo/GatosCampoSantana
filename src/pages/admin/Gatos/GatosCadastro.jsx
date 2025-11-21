@@ -95,7 +95,9 @@ export default function GatosCadastro() {
                     file={value}
                     onFile={(file) => onChange(file)}
                     error={error?.message}
-                    onError={() => {}}
+                    onError={(msg) =>
+                      setError('fotoFile', { type: 'manual', message: msg })
+                    }
                     onClick={(e) => e.stopPropagation()}
                   >
                     Carregar imagem
@@ -116,6 +118,13 @@ export default function GatosCadastro() {
                           value: 3,
                           message: 'Nome tem que ter pelo menos 3 caracteres',
                         },
+                        maxLength: {
+                          value: 50,
+                          message: 'Nome pode ter no máximo 50 caracteres',
+                        },
+                        validate: (value) =>
+                          value.trim().length > 0 ||
+                          'O nome não pode conter apenas espaços',
                       })}
                       error={errors.nome?.message}
                     />
@@ -128,11 +137,10 @@ export default function GatosCadastro() {
                           placeholder="DD/MM/AAAA"
                           {...register('nascimento', {
                             required: 'Nascimento é obrigatório',
+                            validate: (value) =>
+                              validateBirthDate(value) ||
+                              'Data de nascimento inválida',
                           })}
-                          validate={(value) => {
-                            validateBirthDate(value) ||
-                              'Data de nascimento inválida';
-                          }}
                           error={errors.nascimento?.message}
                         />
                       </div>
@@ -219,6 +227,13 @@ export default function GatosCadastro() {
                       value: 350,
                       message: 'Máximo de 350 caracteres',
                     },
+                    minLength: {
+                      value: 10,
+                      message: 'Mínimo de 10 caracteres',
+                    },
+                    validate: (value) =>
+                      value.trim().length > 0 ||
+                      'A descrição não pode conter apenas espaços',
                   })}
                   error={errors.descricao?.message}
                 />

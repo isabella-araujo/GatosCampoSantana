@@ -2,6 +2,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+
 }
 
 .viewport {
@@ -12,6 +13,7 @@
 .track {
   display: flex;
   flex-direction: row;
+  min-height: 260px; 
   transition: transform 450ms ease-in-out;
   will-change: transform;
 }

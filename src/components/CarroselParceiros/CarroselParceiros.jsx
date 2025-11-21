@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './CarroselParceiros.module.css';
 import { getParceiros } from '../../services/parceirosServices';
 import Carrossel from '../Carrossel/Carrossel';
+import Tooltip from '../Tooltip/Tooltip';
 
 export default function CarroselParceiros() {
   const [parceiros, setParceiros] = useState([]);
@@ -33,11 +34,13 @@ export default function CarroselParceiros() {
     >
       {(parceiro) => (
         <div className={styles.parceiroCard} key={parceiro.id}>
-          <img
-            src={parceiro.logoURL}
-            alt={parceiro.nome}
-            className={styles.parceiroLogo}
-          />
+          <Tooltip text={parceiro.nome} key={parceiro.id} position="right">
+            <img
+              src={parceiro.logoURL}
+              alt={parceiro.nome}
+              className={styles.parceiroLogo}
+            />
+          </Tooltip>
         </div>
       )}
     </Carrossel>

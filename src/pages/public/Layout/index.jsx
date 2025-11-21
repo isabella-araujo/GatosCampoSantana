@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { NavBar, ScrollToTop } from '../../../components';
+import { Footer, NavBar, ScrollToTop } from '../../../components';
 import '../../Layout.css';
 import { Helmet } from 'react-helmet-async';
 
@@ -31,6 +31,7 @@ export function Layout() {
         <NavBar links={links} navButton={navButton} />
         <div className="layout-content">
           <Outlet />
+          <Footer />
         </div>
       </div>
     </>
