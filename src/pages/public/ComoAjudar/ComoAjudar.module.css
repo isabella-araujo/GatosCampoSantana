@@ -28,11 +28,13 @@
 }
 
 .sejaVoluntarioContainer {
-  display: flex;
-  justify-content: space-between;
-  gap: clamp(2rem, 6vw, 14rem);
+  grid-column: 1;
+  display: grid;
   width: 100%;
   align-items: center;
+  grid-template-columns: 1fr auto;
+  column-gap: clamp(2rem, 6vw, 14rem);
+  row-gap: 2rem;
 }
 
 .sejaVoluntarioContent{
@@ -56,6 +58,10 @@
   gap: 1rem;
 }
 
+.sejaVoluntarioDescription p{
+  max-width: 400px;
+}
+
 .comoAjudarList{
   gap: 0.8rem;
 }
@@ -66,13 +72,20 @@
   gap: 1rem;
 }
 
+.listItem > *:first-child {
+  flex-shrink: 0;
+}
+
 .sejaVoluntarioImage{
+  grid-column: 2;
   width: 100%;
   height: auto;
   object-fit: cover;
   display: block;      
   flex-shrink: 1; 
+  max-width:  500px;
 }
+
 
 .sejaLarTemporarioSection{
   padding-inline: clamp(1rem, 4vw, 2rem);
@@ -102,29 +115,28 @@
   color: var(--color-primary-yellow);
 }
 
-.pontosColetaText{
+.itensBasicosText{
   font-style: italic;
   font-weight: 600;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   max-width: 400px;
 }
 
 .outrasFormasAjudarSection{
-  padding-inline: clamp(1rem, 4vw, 2rem);
   width: 100%;
   margin-inline: auto;
 }
 
 .outrasFormasAjudarContainer {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  gap: clamp(2rem, 6vw, 8rem);
+  justify-content: space-between;
 }
 
 .doacaoItemsContainer{
   display: flex;
   flex-direction: column;
-  max-width: 460px;
+  max-width: 450px;
   gap: 1rem;
 }
 
@@ -135,6 +147,7 @@
   background-color: var(--color-primary-blue);
   border-radius: 8px;
   padding: 1rem;
+  position: relative;
 }
 
 .accordionTitle{
@@ -146,17 +159,27 @@
   font-weight: 700;
   cursor: pointer;
   color: var(--color-quaternary-blue);
-  padding: 0.5rem;
+  padding: 0.4rem;
 }
 .accordionContent {
-  margin-top: 1rem;
+  position: absolute;
+  top: 80%;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-primary-blue);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
   max-height: 0;
-  overflow: hidden;    
-  transition: max-height 0.3s ease;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease,opacity 0.3s ease;
 }
 
+
 .open {
-  max-height: 500px;    
+  max-height: 500px;
+  opacity: 1;
 }
 
 .iconOpen {
@@ -212,18 +235,33 @@
   max-width: 100%;
 }
 
-.entregaPresencialText{
+.entregaPresencialText, .pontosColetaText{
   text-align: justify;
   color: var(--color-quaternary-blue);
   font-weight: 600;
   max-width: 750px;
 }
 
-
+@media (max-width: 1200px) {
+  .doacaoItemsContainer{
+    max-width: 400px;
+  }
+  .apoioFinanceiroContainer{
+    max-width: 450px;
+  }
+}
 @media (max-width: 992px) {
+  .sejaVoluntarioImage{
+    max-width:  400px;
+  }
   .outrasFormasAjudarContainer {
-    flex-direction: column-reverse;
-    /* melhorar alinhamento */
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .doacaoItemsContainer, .apoioFinanceiroContainer{
+    max-width: 550px
   }
 }
 @media (max-width: 900px) {
@@ -247,4 +285,12 @@
     text-align: center;
   }
 
+
+
+}
+
+@media (max-width: 360px) {
+  .sejaVoluntarioHeader, .sejaLarTemporarioContent{
+    text-align: center;
+  }
 }

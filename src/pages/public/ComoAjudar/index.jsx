@@ -251,9 +251,9 @@ export default function ComoAjudar() {
                   </ul>
                 </div>
               </div>
-              <p className={styles.pontosColetaText + ' text-body2'}>
-                Entre em contato conosco para saber os pontos de coleta mais
-                próximos de você.
+              <p className={styles.itensBasicosText + ' text-body2'}>
+                Toda contribuição faz uma enorme diferença para manter nossos
+                resgates e tratamentos.
               </p>
             </div>
             <div className={styles.apoioFinanceiroContainer}>
@@ -293,7 +293,7 @@ export default function ComoAjudar() {
             </div>
             <div className={styles.entregaCorreios}>
               <h3 className="text-subtitle">Pontos de Coleta</h3>
-              <p className="text-body1">
+              <p className={styles.pontosColetaText + ' text-body1'}>
                 Entre em contato conosco para saber os pontos de coleta mais
                 próximos de você.
               </p>

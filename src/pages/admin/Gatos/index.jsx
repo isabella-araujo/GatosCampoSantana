@@ -145,7 +145,7 @@ export default function Gatos() {
       name: 'Castrado',
       selector: (row) => (
         <div>
-          {row.disponivelAdocao ? (
+          {row.castrado ? (
             <IoCheckmarkCircleSharp
               color="var(--color-support-green)"
               size={24}

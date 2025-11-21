@@ -110,7 +110,12 @@ export default function ParceirosEdit({
               label="Site"
               type="text"
               placeholder="www.exemplo.com"
-              {...register('site')}
+              {...register('site', {
+                maxLength: {
+                  value: 100,
+                  message: 'Máximo de 100 caracteres',
+                },
+              })}
               error={errors.site?.message}
             />
 

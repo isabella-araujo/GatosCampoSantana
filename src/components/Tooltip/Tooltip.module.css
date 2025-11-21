@@ -6,24 +6,37 @@
 
 .tooltipText {
   visibility: hidden;
-  width: 120px;
+  opacity: 0;
+  position: absolute;
   background-color: var(--color-neutral-black);
   color: var(--color-neutral-white);
-  font-family: var(--font-overline-family);
-  font-size: var(--font-overline-size);
-  text-align: center;
+  padding: 6px 10px;
+  font-size: 12px;
   border-radius: 4px;
-  padding: 4px 2px;
-  position: absolute;
-  z-index: 1;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
+  white-space: nowrap;
+  z-index: 9999;
+  transition: opacity .2s ease;
 }
 
 .tooltip:hover .tooltipText {
   visibility: visible;
   opacity: 1;
+}
+
+.top .tooltipText {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.right .tooltipText {
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+}
+
+.left .tooltipText {
+  top: 50%;
+  right: calc(100% + 8px);
+  transform: translateY(-50%);
 }

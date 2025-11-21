@@ -160,10 +160,26 @@ export async function getAllGatos() {
 export async function deleteGato(id) {
   try {
     if (!id) {
-      throw new Error('ID do gato invalido.');
+      throw new Error('ID do gato inválido.');
     }
     const docRef = doc(db, 'gatos', id);
+    const snapshot = await getDoc(docRef);
+
+    if (!snapshot.exists()) {
+      throw new Error('Gato não encontrado.');
+    }
+    const data = snapshot.data();
+
+    if (data.fotoPath) {
+      try {
+        const storageRef = ref(storage, data.fotoPath);
+        await deleteObject(storageRef);
+      } catch (warning) {
+        toast.warn(`Falha ao deletar imagem: ${warning}`);
+      }
+    }
     await deleteDoc(docRef);
+
     return { message: 'Gato deletado com sucesso' };
   } catch (error) {
     toast.error(`Erro ao deletar gato: ${error}`);

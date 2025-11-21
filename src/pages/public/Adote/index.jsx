@@ -34,7 +34,9 @@ export default function Adote() {
       <div className={styles.adoteContainer}>
         <div className={styles.headerContainer}>
           <div className={styles.headerContent}>
-            <h1 className="text-display">Adote amor em forma de gato</h1>
+            <div className={styles.headerTitle}>
+              <h1 className="text-display">Adote amor em forma de gato</h1>
+            </div>
             <p className="text-subtitle">
               Cada um desses gatinhos tem uma história e está em busca de um lar
               cheio de carinho. Adotar transforma a sua vida e a de um gatinho.
