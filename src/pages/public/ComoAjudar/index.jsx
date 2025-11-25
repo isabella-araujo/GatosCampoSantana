@@ -138,11 +138,9 @@ export default function ComoAjudar() {
                 Quero ser um Lar Temporário
               </Link>
             </div>
-            <div className={styles.sejaLarTemporarioCarrosel}>
-              {/* Implementar carrossel de fotos */}
-            </div>
+            <div className={styles.sejaLarTemporarioCarrosel}></div>
             <div className={styles.sejaLarTemporarioButton}>
-              <Link to="/adote">
+              <Link to="/gatoDetalhes">
                 <Button variant="secondary" className="buttonBoxShadow">
                   Gatinhos para adotar
                 </Button>

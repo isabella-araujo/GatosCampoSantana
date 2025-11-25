@@ -4,6 +4,7 @@ import { Layout } from '../pages/public/Layout';
 import Home from '../pages/public/Home';
 import SobreNos from '../pages/public/SobreNos';
 import Adote from '../pages/public/Adote';
+import GatoDetalhes from '../pages/public/Adote/GatoDetalhes';
 import ComoAjudar from '../pages/public/ComoAjudar';
 import Doe from '../pages/public/Doe';
 import Login from '../pages/public/Login/index.jsx';
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: 'adote', Component: Adote },
+      { path: 'gatoDetalhes', Component: GatoDetalhes },
       { path: 'sobre-nos', Component: SobreNos },
       { path: 'como-ajudar', Component: ComoAjudar },
       { path: 'doe', Component: Doe },
