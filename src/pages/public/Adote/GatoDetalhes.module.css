@@ -1,0 +1,85 @@
+
+.pgatoDetailsContainer{
+  margin: 42px 0 ;
+}
+
+.titleContainer{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 54px;
+}
+
+.gatoDetailsContent{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 20px;
+}
+
+.imageContainer img {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.gatoInfoContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.infoItem{
+  display: flex;
+  gap: 8px;
+}
+
+.infoItem span{
+  font-weight: 600;
+}
+
+.buttonsContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttonsContainer p{
+  font-weight: 600;
+}
+
+.actionButtons{
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .gatoDetailsContent {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .imageContainer{
+    display: flex;
+    justify-content: center;
+  }
+  .actionButtons{
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageContainer img{
+    width: 100%;
+  }
+  .actionButtons{
+    flex-direction: column;
+  }
+}

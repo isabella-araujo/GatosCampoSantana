@@ -1,0 +1,62 @@
+.card{
+  width: 300px;
+  min-height: 450px;
+  background-color: #FFF;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 2px solid #D9D9D9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.imagemContainer{
+  align-self: center;
+  overflow: hidden;
+  width: 240px;
+  height: 240px;
+}
+
+.imagemContainer img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nomeContainer{
+  text-align: center;
+  width: 100%;
+}
+
+.nome {
+  color: var(--color-primary-yellow);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.info{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 8px 22px;
+  padding-left: 14px;
+}
+
+.infoItem{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.infoItem span{
+  font-weight: 600;
+}
+
+.buttonContainer{
+  align-self: center;
+}
