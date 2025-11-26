@@ -13,14 +13,24 @@
   color: var(--color-neutral-black);
 }
 
+.title2 {
+  margin-top: 2rem;
+  color: var(--color-neutral-black);
+}
+
 .imageContainer{
   width: 100%;
   max-width: 500px;
   min-width: 400px;
 }
 
-.message {
+.subtitle {
   margin: 2rem;
+  color: var(--color-neutral-black);
+}
+
+.message {
+  margin-top: 0.5rem;
   color: var(--color-neutral-black);
 }
 

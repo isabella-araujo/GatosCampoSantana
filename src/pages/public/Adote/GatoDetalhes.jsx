@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import styles from './GatoDetalhes.module.css';
 import { useEffect, useState } from 'react';
-import { Button, Container } from '../../../components';
+import { Button, Container, Loading } from '../../../components';
 import {
   IoBandage,
   IoCalendarSharp,
@@ -11,7 +11,7 @@ import {
 } from 'react-icons/io5';
 import { getGatoBySlug } from '../../../services/gatosServices';
 import { formatarGato } from '../../../utils/formatarGato';
-
+import NenhumGatoEncontrado from '../Others/NenhumGatoEncontrado';
 export default function GatoDetalhes() {
   const { slug } = useParams();
   const [gato, setGato] = useState(null);
@@ -20,24 +20,36 @@ export default function GatoDetalhes() {
     async function fetchGato() {
       try {
         const gatoData = await getGatoBySlug(slug);
+        if (!gatoData) {
+          setGato(undefined);
+          return;
+        }
         const gatoWithFormattedFields = formatarGato(gatoData);
         setGato(gatoWithFormattedFields);
       } catch (error) {
         console.error('Erro ao buscar os detalhes do gato:', error);
+        setGato(undefined);
       }
     }
 
     fetchGato();
   }, [slug]);
 
-  if (!gato) {
-    return <div>Carregando...</div>;
+  if (gato === null) {
+    return <Loading />;
+  }
+
+  if (gato === undefined) {
+    return (
+      <NenhumGatoEncontrado msg="Não foi possível encontrar o gatinho, tente novamente mais tarde." />
+    );
   }
 
   return (
     <>
       <Helmet>
         <title> Gatos do Campo de Santana | {gato.nomeFormatado}</title>
+        <meta name="robots" content="noindex" />
       </Helmet>
       <div className={styles.gatoDetailsContainer}>
         <div className={styles.titleContainer}>

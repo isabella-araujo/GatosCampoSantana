@@ -17,7 +17,7 @@ function PageNotFound() {
         <div className={styles.imageContainer}>
           <img src={Error404} alt="Error 404" />
         </div>
-        <p className={`${styles.message} text-subtitle`}>
+        <p className={`${styles.subtitle} text-subtitle`}>
           Verifique o endereço digitado ou volte para a
           <Link to="/" className={styles.homeLink}>
             {' '}
