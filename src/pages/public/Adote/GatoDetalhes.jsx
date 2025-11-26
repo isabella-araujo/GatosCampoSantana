@@ -1,37 +1,58 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import styles from './GatoDetalhes.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Container } from '../../../components';
-import GatoImg from '../../../assets/drica.jpg';
 import {
   IoBandage,
   IoCalendarSharp,
   IoMaleFemaleOutline,
   IoPawSharp,
 } from 'react-icons/io5';
+import { getGatoBySlug } from '../../../services/gatosServices';
+import { formatarGato } from '../../../utils/formatarGato';
 
 export default function GatoDetalhes() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [gato, setGato] = useState(null);
+
+  useEffect(() => {
+    async function fetchGato() {
+      try {
+        const gatoData = await getGatoBySlug(slug);
+        const gatoWithFormattedFields = formatarGato(gatoData);
+        setGato(gatoWithFormattedFields);
+      } catch (error) {
+        console.error('Erro ao buscar os detalhes do gato:', error);
+      }
+    }
+
+    fetchGato();
+  }, [slug]);
+
+  if (!gato) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <>
       <Helmet>
-        {/*<title> Gatos do Campo de Santana | {gato.nomeFormatado}</title>*/}
+        <title> Gatos do Campo de Santana | {gato.nomeFormatado}</title>
       </Helmet>
       <div className={styles.gatoDetailsContainer}>
         <div className={styles.titleContainer}>
-          <h2 className="text-display">Drica</h2>
+          <h2 className="text-display">{gato.nomeFormatado}</h2>
         </div>
         <Container style={{ width: '900px' }}>
           <div className={styles.gatoDetailsContent}>
             <div className={styles.imageContainer}>
-              <img src={GatoImg} alt="Foto da Drica" />
+              <img src={gato.fotoURL} alt={`Foto da ${gato.nomeFormatado}`} />
             </div>
             <div className={styles.gatoInfoContainer}>
               <div className={styles.nomeContainer}>
-                <h2 className={`${styles.nome} text-title`}>Drica</h2>
+                <h2 className={`${styles.nome} text-title`}>
+                  {gato.nomeFormatado}
+                </h2>
               </div>
               <div className={styles.info}>
                 <div className={styles.infoItem}>
@@ -40,7 +61,7 @@ export default function GatoDetalhes() {
                     size={22}
                     color="var(--color-neutral-black)"
                   />
-                  <span className="text-body2">Fêmea</span>
+                  <span className="text-body2">{gato.generoFormatado}</span>
                 </div>
                 <div className={styles.infoItem}>
                   <IoPawSharp
@@ -48,7 +69,7 @@ export default function GatoDetalhes() {
                     size={22}
                     color="var(--color-neutral-black)"
                   />
-                  <span className="text-body2">Castrado</span>
+                  <span className="text-body2">{gato.castradoFormatado}</span>
                 </div>
                 <div className={styles.infoItem}>
                   <IoCalendarSharp
@@ -56,7 +77,7 @@ export default function GatoDetalhes() {
                     size={22}
                     color="var(--color-neutral-black)"
                   />
-                  <span className="text-body2">2 anos</span>
+                  <span className="text-body2">{gato.idade}</span>
                 </div>
                 <div className={styles.infoItem}>
                   <IoBandage
@@ -64,23 +85,16 @@ export default function GatoDetalhes() {
                     size={22}
                     color="var(--color-neutral-black)"
                   />
-                  <span className="text-body2">Negativo Fiv/FeLV</span>
+                  <span className="text-body2">{gato.fivFelvFormatado}</span>
                 </div>
               </div>
               <div className={styles.descriptionContainer}>
-                <p className="text-body1">
-                  A Drica é uma gata adorável de 2 anos, castrada e
-                  saudável,pronta para encontrar um lar amoroso. Ela é
-                  carinhosa,brincalhona e adora companhia humana. Com seu
-                  temperamento dócil, a Drica se adapta facilmente a novos
-                  ambientes e é ótima com crianças e outros animais. Se você
-                  está procurando uma companheira felina leal e amorosa, a Drica
-                  é perfeita!
-                </p>
+                <p className="text-body1">{gato.descricao}</p>
               </div>
               <div className={styles.buttonsContainer}>
                 <p className="text-body1">
-                  Interessado em adotar a Drica? Entre em contato conosco!
+                  Interessado em adotar a {gato.nomeFormatado}? Entre em contato
+                  conosco!
                 </p>
                 <div className={styles.actionButtons}>
                   <Button variant="primary" size="medium">

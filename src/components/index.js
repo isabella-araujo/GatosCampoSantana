@@ -22,3 +22,6 @@ export { default as CardPagamentoPix } from './CardsPagamento/CardPagamentoPix.j
 export { default as CardPagamentoPicPay } from './CardsPagamento/CardPagamentoPicPay.jsx';
 export { default as ScrollToTop } from './ScrollToTop/ScrollToTop.jsx';
 export { default as Footer } from './Footer/Footer.jsx';
+export { default as CarroselGatos } from './CarroselGatos/CarroselGatos.jsx';
+export { default as GridGatos } from './GridGatos/GridGatos.jsx';
+export { default as FiltrosGatos } from './FiltrosGatos/FiltrosGatos.jsx';

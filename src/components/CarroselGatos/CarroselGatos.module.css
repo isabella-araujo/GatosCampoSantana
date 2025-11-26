@@ -1,0 +1,30 @@
+.carroselContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .carroselContainer {
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carroselContainer {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carroselContainer {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 360px) {
+  .carroselContainer {
+    max-width: 300px;
+  }
+}

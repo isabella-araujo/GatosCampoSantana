@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './ComoAjudar.module.css';
-import { Button, CardPagamentoPix } from '../../../components';
+import { Button, CardPagamentoPix, CarroselGatos } from '../../../components';
 import { Link } from 'react-router-dom';
 import VoluntarioImg from '../../../assets/ComoAjudar/voluntario.png';
 import { PiBoneFill } from 'react-icons/pi';
@@ -138,9 +138,11 @@ export default function ComoAjudar() {
                 Quero ser um Lar Temporário
               </Link>
             </div>
-            <div className={styles.sejaLarTemporarioCarrosel}></div>
+            <div className={styles.sejaLarTemporarioCarrosel}>
+              <CarroselGatos />
+            </div>
             <div className={styles.sejaLarTemporarioButton}>
-              <Link to="/gatoDetalhes">
+              <Link to="/adote">
                 <Button variant="secondary" className="buttonBoxShadow">
                   Gatinhos para adotar
                 </Button>

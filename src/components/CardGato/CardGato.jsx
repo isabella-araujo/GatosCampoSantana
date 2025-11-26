@@ -7,6 +7,7 @@ import {
   IoHeart,
 } from 'react-icons/io5';
 import Button from '../Button/Button.jsx';
+import { Link } from 'react-router-dom';
 
 export function CardGato({ gato }) {
   return (
@@ -56,7 +57,7 @@ export function CardGato({ gato }) {
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <Link to={`/adote/${gato.id}`}>
+        <Link to={`/adote/gatoDetalhes/${gato.slug}`}>
           <Button variant="secondary" size="small" icon={IoHeart}>
             {gato.atributo}
           </Button>

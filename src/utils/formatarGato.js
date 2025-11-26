@@ -1,10 +1,15 @@
-import { formatDate, formatBirthDate } from './validateDate';
+import { formatDate, formatBirthDate, birthDateInMonths } from './validateDate';
 
 export function formatarGato(gato) {
   const nome =
     gato.nome.charAt(0).toUpperCase() + gato.nome.slice(1).toLowerCase();
-  const dataFormatada = formatDate(gato.dataNascimento);
+  const dataFormatada = formatDate(gato.nascimento);
   const idade = formatBirthDate(dataFormatada);
+  const idadeMeses = birthDateInMonths(dataFormatada);
+
+  if (idadeMeses !== null) {
+    gato.idadeMeses = idadeMeses;
+  }
 
   const genero =
     gato.genero === 'macho'
@@ -22,7 +27,9 @@ export function formatarGato(gato) {
       ? 'Positivo Fiv/FeLV'
       : 'Não informado';
 
-  const atributo = gato.disponivelAdocao
+  const atributo = gato.isAdotado
+    ? 'Indisponível'
+    : gato.disponivelAdocao
     ? 'Adotar'
     : gato.disponivelLarTemporario
     ? 'Lar Temporário'
@@ -30,6 +37,10 @@ export function formatarGato(gato) {
 
   return {
     ...gato,
+    disponivelAdocao: gato.isAdotado ? false : gato.disponivelAdocao,
+    disponivelLarTemporario: gato.isAdotado
+      ? false
+      : gato.disponivelLarTemporario,
     nomeFormatado: nome,
     idade,
     generoFormatado: genero,

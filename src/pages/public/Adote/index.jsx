@@ -2,14 +2,67 @@ import { Helmet } from 'react-helmet-async';
 import styles from './Adote.module.css';
 import VectorAdoteBanner from '../../../assets/Adote/VectorAdoteBanner.svg';
 import GatoShapeAdote from '../../../assets/Adote/GatoShapeAdote.svg';
-import { Button } from '../../../components';
+import { Button, FiltrosGatos, GridGatos } from '../../../components';
 import { Link } from 'react-router-dom';
 import { IoNewspaperOutline, IoHeartCircle } from 'react-icons/io5';
 import Formulario from '../../../assets/Adote/Formulario.svg';
 import Entrevista from '../../../assets/Adote/Entrevistas.svg';
 import Documentos from '../../../assets/Adote/Documentos.svg';
+import { useEffect, useState } from 'react';
+import { getAllGatos } from '../../../services/gatosServices';
+import { formatarGato } from '../../../utils/formatarGato';
 
 export default function Adote() {
+  const [filtros, setFiltros] = useState({
+    genero: '',
+    idade: '',
+    castrado: '',
+    fivFelv: '',
+  });
+  const [gatos, setGatos] = useState([]);
+
+  useEffect(() => {
+    fetchGatos();
+  }, []);
+
+  async function fetchGatos() {
+    try {
+      const gatos = await getAllGatos();
+      const gatosFormatados = gatos.map((g) => formatarGato(g));
+      setGatos(gatosFormatados);
+    } catch (error) {
+      console.error('Erro ao buscar gatos:', error);
+    }
+  }
+
+  function aplicarFiltros(gatos) {
+    return gatos
+      .filter((g) => !g.isAdotado)
+      .filter((g) => (filtros.genero ? g.genero === filtros.genero : true))
+      .filter((g) =>
+        filtros.castrado
+          ? filtros.castrado === 'castrado'
+            ? g.castrado === true
+            : g.castrado === false
+          : true,
+      )
+      .filter((g) =>
+        filtros.fivFelv ? g.possuiFievFelv === filtros.fivFelv : true,
+      )
+      .filter((g) => {
+        if (!filtros.idade) return true;
+        if (filtros.idade === 'filhote') return g.idadeMeses < 6;
+        if (filtros.idade === 'jovem')
+          return g.idadeMeses >= 6 && g.idadeMeses < 24;
+        if (filtros.idade === 'adulto')
+          return g.idadeMeses >= 24 && g.idadeMeses < 84;
+        if (filtros.idade === 'idoso') return g.idadeMeses >= 84;
+        return true;
+      });
+  }
+
+  const gatosFiltrados = aplicarFiltros(gatos, filtros);
+
   return (
     <>
       <Helmet>
@@ -109,6 +162,10 @@ export default function Adote() {
             <div className={styles.gatosParaAdocaoTitle}>
               <IoHeartCircle size={40} color="var(--color-primary-blue)" />
               <h2 className="text-title">Conheça nossos gatinhos</h2>
+            </div>
+            <div className={styles.gatosParaAdocaoContent}>
+              <FiltrosGatos filtros={filtros} setFiltros={setFiltros} />
+              <GridGatos gatos={gatosFiltrados} />
             </div>
           </div>
         </div>
