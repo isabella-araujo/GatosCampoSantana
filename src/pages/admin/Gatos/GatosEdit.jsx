@@ -43,6 +43,7 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
       possuiFievFelv: '',
       disponivelAdocao: true,
       disponivelLarTemporario: false,
+      isAdotado: false,
     },
   });
 
@@ -63,6 +64,7 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
         possuiFievFelv: gatos.possuiFievFelv || '',
         disponivelAdocao: gatos.disponivelAdocao ?? true,
         disponivelLarTemporario: gatos.disponivelLarTemporario ?? false,
+        isAdotado: gatos.isAdotado ?? false,
       });
     }
   }, [gatos, reset]);
@@ -207,6 +209,17 @@ export default function GatosEdit({ gatos, onGatoUpdate, onClose }) {
                     render={({ field }) => (
                       <Checkbox
                         label="Disponível para Lar Temporário"
+                        checked={field.value}
+                        onChecked={(val) => field.onChange(val)}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="isAdotado"
+                    control={control}
+                    render={({ field }) => (
+                      <Checkbox
+                        label="Adotado?"
                         checked={field.value}
                         onChecked={(val) => field.onChange(val)}
                       />

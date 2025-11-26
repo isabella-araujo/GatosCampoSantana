@@ -125,22 +125,41 @@ export default function Gatos() {
     },
     {
       name: 'Status',
-      selector: (row) => (
-        <div>
-          <StatusPill
-            bgColor={
-              row.disponivelAdocao
-                ? 'rgba(91, 190, 114, 0.5)'
-                : 'rgba(198,206,218, 0.5)'
-            }
-            textColor="var(--color-neutral-black)"
-          >
-            {row.disponivelAdocao ? 'Disponivel' : 'Adotado'}
-          </StatusPill>
-        </div>
-      ),
+      selector: (row) => {
+        const isAdotado = !!row.isAdotado;
+        const isDisponivel =
+          !!row.disponivelAdocao || !!row.disponivelLarTemporario;
+
+        const bgColor = isAdotado
+          ? 'rgba(198,206,218,0.5)'
+          : isDisponivel
+          ? 'rgba(91,190,114,0.5)'
+          : 'rgba(240,200,120,0.5)';
+
+        const isLarTemp =
+          !!row.disponivelLarTemporario && !row.disponivelAdocao;
+        const label = isAdotado
+          ? 'Adotado'
+          : isDisponivel
+          ? isLarTemp
+            ? 'Disp.Lar temporário'
+            : 'Disponível'
+          : 'Indisponível';
+
+        return (
+          <div>
+            <StatusPill
+              bgColor={bgColor}
+              textColor="var(--color-neutral-black)"
+            >
+              {label}
+            </StatusPill>
+          </div>
+        );
+      },
       sortable: true,
     },
+
     {
       name: 'Castrado',
       selector: (row) => (

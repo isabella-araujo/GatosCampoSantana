@@ -152,14 +152,15 @@ export default function Home() {
                 ultrapassavam 400 gatos soltos, além dos abandonos diários e
                 nascimentos de novos filhotes.
               </p>
-              <Button
-                size="small"
-                variant="secondary"
-                className={`${styles.quemSomosButton} buttonBoxShadow`}
-                href="/quem-somos"
-              >
-                Saiba mais
-              </Button>
+              <Link to="/sobre-nos" className={styles.quemSomosButton}>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  className="buttonBoxShadow"
+                >
+                  Saiba mais
+                </Button>
+              </Link>
               <img
                 src={patinhasGroup}
                 alt="Patinhas Group"

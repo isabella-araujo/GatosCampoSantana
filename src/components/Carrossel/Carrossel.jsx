@@ -18,8 +18,17 @@ export default function Carrossel({
 
   useEffect(() => {
     function update() {
-      setItemsPerPage(window.innerWidth < 768 ? 1 : 3);
+      const w = window.innerWidth;
+
+      if (w < 768) {
+        setItemsPerPage(1);
+      } else if (w < 1088) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(3);
+      }
     }
+
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);

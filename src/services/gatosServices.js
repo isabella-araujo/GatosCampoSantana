@@ -6,13 +6,11 @@ import {
   addDoc,
   doc,
   Timestamp,
-  orderBy,
-  limit,
-  startAfter,
   query,
   deleteDoc,
   updateDoc,
   serverTimestamp,
+  where,
 } from 'firebase/firestore';
 import { storage } from '../config/firebase.js';
 import {
@@ -23,6 +21,7 @@ import {
 } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
+import { slugify } from '../utils/slug.js';
 
 export async function uploadGatoImage(fotoFile) {
   if (!fotoFile) throw new Error('Nenhum arquivo fornecido para upload.');
@@ -54,8 +53,14 @@ export async function createGato(gatoData) {
       : new Date(gatoData.nascimento);
 
   const { fotoURL, fotoPath } = await uploadGatoImage(gatoData.fotoFile);
+  const { slug, slugBase } = await slugify(gatoData.nome);
+
+  const gatosCollection = collection(db, 'gatos');
+  const docRef = await addDoc(gatosCollection, {});
+  const id = docRef.id;
 
   const gato = {
+    id,
     castrado: false,
     disponivelAdocao: true,
     disponivelLarTemporario: false,
@@ -63,16 +68,17 @@ export async function createGato(gatoData) {
     genero: 'não informado',
     ...gatoData,
     nascimento: Timestamp.fromDate(nascimentoDate),
+    slug,
+    slugBase,
     fotoURL,
     fotoPath,
     createdAt: serverTimestamp(),
   };
 
   delete gato.fotoFile;
+  await updateDoc(docRef, gato);
 
-  const gatosCollection = collection(db, 'gatos');
-  const docRef = await addDoc(gatosCollection, gato);
-  return { id: docRef.id, ...gato };
+  return gato;
 }
 
 export async function getGatoById(id) {
@@ -90,44 +96,19 @@ export async function getGatoById(id) {
   }
 }
 
-export async function getGatosFirstPage() {
+export async function getGatoBySlug(slug) {
   try {
     const gatosCollection = collection(db, 'gatos');
-    const q = query(gatosCollection, orderBy('nascimento', 'desc'), limit(10));
+    const q = query(gatosCollection, where('slug', '==', slug));
     const snapshot = await getDocs(q);
-    if (snapshot.empty) {
-      return { gatos: [], lastDoc: null };
+    if (!snapshot.empty) {
+      const doc = snapshot.docs[0];
+      return { id: doc.id, ...doc.data() };
+    } else {
+      return null;
     }
-    const lastDoc = snapshot.docs[snapshot.docs.length - 1];
-    const gatos = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    return { gatos, lastDoc };
   } catch (error) {
-    toast.error(`Erro ao buscar gatos: ${error}`);
-    throw error;
-  }
-}
-
-export async function getGatosNextPage(lastDoc) {
-  try {
-    if (!lastDoc) {
-      return { gatos: [], lastDoc: null };
-    }
-
-    const gatosCollection = collection(db, 'gatos');
-    const q = query(
-      gatosCollection,
-      orderBy('nascimento', 'desc'),
-      startAfter(lastDoc),
-      limit(10),
-    );
-
-    const snapshot = await getDocs(q);
-    const newLastDoc = snapshot.docs[snapshot.docs.length - 1] || null;
-
-    const gatos = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    return { gatos, lastDoc: newLastDoc };
-  } catch (error) {
-    toast.error(`Erro ao buscar gatos: ${error}`);
+    toast.error(`Erro ao buscar gato por slug: ${error}`);
     throw error;
   }
 }

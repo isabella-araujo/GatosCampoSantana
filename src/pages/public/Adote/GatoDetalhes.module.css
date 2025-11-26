@@ -45,7 +45,10 @@
 .infoItem span{
   font-weight: 600;
 }
-
+.descriptionContainer{
+  font-style: italic;
+  color: var(--color-primary-yellow);
+}
 .buttonsContainer{
   display: flex;
   flex-direction: column;

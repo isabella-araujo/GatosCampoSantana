@@ -8,6 +8,7 @@ export default function Dropdown({
   onSelect,
   idDropdown,
   value,
+  className = 'bgColorBlue',
 }) {
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -35,7 +36,11 @@ export default function Dropdown({
 
   return (
     <div className={styles.dropdown}>
-      <div className={styles.dropdownLabelContainer} onClick={toggleDropdown}>
+      <div
+        className={`${styles.dropdownLabelContainer} ${styles[className]}`}
+        tabIndex={0}
+        onClick={toggleDropdown}
+      >
         <label className={styles.dropdownLabel}>
           {selectedOption ? selectedOption.title : label}
         </label>

@@ -68,3 +68,16 @@ export function formatBirthDate(date) {
     return `${anosCorrigido} ${anosCorrigido === 1 ? 'ano' : 'anos'}`;
   }
 }
+
+export function birthDateInMonths(date) {
+  if (!date) return null;
+  const [dia, mes, ano] = date.split('/').map(Number);
+  if (!dia || !mes || !ano) return null;
+  const data = new Date(ano, mes - 1, dia);
+  const hoje = new Date();
+  const diferencaMeses =
+    hoje.getFullYear() * 12 +
+    hoje.getMonth() -
+    (data.getFullYear() * 12 + data.getMonth());
+  return diferencaMeses;
+}

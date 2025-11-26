@@ -1,0 +1,21 @@
+.filtrosContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+@media (max-width: 900px) {
+  .filtrosContainer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .filtrosContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
