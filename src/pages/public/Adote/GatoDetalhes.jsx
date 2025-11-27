@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './GatoDetalhes.module.css';
 import { useEffect, useState } from 'react';
-import { Button, Container, Loading } from '../../../components';
+import { Button, Container, Loading, Modal } from '../../../components';
 import {
   IoBandage,
   IoCalendarSharp,
@@ -12,9 +12,11 @@ import {
 import { getGatoBySlug } from '../../../services/gatosServices';
 import { formatarGato } from '../../../utils/formatarGato';
 import NenhumGatoEncontrado from '../Others/NenhumGatoEncontrado';
+import GoogleForm from '../../../components/GoogleForm/GoogleForm';
 export default function GatoDetalhes() {
   const { slug } = useParams();
   const [gato, setGato] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     async function fetchGato() {
@@ -44,6 +46,13 @@ export default function GatoDetalhes() {
       <NenhumGatoEncontrado msg="Não foi possível encontrar o gatinho, tente novamente mais tarde." />
     );
   }
+  const formURL = `https://docs.google.com/forms/d/e/1FAIpQLSchqxW3drNKuJjsvlzwEfleJ9KlMVnLXkzBCo4gbGe9C1TR8g/viewform?embedded=true&entry.1347770403=${encodeURIComponent(
+    gato.nomeFormatado,
+  )}`;
+  const handleOpenModal = () => {
+    console.log('clicou abrir modal');
+    setOpenModal(true);
+  };
 
   return (
     <>
@@ -109,10 +118,25 @@ export default function GatoDetalhes() {
                   conosco!
                 </p>
                 <div className={styles.actionButtons}>
-                  <Button variant="primary" size="medium">
-                    Instagram
-                  </Button>
-                  <Button variant="secondary" size="medium">
+                  <Link
+                    to="https://ig.me/m/gatosdocampodesantana"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button
+                      variant="primary"
+                      size="medium"
+                      className={styles.instagramButton}
+                    >
+                      Instagram
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="secondary"
+                    size="medium"
+                    className={styles.whatsappButton}
+                    onClick={handleOpenModal}
+                  >
                     WhatsApp
                   </Button>
                 </div>
@@ -121,6 +145,9 @@ export default function GatoDetalhes() {
           </div>
         </Container>
       </div>
+      <Modal open={openModal} onClose={() => setOpenModal(false)}>
+        <GoogleForm url={formURL} />
+      </Modal>
     </>
   );
 }

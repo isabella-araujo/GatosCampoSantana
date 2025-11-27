@@ -64,6 +64,26 @@
   gap: 16px;
 }
 
+.instagramButton {
+  background-color: #E4405F;
+  border-color: #E4405F;
+}
+
+.instagramButton:hover {
+  background-color: #d73753;
+  border-color: #d73753;
+}
+
+.whatsappButton {
+  background-color: #25D366;
+  border-color: #25D366;
+}
+
+.whatsappButton:hover {
+  background-color: #1ebe57;
+  border-color: #1ebe57;
+}
+
 @media (max-width: 768px) {
   .gatoDetailsContent {
     grid-template-columns: 1fr;
