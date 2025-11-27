@@ -27,7 +27,7 @@ const Button = ({
       onClick={onClick}
       className={classes}
       disabled={disabled}
-      style={{ borderRadius }}
+      style={{ borderRadius, backgroundColor: props.style?.backgroundColor }}
       {...props}
     >
       {children}
