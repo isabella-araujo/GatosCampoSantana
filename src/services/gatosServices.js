@@ -108,7 +108,7 @@ export async function getGatoBySlug(slug) {
       return null;
     }
   } catch (error) {
-    toast.error(`Erro ao buscar gato por slug: ${error}`);
+    console.error(`Erro ao buscar gato por slug: ${error}`);
     throw error;
   }
 }
@@ -133,7 +133,7 @@ export async function getAllGatos() {
       };
     });
   } catch (error) {
-    toast.error(`Erro ao buscar todos os gatos: ${error}`);
+    console.error(`Erro ao buscar todos os gatos: ${error}`);
     throw error;
   }
 }

@@ -11,7 +11,7 @@ function NenhumGatoEncontrado({ msg }) {
       </Helmet>
       <div className={styles.container}>
         <div>
-          <img src={ErrorImagem} alt="Nenhum Gato" />
+          <img src={ErrorImagem} alt="Nenhum Gato" loading="lazy" />
         </div>
         <h1 className={`${styles.title2} text-title`}>
           Nenhum gatinho por aqui...

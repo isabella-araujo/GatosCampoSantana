@@ -35,6 +35,7 @@ export default function CarroselGatos() {
         atributo="disponivelLarTemporario"
         isLoading={isLoading}
         error={error}
+        itemName="gatos"
       >
         {(gato) => <CardGato key={gato.id} gato={gato} />}
       </Carrossel>

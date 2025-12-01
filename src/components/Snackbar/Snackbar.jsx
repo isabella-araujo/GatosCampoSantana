@@ -14,6 +14,7 @@ const Snackbar = ({ open, message, onClose, duration = 6000 }) => {
         size={16}
         color="var(--color-neutral-white)"
         onClick={onClose}
+        label={'fecharSnackbar'}
       />
     </div>
   );

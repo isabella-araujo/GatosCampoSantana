@@ -102,6 +102,7 @@
   justify-content: center; 
   align-items: center;
   gap: clamp(2rem, 4vw, 4rem);
+  margin-bottom: 2rem;
 
 }
 

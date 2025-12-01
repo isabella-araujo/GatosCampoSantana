@@ -12,7 +12,7 @@ const HomeCard = ({ icon, title, text, buttonText, linkTo = '/' }) => {
   return (
     <div className={styles.card}>
       <div className={styles.iconContainer}>{icon}</div>
-      <h3 className={styles.cardTitle}>{title}</h3>
+      <h2 className={styles.cardTitle}>{title}</h2>
       <p className={styles.cardDescription}>{text}</p>
       <Link to={resolvedLink} className={`${styles.cardButton} text-button`}>
         {buttonText}

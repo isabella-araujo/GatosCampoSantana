@@ -15,7 +15,7 @@ function MobileNotSupported() {
           Dispositivo não suportado
         </h1>
         <div>
-          <img src={NotSupported} alt="Not Supported" />
+          <img src={NotSupported} alt="Not Supported" loading="lazy" />
         </div>
         <p className={`${styles.subtitle} text-subtitle`}>
           Tente acessar de um computador para aproveitar todos os recursos.

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoChevronDownOutline, IoChevronUpOutline } from 'react-icons/io5';
 import styles from './Dropdown.module.css';
 
 export default function Dropdown({
@@ -13,7 +13,7 @@ export default function Dropdown({
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const ArrowIcon = open ? IoIosArrowUp : IoIosArrowDown;
+  const ArrowIcon = open ? IoChevronUpOutline : IoChevronDownOutline;
 
   useEffect(() => {
     if (value) {

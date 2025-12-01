@@ -31,6 +31,7 @@ export default function CarroselParceiros() {
       atributo="ativo"
       isLoading={isLoading}
       error={error}
+      itemName="parceiros"
     >
       {(parceiro) => (
         <div className={styles.parceiroCard} key={parceiro.id}>

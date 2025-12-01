@@ -5,7 +5,7 @@ import { useEffect, useReducer } from 'react';
 import ObjetivosEdit from './ObjetivosEdit';
 import {
   getObjetivos,
-  updateObjetivos,
+  updateObjetivo,
 } from '../../../services/objetivosServices';
 import {
   Container,
@@ -80,7 +80,7 @@ export default function Objetivos() {
 
   const handleObjetivoEdit = async (objetivoEditado) => {
     try {
-      await updateObjetivos([objetivoEditado]);
+      await updateObjetivo(objetivoEditado);
 
       dispatch({ type: 'MODAL_EDIT_CLOSE' });
       dispatch({ type: 'MODAL_CONFIRM_OPEN' });
@@ -129,6 +129,7 @@ export default function Objetivos() {
                     icon={IoPencilOutline}
                     color="var(--color-neutral-black)"
                     onClick={() => handleEditClick(obj)}
+                    label={'editarObjetivo'}
                   />
                 </div>
 

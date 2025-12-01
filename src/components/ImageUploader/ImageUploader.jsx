@@ -1,8 +1,7 @@
 import styles from './ImageUploader.module.css';
 import { useEffect, useRef, useState } from 'react';
 
-import { FaImage } from 'react-icons/fa6';
-import { HiOutlineUpload } from 'react-icons/hi';
+import { IoImage, IoPushOutline, IoWarningOutline } from 'react-icons/io5';
 import { PiWarningCircle } from 'react-icons/pi';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
@@ -61,7 +60,7 @@ export default function ImageUploader({
   function imageDisplay() {
     if (error) {
       return (
-        <PiWarningCircle className={`${styles.iconImage} ${classnameError}`} />
+        <IoWarningOutline className={`${styles.iconImage} ${classnameError}`} />
       );
     }
 
@@ -69,7 +68,7 @@ export default function ImageUploader({
       return <img className={styles.image} src={previewImage} />;
     }
 
-    return <FaImage className={`${styles.iconImage} ${classnameError}`} />;
+    return <IoImage className={`${styles.iconImage} ${classnameError}`} />;
   }
 
   return (
@@ -90,7 +89,7 @@ export default function ImageUploader({
         className={`${styles.btn} ${classnameError}`}
         onClick={handleClick}
       >
-        {children} <HiOutlineUpload className={styles.iconBtn} />
+        {children} <IoPushOutline className={styles.iconBtn} />
       </button>
 
       {error && <ErrorMessage>{error}</ErrorMessage>}

@@ -106,7 +106,7 @@ export async function getParceiroById(id) {
       return null;
     }
   } catch (error) {
-    toast.error(`Erro ao buscar parceiro por ID: ${error}`);
+    console.error(`Erro ao buscar parceiro por ID: ${error}`);
     throw error;
   }
 }

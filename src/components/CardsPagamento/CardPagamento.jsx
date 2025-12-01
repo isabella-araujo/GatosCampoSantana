@@ -29,6 +29,7 @@ export function CardPagamento({
             src={qrCodeImg}
             alt={`QR Code para ${metodo}`}
             className={styles.qrCodeImage}
+            loading="lazy"
           />
         </div>
       )}

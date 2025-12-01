@@ -1,7 +1,7 @@
 .footerWrapper{
   position: relative;
   width: 100%;
-  margin-top: 20rem;
+  margin-top: 18rem;
 }
 .footerVector {
   position: absolute;
@@ -12,12 +12,20 @@
   z-index: -1;
 }
 
+.footerPaws{
+  position: absolute;
+  top: -220px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+}
 .footerBackground {
   background-color: var(--color-primary-yellow);
   color: var(--color-neutral-white);
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .footerMain{
@@ -49,7 +57,7 @@
   gap: 2rem;
 }
 
-.socialLink{
+.redesSociasLink{
   background-color: var(--color-neutral-white);
   display: flex;
   align-items: center;
@@ -104,6 +112,7 @@
 
 .footer{
   color: var(--color-neutral-black);
+  padding: 1rem 0;
 }
 
 .footer p, .links h3,  .links p, .helpSection h3{
@@ -114,11 +123,20 @@
   .footerVector {
     top: -150px;
   }
+  .footerPaws{
+    top: -170px;
+  }
 }
 
 @media (max-width: 992px) {
+  .footerWrapper{
+  margin-top: 10rem;
+}
   .footerVector {
     top: -100px;
+  }
+  .footerPaws{
+    top: -120px;
   }
 }
 
@@ -139,6 +157,9 @@
   .footerVector {
     top: -90px;
   }
+  .footerPaws{
+    top: -110px;
+  }
   .footerMain{
     flex-direction: column;
     gap: 3rem;
@@ -158,11 +179,22 @@
   .footerVector {
     top: -70px;
   }
+  .footerPaws{
+    top: -90px;
+  }
 }
 
 @media (max-width: 448px) {
   .footerVector {
     top: -40px;
   }
+  .footerPaws{
+    top: -70px;
+  }
 }
 
+@media (max-width: 420px) {
+  .footer{
+    text-align: center
+  };
+}

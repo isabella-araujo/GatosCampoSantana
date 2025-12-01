@@ -1,14 +1,15 @@
 import { Navigate, Outlet } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 import { Loading } from '../components/index.js';
-import { isMobile } from 'react-device-detect';
+import { isMobile } from '../utils/mobileDetecter.jsx';
 
 export function ProtectedRoute() {
   const { user, loading } = useAuth();
+  const mobile = isMobile();
 
   if (loading) return <Loading />;
 
-  if (isMobile && window.location.pathname.startsWith('/admin')) {
+  if (mobile && window.location.pathname.startsWith('/admin')) {
     return <Navigate to="/mobile-not-supported" replace />;
   }
 

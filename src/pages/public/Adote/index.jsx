@@ -1,9 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './Adote.module.css';
-import VectorAdoteBanner from '../../../assets/Adote/VectorAdoteBanner.svg';
-import GatoShapeAdote from '../../../assets/Adote/GatoShapeAdote.svg';
-import { Button, FiltrosGatos, GridGatos } from '../../../components';
-import { Link } from 'react-router-dom';
+import { FiltrosGatos, GridGatos } from '../../../components';
 import { IoNewspaperOutline, IoHeartCircle } from 'react-icons/io5';
 import Formulario from '../../../assets/Adote/Formulario.svg';
 import Entrevista from '../../../assets/Adote/Entrevistas.svg';
@@ -11,6 +8,7 @@ import Documentos from '../../../assets/Adote/Documentos.svg';
 import { useEffect, useState } from 'react';
 import { getAllGatos } from '../../../services/gatosServices';
 import { formatarGato } from '../../../utils/formatarGato';
+import NenhumGatoEncontrado from '../Others/NenhumGatoEncontrado';
 
 export default function Adote() {
   const [filtros, setFiltros] = useState({
@@ -77,12 +75,15 @@ export default function Adote() {
           content="Adote um gatinho e faça a diferença na vida dele."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/adote-thumb.jpg" /> //
-        Substituir pelo caminho correto da imagem
+        <meta
+          property="og:image"
+          content={`https://gatosdocampodesantana.com/og-images/adote.jpg`}
+        />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com.br/adote"
+          content="https://gatosdocampodesantana.com/adote"
         />
+        <link rel="canonical" href="https://gatosdocampodesantana.com/adote" />
       </Helmet>
       <div className={styles.adoteContainer}>
         <div className={styles.headerContainer}>
@@ -165,6 +166,9 @@ export default function Adote() {
             </div>
             <div className={styles.gatosParaAdocaoContent}>
               <FiltrosGatos filtros={filtros} setFiltros={setFiltros} />
+              {gatosFiltrados.length === 0 && (
+                <NenhumGatoEncontrado msg="No momento, nenhum gatinho foi encontrado. Tente novamente mais tarde, ou teste com outros filtros." />
+              )}
               <GridGatos gatos={gatosFiltrados} />
             </div>
           </div>

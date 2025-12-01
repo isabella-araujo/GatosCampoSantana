@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 import svgVector from '../../assets/svg/vector_footer.svg';
+import svgPaws from '../../assets/svg/paws.svg';
 import {
   IoLogoInstagram,
   IoLogoWhatsapp,
@@ -15,6 +16,11 @@ function Footer() {
         src={svgVector}
         alt="onda decorativa de rodapé"
         className={styles.footerVector}
+      />
+      <img
+        src={svgPaws}
+        alt="patas decorativas de rodapé"
+        className={styles.footerPaws}
       />
       <div className={styles.footerBackground}>
         <div className={styles.footerMain}>
@@ -36,7 +42,8 @@ function Footer() {
                   to="https://whatsapp.com/channel/0029Vb5yS7z8F2pD3QxrPE3c"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.socialLink}
+                  aria-label="WhatsApp"
+                  className={styles.redesSociasLink}
                 >
                   <IoLogoWhatsapp
                     size={24}
@@ -47,7 +54,8 @@ function Footer() {
                   to="https://www.instagram.com/gatosdocampodesantana/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.socialLink}
+                  aria-label="Instagram"
+                  className={styles.redesSociasLink}
                 >
                   <IoLogoInstagram
                     size={24}
@@ -58,7 +66,8 @@ function Footer() {
                   to="https://www.facebook.com/share/1CQEiqbdJb/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.socialLink}
+                  aria-label="Facebook"
+                  className={styles.redesSociasLink}
                 >
                   <IoLogoFacebook
                     size={24}

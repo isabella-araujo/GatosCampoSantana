@@ -111,7 +111,7 @@ export default function Parceiros() {
       name: 'Nome',
       selector: (row) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <img src={row.logoURL} alt={row.nome} width="50" />
+          <img src={row.logoURL} alt={row.nome} width="50" loading="lazy" />
           <span>{row.nome}</span>
         </div>
       ),

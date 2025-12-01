@@ -58,6 +58,7 @@ const Table = ({
               size={16}
               style={{ padding: '0 2px' }}
               onClick={() => onEdit(row)}
+              label={'editarRegistro'}
             />
           )}
           {onDelete && (
@@ -67,6 +68,7 @@ const Table = ({
               size={16}
               style={{ padding: '0 2px' }}
               onClick={() => onDelete(row)}
+              label={'excluirRegistro'}
             />
           )}
           {onBlock && (
@@ -76,6 +78,7 @@ const Table = ({
               size={16}
               style={{ padding: '0 2px' }}
               onClick={() => onBlock(row)}
+              label={'bloquearRegistro'}
             />
           )}
         </div>

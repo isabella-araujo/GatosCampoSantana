@@ -15,7 +15,7 @@ function PageNotFound() {
           Página não encontrada
         </h1>
         <div className={styles.imageContainer}>
-          <img src={Error404} alt="Error 404" />
+          <img src={Error404} alt="Error 404" loading="lazy" />
         </div>
         <p className={`${styles.subtitle} text-subtitle`}>
           Verifique o endereço digitado ou volte para a

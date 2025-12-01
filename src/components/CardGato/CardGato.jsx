@@ -17,6 +17,7 @@ export function CardGato({ gato }) {
           src={gato.fotoURL}
           alt={gato.nomeFormatado}
           className={styles.imagem}
+          loading="lazy"
         />
       </div>
       <div className={styles.nomeContainer}>

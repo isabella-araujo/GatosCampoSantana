@@ -2,13 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import styles from './SobreNos.module.css';
 import { Button, NossosObjetivosList } from '../../../components';
 import { Link } from 'react-router-dom';
-import { IoHeart } from 'react-icons/io5';
-import { GoArrowUpRight } from 'react-icons/go';
+import { IoHeart, IoArrowRedoSharp } from 'react-icons/io5';
 import NossaHistoriaImg from '../../../assets/SobreNos/nossa-historia.jpg';
 import EllipseBlue from '../../../assets/SobreNos/Ellipse_1.svg';
 import EllipseYellow from '../../../assets/SobreNos/Ellipse_2.svg';
-import ComoAtuamosImg from '../../../assets/SobreNos/como-atuamos.png';
-import FeirasAdocaoImg from '../../../assets/SobreNos/feiras-adocao.png';
+import ComoAtuamosImg from '../../../assets/SobreNos/como-atuamos.jpg';
+import FeirasAdocaoImg from '../../../assets/SobreNos/feiras-adocao.webp';
 
 export default function SobreNos() {
   return (
@@ -27,12 +26,19 @@ export default function SobreNos() {
           property="og:description"
           content="Saiba mais sobre o projeto Gatos do Campo de Santana!"
         />
+
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/sobre-nos-thumb.jpg" />{' '}
-        /*Substitua pelo caminho correto da imagem*/
+        <meta
+          property="og:image"
+          content={`https://gatosdocampodesantana.com/og-images/sobre-nos.jpg`}
+        />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com.br/sobre-nos"
+          content="https://gatosdocampodesantana.com/sobre-nos"
+        />
+        <link
+          rel="canonical"
+          href="https://gatosdocampodesantana.com/sobre-nos"
         />
       </Helmet>
       <div className={styles.sobreNosContainer}>
@@ -176,7 +182,7 @@ export default function SobreNos() {
               >
                 siga nosso Instagram
               </Link>{' '}
-              <GoArrowUpRight size={16} color="var(--color-primary-yellow)" />
+              <IoArrowRedoSharp size={16} color="var(--color-primary-yellow)" />
             </p>
           </div>
         </div>

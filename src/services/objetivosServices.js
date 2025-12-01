@@ -4,7 +4,7 @@ import {
   getDocs,
   getDoc,
   doc,
-  writeBatch,
+  updateDoc,
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,7 @@ export async function getObjetivos() {
     }));
     return { objetivos, error: null };
   } catch (error) {
-    toast.error(`Error: ${error}`);
+    console.error(`Error: ${error}`);
     return { objetivos: [], error };
   }
 }
@@ -37,27 +37,17 @@ export async function getObjetivoById(id) {
   }
 }
 
-export async function updateObjetivos(objetivos) {
+export async function updateObjetivo(objetivo) {
   try {
-    console.log('Objetivos recebidos para update:', objetivos);
+    const docRef = doc(db, 'objetivos', objetivo.id);
 
-    const batch = writeBatch(db);
-
-    objetivos.forEach((objetivo) => {
-      console.log('Atualizando objetivo:', objetivo);
-
-      const docRef = doc(db, 'objetivos', objetivo.id);
-      batch.update(docRef, {
-        titulo: objetivo.titulo,
-        descricao: objetivo.descricao,
-      });
+    await updateDoc(docRef, {
+      titulo: objetivo.titulo,
+      descricao: objetivo.descricao,
     });
-
-    const result = await batch.commit();
-    console.log('Batch commit result:', result);
   } catch (error) {
     console.error('Erro ao atualizar:', error);
-    toast.error(`Erro ao atualizar objetivos: ${error}`);
+    toast.error(`Erro ao atualizar objetivo: ${error}`);
     throw error;
   }
 }
