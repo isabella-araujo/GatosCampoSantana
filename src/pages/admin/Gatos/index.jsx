@@ -97,7 +97,7 @@ export default function Gatos() {
       name: 'Nome',
       selector: (row) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <img src={row.fotoURL} alt={row.nome} width="50" />
+          <img src={row.fotoURL} alt={row.nome} width="50" loading="lazy" />
           <span>{row.nome}</span>
         </div>
       ),

@@ -175,7 +175,7 @@
 }
 
 .nossosObjIcon{
-position: relative;
+  position: relative;
   width: fit-content;
 }
 
@@ -361,5 +361,8 @@ position: relative;
 @media (max-width: 300px) {
   .nossosObjImg {
   display: none 
+  }
+  .nossosObjHeader{
+    text-align: center;
   }
 }

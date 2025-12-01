@@ -1,17 +1,17 @@
+import React, { useRef, forwardRef } from 'react';
 import styles from './Checkbox.module.css';
-import { useRef } from 'react';
-import { FaCheck } from 'react-icons/fa6';
+import { IoCheckmarkSharp } from 'react-icons/io5';
 
-export default function Checkbox({ label, checked, onChecked, ...props }) {
-  const classname = `${styles.checkbox} ${checked ? styles.checked : ''}`;
-  const inputRef = useRef(null);
+const Checkbox = forwardRef(({ label, checked, onChecked, ...props }, ref) => {
+  const internalRef = useRef(null);
 
   function handleChange() {
     onChecked(!checked);
   }
 
   function handleClick() {
-    inputRef.current.click();
+    const element = ref?.current || internalRef.current;
+    element?.click();
   }
 
   return (
@@ -21,13 +21,20 @@ export default function Checkbox({ label, checked, onChecked, ...props }) {
         type="checkbox"
         onChange={handleChange}
         checked={checked}
-        ref={inputRef}
+        ref={ref || internalRef}
         {...props}
       />
-      <div className={classname} onClick={handleClick}>
-        {checked && <FaCheck />}
+
+      <div
+        className={`${styles.checkbox} ${checked ? styles.checked : ''}`}
+        onClick={handleClick}
+      >
+        {checked && <IoCheckmarkSharp />}
       </div>
+
       <p className="text-body1">{label}</p>
     </div>
   );
-}
+});
+
+export default Checkbox;

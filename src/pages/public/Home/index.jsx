@@ -2,9 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
 import VectorHomeBanner from '../../../assets/Home/vector-banner.svg';
 import GatoShapeHome from '../../../assets/Home/gato-shape-banner.svg';
-import QuemSomosSection from '../../../assets/Home/quem-somos.png';
+import QuemSomosSection from '../../../assets/Home/quem-somos.webp';
 import CatSilhouette from '../../../assets/Home/CatSilhouette.svg';
-import GatoImgHomeBanner from '../../../assets/Home/gato-banner.png';
+import GatoImgHomeBanner from '../../../assets/Home/gato-banner.webp';
 import patinhasGroup from '../../../assets/Home/patinhas-group.svg';
 import Star from '../../../assets/Home/star.svg';
 import { Link } from 'react-router-dom';
@@ -31,13 +31,17 @@ export default function Home() {
           property="og:description"
           content="Bem-vindos ao site dos Gatos do Campo de Santana!"
         />
+
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/home-thumb.jpg" />{' '}
-        /*Substitua pelo caminho correto da imagem*/
+        <meta
+          property="og:image"
+          content={`https://gatosdocampodesantana.com/og-images/home.jpg`}
+        />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com.br/"
+          content="https://gatosdocampodesantana.com/home"
         />
+        <link rel="canonical" href="https://gatosdocampodesantana.com/home" />
       </Helmet>
       <div className={styles.homeContainer}>
         <div className={styles.bannerWrapper}>
@@ -82,11 +86,13 @@ export default function Home() {
                   src={GatoShapeHome}
                   alt="Gatos Laranja SVG shape banner"
                   className={styles.gatobannerImage}
+                  fetchpriority="high"
                 />
                 <img
                   src={GatoImgHomeBanner}
                   alt="Gatos Laranja"
                   className={styles.gatobannerImageMobile}
+                  fetchpriority="high"
                 />
               </div>
             </div>
@@ -138,7 +144,11 @@ export default function Home() {
           <h2 className="text-title">Quem Somos</h2>
           <div className={styles.quemSomosContent}>
             <div className={styles.quemSomosImage}>
-              <img src={QuemSomosSection} alt="Quem Somos Section" />
+              <img
+                src={QuemSomosSection}
+                alt="Quem Somos Section"
+                loading="lazy"
+              />
             </div>
             <div className={styles.quemSomosText}>
               <h3 className="text-title">
@@ -174,13 +184,13 @@ export default function Home() {
             <div className={styles.nossosObjHeader}>
               <h2 className="text-title">Nossos Objetivos</h2>
               <div className={styles.nossosObjImg}>
-                <img src={CatSilhouette} alt="Cat Silhouette" />
+                <img src={CatSilhouette} alt="Cat Silhouette" loading="lazy" />
               </div>
             </div>
             <div className={styles.nossosObjContent}>
               <div className={styles.nossosObjItem}>
                 <div className={styles.nossosObjIcon}>
-                  <img src={Star} alt="Star" />
+                  <img src={Star} alt="Star" loading="lazy" />
                   <span className={styles.nossosObjNumber}> 1 </span>
                 </div>
                 <h3 className="text-subtitle">
@@ -190,14 +200,14 @@ export default function Home() {
               <div className={styles.nossosObjItem}>
                 <div className={styles.nossosObjIcon}>
                   <span className={styles.nossosObjNumber}> 2 </span>
-                  <img src={Star} alt="Star" />
+                  <img src={Star} alt="Star" loading="lazy" />
                 </div>
                 <h3 className="text-subtitle">Mais Lares Temporários</h3>
               </div>
               <div className={styles.nossosObjItem}>
                 <div className={styles.nossosObjIcon}>
                   <span className={styles.nossosObjNumber}> 3 </span>
-                  <img src={Star} alt="Star" />
+                  <img src={Star} alt="Star" loading="lazy" />
                 </div>
                 <h3 className="text-subtitle">Incentivo ao Voluntariado</h3>
               </div>

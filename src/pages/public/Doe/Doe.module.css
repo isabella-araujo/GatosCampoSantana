@@ -4,8 +4,7 @@
   align-items: center;
   margin-inline: auto;
   max-width: 1200px;
-  padding-inline: clamp(1rem, 4vw, 2rem);
-}
+  padding-inline: clamp(1rem, 4vw, 2rem);}
 
 .headerContainer {
   width: 100%;
@@ -164,4 +163,3 @@
     align-self: center;
   }
 }
-

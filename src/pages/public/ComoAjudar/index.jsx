@@ -2,8 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import styles from './ComoAjudar.module.css';
 import { Button, CardPagamentoPix, CarroselGatos } from '../../../components';
 import { Link } from 'react-router-dom';
-import VoluntarioImg from '../../../assets/ComoAjudar/voluntario.png';
-import { PiBoneFill } from 'react-icons/pi';
+import VoluntarioImg from '../../../assets/ComoAjudar/voluntario.webp';
+import VoluntarioPaws from '../../../assets/ComoAjudar/paws.svg';
+import PiBoneFill from '../../../assets/ComoAjudar/bone.svg';
 import {
   IoCarSharp,
   IoHomeSharp,
@@ -11,6 +12,7 @@ import {
   IoPawSharp,
   IoHeart,
   IoChevronDown,
+  IoArrowRedoSharp,
 } from 'react-icons/io5';
 import { useState } from 'react';
 import CardPagamentoPicPay from '../../../components/CardsPagamento/CardPagamentoPicPay';
@@ -40,12 +42,15 @@ export default function ComoAjudar() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="/assets/como-ajudar-thumb.jpg"
-        />{' '}
-        /*Substituir pelo caminho correto da imagem*/
+          content={`https://gatosdocampodesantana.com/og-images/como-ajudar.jpg`}
+        />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com.br/como-ajudar"
+          content="https://gatosdocampodesantana.com/como-ajudar"
+        />
+        <link
+          rel="canonical"
+          href="https://gatosdocampodesantana.com/como-ajudar"
         />
       </Helmet>
       <div className={styles.comoAjudarContainer}>
@@ -72,7 +77,12 @@ export default function ComoAjudar() {
                 </p>
                 <ul className={styles.comoAjudarList}>
                   <li className={`${styles.listItem} text-body1`}>
-                    <PiBoneFill size={28} color="var(--color-primary-yellow)" />{' '}
+                    <img
+                      src={PiBoneFill}
+                      alt="Osso Decorativo"
+                      width={28}
+                      height={28}
+                    />
                     Alimentação diária
                   </li>
                   <li className={`${styles.listItem} text-body1`}>
@@ -114,8 +124,21 @@ export default function ComoAjudar() {
                 </Link>
               </div>
             </div>
-            <div className={styles.sejaVoluntarioImage}>
-              <img src={VoluntarioImg} alt="Seja um Voluntário" />
+            <div className={styles.sejaVoluntarioImgContainer}>
+              <div className={styles.sejaVoluntarioImage}>
+                <img
+                  src={VoluntarioImg}
+                  alt="Seja um Voluntário"
+                  loading="lazy"
+                />
+              </div>
+              <div className={styles.voluntarioPaws}>
+                <img
+                  src={VoluntarioPaws}
+                  alt="Patas Decorativas"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -286,16 +309,42 @@ export default function ComoAjudar() {
               <h3 className="text-subtitle">Entrega Presencial</h3>
               <p className={styles.entregaPresencialText + ' text-body1'}>
                 Nossos voluntários estão no Parque todos os dias, de 9h às 13h.
-                Para levar doações, envie uma mensagem no Instagram e
-                combinaremos o dia, horário e contato da pessoa que estará
+                Para levar doações, envie uma mensagem no{' '}
+                <Link
+                  to="https://www.instagram.com/gatosdocampodesantana"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.instagramLink}`}
+                >
+                  Instagram
+                </Link>
+                <IoArrowRedoSharp
+                  size={16}
+                  color="var(--color-secondary-blue)"
+                />{' '}
+                {''}e combinaremos o dia, horário e contato da pessoa que estará
                 recebendo.
               </p>
             </div>
-            <div className={styles.entregaCorreios}>
+            <div className={styles.pontosColeta}>
               <h3 className="text-subtitle">Pontos de Coleta</h3>
               <p className={styles.pontosColetaText + ' text-body1'}>
-                Entre em contato conosco para saber os pontos de coleta mais
-                próximos de você.
+                Para descobrir os pontos de coleta mais próximos, veja nosso{' '}
+                <Link
+                  to="https://www.instagram.com/stories/highlights/17905037030180220/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.instagramLink}`}
+                >
+                  destaque no Instagram
+                </Link>
+                ✨.
+                <span>
+                  {' '}
+                  Observação: Os locais podem mudar, então recomendamos enviar
+                  uma mensagem na nossa DM para confirmar antes de ir até o
+                  ponto.
+                </span>
               </p>
             </div>
           </div>

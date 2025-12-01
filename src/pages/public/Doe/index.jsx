@@ -1,8 +1,8 @@
 import styles from './Doe.module.css';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import ApadrinhamentoImg from '../../../assets/Doe/apadrinhamento.png';
-import VakinhaImg from '../../../assets/Doe/vakinha.png';
+import ApadrinhamentoImg from '../../../assets/Doe/apadrinhamento.webp';
+import VakinhaImg from '../../../assets/Doe/vakinha.webp';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 import {
   Button,
@@ -24,13 +24,17 @@ export default function Doe() {
           property="og:description"
           content="Saiba como doar para ajudar os gatinhos do campo de Santana."
         />
+
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/doe-thumb.jpg" />{' '}
-        /*Substituir pelo caminho correto da imagem*/
+        <meta
+          property="og:image"
+          content={`https://gatosdocampodesantana.com/og-images/doe.webp`}
+        />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com.br/doe"
+          content="https://gatosdocampodesantana.com/doe"
         />
+        <link rel="canonical" href="https://gatosdocampodesantana.com/doe" />
       </Helmet>
       <div className={styles.doeContainer}>
         <div className={styles.headerContainer}>
@@ -63,7 +67,11 @@ export default function Doe() {
               <h2 className="text-title">Apadrinhamento dos Gatos do Campo</h2>
             </div>
             <div className={styles.imagem}>
-              <img src={ApadrinhamentoImg} alt="Apadrinhe um Gatinho" />
+              <img
+                src={ApadrinhamentoImg}
+                alt="Apadrinhe um Gatinho"
+                loading="lazy"
+              />
             </div>
             <div className={styles.content}>
               <div className={styles.apadrinhamentoDescription}>

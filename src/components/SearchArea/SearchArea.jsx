@@ -14,7 +14,12 @@ const SearchArea = ({ className = styles.searchArea, onChange }) => {
 
   return (
     <div className={className}>
-      <IconButton icon={IoSearch} size={18} color="#787880" />
+      <IconButton
+        icon={IoSearch}
+        size={18}
+        color="#787880"
+        label={'lupaPesquisa'}
+      />
       <input
         type="text"
         placeholder="Procurar"

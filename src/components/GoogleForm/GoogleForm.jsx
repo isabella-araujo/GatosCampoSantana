@@ -1,10 +1,11 @@
+import styles from './GoogleForm.module.css';
 export default function GoogleForm({ url }) {
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div className={styles.googleFormContainer}>
       <iframe
         src={url}
-        width="100%"
-        height="600"
+        width="500"
+        height="500"
         frameBorder="0"
         marginHeight="0"
         marginWidth="0"

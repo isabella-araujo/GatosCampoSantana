@@ -14,7 +14,7 @@ const NavBar = ({ links, navButton, logoutButton }) => {
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <Link to="/">
-          <img src={Logo} alt="Logo" />
+          <img src={Logo} alt="Logo" loading="lazy" />
         </Link>
       </div>
 
@@ -54,6 +54,7 @@ const NavBar = ({ links, navButton, logoutButton }) => {
             icon={IoClose}
             color="var( --color-primary-blue)"
             size={42}
+            label={'menuMobileClose'}
           />
         ) : (
           <IconButton
@@ -61,6 +62,7 @@ const NavBar = ({ links, navButton, logoutButton }) => {
             icon={IoReorderThreeOutline}
             color="var( --color-primary-blue)"
             size={48}
+            label={'menuMobileOpen'}
           />
         )}
       </div>

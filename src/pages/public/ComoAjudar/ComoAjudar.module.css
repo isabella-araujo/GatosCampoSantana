@@ -76,7 +76,7 @@
   flex-shrink: 0;
 }
 
-.sejaVoluntarioImage{
+.sejaVoluntarioImgContainer{
   grid-column: 2;
   width: 100%;
   height: auto;
@@ -84,6 +84,16 @@
   display: block;      
   flex-shrink: 1; 
   max-width:  500px;
+  position: relative;
+}
+
+.voluntarioPaws{
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 150px;
+  height: 150px;
+  opacity: 0.7;
 }
 
 
@@ -96,7 +106,7 @@
 .sejaLarTemporarioContainer{ 
   display: flex;
   flex-direction: column;
-  gap: clamp(2rem, 4vw, 6rem);
+  gap: 2rem;
   align-items: flex-start;
 }
 
@@ -240,12 +250,24 @@
   color: var(--color-quaternary-blue);
   font-weight: 600;
   max-width: 750px;
+  white-space: normal;
+  hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 .sejaLarTemporarioCarrosel{
   margin-top: 2rem;
   max-width: 100%;
 }
-  
+.instagramLink{
+  display: inline-block;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.pontosColeta span{
+  font-style: italic;
+  font-weight: 400;
+}
 @media (max-width: 1200px) {
   .doacaoItemsContainer{
     max-width: 400px;
@@ -294,9 +316,18 @@
 
 
 }
+@media (max-width: 480px) {
+  .entregaPresencialText, .pontosColetaText{
+    width: 100%;
+  }
 
+  .outrasFormasAjudarContainer {
+    align-items: center;
+  }
+}
 @media (max-width: 360px) {
   .sejaVoluntarioHeader, .sejaLarTemporarioContent{
     text-align: center;
   }
+  
 }

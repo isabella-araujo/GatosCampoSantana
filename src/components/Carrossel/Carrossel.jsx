@@ -8,6 +8,7 @@ export default function Carrossel({
   error = null,
   atributo = null,
   children,
+  itemName = 'item',
 }) {
   const [index, setIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(1);
@@ -61,11 +62,19 @@ export default function Carrossel({
   }
 
   if (error && !isLoading) {
-    return <div className={styles.message}>Erro ao carregar itens.</div>;
+    return (
+      <div className={styles.message}>
+        Não foi possível carregar os {itemName}.
+      </div>
+    );
   }
 
   if (!isLoading && items.length === 0) {
-    return <div className={styles.message}>Nenhum item encontrado.</div>;
+    return (
+      <div className={styles.message}>
+        Nenhum dos {itemName} foi encontrado.
+      </div>
+    );
   }
 
   const trackWidth = `${totalPages * 100}%`;

@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
           setIsAdmin(false);
         }
       } catch (error) {
-        toast.error(`Erro ao obter claims do usuário: ${error.message}`);
+        console.error(`Erro ao obter claims do usuário: ${error.message}`);
         setUser(null);
         setIsAdmin(false);
       } finally {

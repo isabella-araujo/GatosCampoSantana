@@ -4,13 +4,14 @@
   align-items: center;
   margin-inline: auto;
   max-width: 1200px;
+  /*publicCommonContainer*/
 }
 
 .nossaHistoriaContainer {
   margin-top: 4rem;
   width: 100%;
   padding-inline: clamp(1rem, 4vw, 2rem);
-}
+} 
 
 .underline {
   display: block;
