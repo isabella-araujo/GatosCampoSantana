@@ -1,4 +1,5 @@
 import styles from './Doe.module.css';
+import commonStyles from '../styles/PublicCommon.module.css';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import ApadrinhamentoImg from '../../../assets/Doe/apadrinhamento.webp';
@@ -36,7 +37,9 @@ export default function Doe() {
         />
         <link rel="canonical" href="https://gatosdocampodesantana.com/doe" />
       </Helmet>
-      <div className={styles.doeContainer}>
+      <div
+        className={`${commonStyles.paddingInlineClamp} ${commonStyles.publicContainer} ${commonStyles.animatedFadeIn}   `}
+      >
         <div className={styles.headerContainer}>
           <div className={styles.headerContent}>
             <h1 className="text-display">
@@ -50,7 +53,9 @@ export default function Doe() {
               acolhedor enquanto aguardam por uma família.
             </p>
           </div>
-          <div className={styles.donationMethods}>
+          <div
+            className={`${styles.donationMethods}  ${commonStyles.paddingInlineClamp}`}
+          >
             <CardPagamentoPix
               metodoKey="gatinhoscamposantana@gmail.com"
               showQrCode={true}
@@ -61,7 +66,9 @@ export default function Doe() {
             />
           </div>
         </div>
-        <div className={`${styles.apadrinhamentoSection} sectionMargin`}>
+        <div
+          className={`${styles.apadrinhamentoSection} ${commonStyles.sectionMargin} ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.apadrinhamentoContainer}>
             <div className={styles.title}>
               <h2 className="text-title">Apadrinhamento dos Gatos do Campo</h2>
@@ -139,7 +146,9 @@ export default function Doe() {
             </div>
           </div>
         </div>
-        <div className={`${styles.vakinhaSection} sectionMargin`}>
+        <div
+          className={`${styles.vakinhaSection} ${commonStyles.sectionMargin} ${commonStyles.paddingInlineClamp} ${commonStyles.lastSectionMargin}`}
+        >
           <div className={styles.vakinhaContainer}>
             <div className={styles.title}>
               <h2 className="text-title">Vakinha da Clínica Veterinária</h2>

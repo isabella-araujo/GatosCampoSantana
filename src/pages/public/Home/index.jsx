@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
+import commonStyles from '../styles/PublicCommon.module.css';
 import VectorHomeBanner from '../../../assets/Home/vector-banner.svg';
 import GatoShapeHome from '../../../assets/Home/gato-shape-banner.svg';
 import QuemSomosSection from '../../../assets/Home/quem-somos.webp';
@@ -43,7 +44,7 @@ export default function Home() {
         />
         <link rel="canonical" href="https://gatosdocampodesantana.com/home" />
       </Helmet>
-      <div className={styles.homeContainer}>
+      <div className={`${styles.homeContainer} ${commonStyles.animatedFadeIn}`}>
         <div className={styles.bannerWrapper}>
           <img
             src={VectorHomeBanner}
@@ -51,7 +52,9 @@ export default function Home() {
             className={styles.bannerShape}
           />
           <div className={styles.bannerContainer}>
-            <div className={styles.bannerContent}>
+            <div
+              className={`${styles.bannerContent} ${commonStyles.paddingInlineClamp}`}
+            >
               <div className={styles.bannerText}>
                 <h1 className={styles.bannerTitle}>
                   Mais que uma colônia, um lar para centenas de gatinhos
@@ -96,7 +99,9 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className={`${styles.cardsHomeContainer} sectionMargin`}>
+            <div
+              className={`${styles.cardsHomeContainer} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp}`}
+            >
               <div className={styles.cardWrapper}>
                 <HomeCard
                   icon={
@@ -140,7 +145,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`${styles.quemSomosSection} sectionMargin`}>
+        <div
+          className={`${styles.quemSomosSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp}`}
+        >
           <h2 className="text-title">Quem Somos</h2>
           <div className={styles.quemSomosContent}>
             <div className={styles.quemSomosImage}>
@@ -179,7 +186,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`${styles.nossosObjWrapper} sectionMargin`}>
+        <div
+          className={`${styles.nossosObjWrapper} ${commonStyles.sectionMargin}`}
+        >
           <div className={styles.nossosObjContainer}>
             <div className={styles.nossosObjHeader}>
               <h2 className="text-title">Nossos Objetivos</h2>
@@ -188,12 +197,12 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.nossosObjContent}>
-              <div className={styles.nossosObjItem}>
-                <div className={styles.nossosObjIcon}>
+              <div className={`${styles.nossosObjItem}`}>
+                <div className={`${styles.nossosObjIcon}`}>
                   <img src={Star} alt="Star" loading="lazy" />
                   <span className={styles.nossosObjNumber}> 1 </span>
                 </div>
-                <h3 className="text-subtitle">
+                <h3 className={`text-subtitle`}>
                   Bem-Estar e Redução da Colônia
                 </h3>
               </div>
@@ -214,7 +223,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`${styles.parceirosSection} sectionMargin`}>
+        <div
+          className={`${styles.parceirosSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp} ${commonStyles.lastSectionMargin}`}
+        >
           <div className={styles.parceirosHeader}>
             <div className={styles.parceirosTitle}>
               <h2 className="text-title">Parcerias</h2>

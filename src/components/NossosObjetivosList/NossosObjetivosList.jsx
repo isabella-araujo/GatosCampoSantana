@@ -24,7 +24,7 @@ function NossosObjetivosList() {
   }
 
   return (
-    <div className={styles.objetivosContainer}>
+    <div className={`${styles.objetivosContainer}`}>
       {objetivos.map((objetivo) => (
         <div key={objetivo.id}>
           <div className={styles.objetivoIcon}>

@@ -12,6 +12,12 @@
   background-color: var(--color-primary-blue);
 }
 
+.card:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  transition: transform .3s ease;
+}
+
+
 .cardTitle {
   color: var(--color-neutral-white);
   text-align: center;

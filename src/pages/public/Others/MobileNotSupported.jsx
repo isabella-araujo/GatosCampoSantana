@@ -14,7 +14,7 @@ function MobileNotSupported() {
         <h1 className={`${styles.title} text-display`}>
           Dispositivo não suportado
         </h1>
-        <div>
+        <div className={styles.imageContainer}>
           <img src={NotSupported} alt="Not Supported" loading="lazy" />
         </div>
         <p className={`${styles.subtitle} text-subtitle`}>

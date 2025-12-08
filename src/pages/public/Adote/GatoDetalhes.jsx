@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import styles from './GatoDetalhes.module.css';
+import commonStyles from '../styles/PublicCommon.module.css';
 import { useEffect, useState } from 'react';
 import { Button, Container, Loading, Modal } from '../../../components';
 import {
@@ -78,7 +79,9 @@ export default function GatoDetalhes() {
           href={`https://gatosdocampodesantana.com/adote/${gato.slug}`}
         />
       </Helmet>
-      <div className={styles.gatoDetailsContainer}>
+      <div
+        className={`${styles.gatoDetailsContainer} ${commonStyles.animatedFadeIn}`}
+      >
         <div className={styles.titleContainer}>
           <h2 className="text-display">{gato.nomeFormatado}</h2>
         </div>

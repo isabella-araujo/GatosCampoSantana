@@ -1,16 +1,6 @@
-.sobreNosContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-inline: auto;
-  max-width: 1200px;
-  /*publicCommonContainer*/
-}
-
 .nossaHistoriaContainer {
   margin-top: 4rem;
   width: 100%;
-  padding-inline: clamp(1rem, 4vw, 2rem);
 } 
 
 .underline {
@@ -102,7 +92,6 @@
   gap: clamp(3rem, 4vw, 7rem);
   width: 100%;
   margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
 .comoAtuamosContent {
@@ -138,7 +127,6 @@
 }
 
 .feirasAdocaoSection{
-  padding-inline: clamp(1rem, 4vw, 2rem);
   width: 100%;
   margin-inline: auto;
 }
@@ -204,8 +192,6 @@
   align-items: center;
   flex-direction: column;
   gap: 2rem;
-  padding-inline: clamp(1rem, 4vw, 2rem);
-  margin-bottom: 6rem;
 }
 .nossosObjHeader{
   display: flex;

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 export function CardGato({ gato }) {
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} `}>
       <div className={styles.imagemContainer}>
         <img
           src={gato.fotoURL}
