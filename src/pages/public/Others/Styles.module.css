@@ -9,7 +9,7 @@
 
 .title {
   margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: var(--color-neutral-black);
 }
 
@@ -50,4 +50,11 @@
     margin-top: 2rem;
   }
 
+}
+
+@media (max-width: 400px) {
+  .imageContainer{
+    max-width: 300px;
+    min-width: 150px;
+  }
 }

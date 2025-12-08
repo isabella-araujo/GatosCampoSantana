@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './SobreNos.module.css';
+import commonStyles from '../styles/PublicCommon.module.css';
 import { Button, NossosObjetivosList } from '../../../components';
 import { Link } from 'react-router-dom';
 import { IoHeart, IoArrowRedoSharp } from 'react-icons/io5';
@@ -41,8 +42,12 @@ export default function SobreNos() {
           href="https://gatosdocampodesantana.com/sobre-nos"
         />
       </Helmet>
-      <div className={styles.sobreNosContainer}>
-        <div className={styles.nossaHistoriaContainer}>
+      <div
+        className={` ${commonStyles.publicContainer} ${commonStyles.animatedFadeIn}`}
+      >
+        <div
+          className={`${styles.nossaHistoriaContainer} ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.nossaHistoriaHeader}>
             <h2 className="text-title">Nossa História</h2>
             <span className={styles.underline}></span>
@@ -97,8 +102,12 @@ export default function SobreNos() {
           </div>
         </div>
 
-        <div className={`${styles.comoAtuamosSection} sectionMargin`}>
-          <div className={styles.comoAtuamosContainer}>
+        <div
+          className={`${styles.comoAtuamosSection} ${commonStyles.sectionMargin}`}
+        >
+          <div
+            className={`${styles.comoAtuamosContainer} ${commonStyles.paddingInlineClamp}`}
+          >
             <div className={styles.comoAtuamosContent}>
               <div className={styles.comoAtuamosHeader}>
                 <h2 className="text-title">Como Atuamos</h2>
@@ -139,7 +148,9 @@ export default function SobreNos() {
             </div>
           </div>
         </div>
-        <div className={`${styles.feirasAdocaoSection} sectionMargin`}>
+        <div
+          className={`${styles.feirasAdocaoSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.feirasAdocaoContainer}>
             <div className={styles.feirasAdocaoContent}>
               <div className={styles.feirasAdocaoTitle}>
@@ -186,7 +197,9 @@ export default function SobreNos() {
             </p>
           </div>
         </div>
-        <div className={`${styles.nossosObjSection} sectionMargin`}>
+        <div
+          className={`${styles.nossosObjSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp} ${commonStyles.lastSectionMargin}`}
+        >
           <div className={styles.nossosObjHeader}>
             <div className={styles.nossosObjTitle}>
               <h2 className="text-title">Nossos Objetivos</h2>

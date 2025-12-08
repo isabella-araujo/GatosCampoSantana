@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './ComoAjudar.module.css';
+import commonStyles from '../styles/PublicCommon.module.css';
 import { Button, CardPagamentoPix, CarroselGatos } from '../../../components';
 import { Link } from 'react-router-dom';
 import VoluntarioImg from '../../../assets/ComoAjudar/voluntario.webp';
@@ -53,7 +54,9 @@ export default function ComoAjudar() {
           href="https://gatosdocampodesantana.com/como-ajudar"
         />
       </Helmet>
-      <div className={styles.comoAjudarContainer}>
+      <div
+        className={`${styles.comoAjudarContainer} ${commonStyles.animatedFadeIn}  ${commonStyles.paddingInlineClamp}`}
+      >
         <div className={styles.headerContent}>
           <h1 className="text-display">Junte-se a nós nessa missão </h1>
           <p className="text-subtitle">
@@ -61,7 +64,9 @@ export default function ComoAjudar() {
             imagina.
           </p>
         </div>
-        <div className={`${styles.sejaVoluntarioSection} sectionMargin`}>
+        <div
+          className={`${styles.sejaVoluntarioSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.sejaVoluntarioContainer}>
             <div className={styles.sejaVoluntarioContent}>
               <div className={styles.sejaVoluntarioHeader}>
@@ -142,7 +147,9 @@ export default function ComoAjudar() {
             </div>
           </div>
         </div>
-        <div className={`${styles.sejaLarTemporarioSection} sectionMargin`}>
+        <div
+          className={`${styles.sejaLarTemporarioSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.sejaLarTemporarioContainer}>
             <div className={styles.sejaLarTemporarioContent}>
               <h2 className="text-title">Seja um Lar Temporário</h2>
@@ -173,7 +180,9 @@ export default function ComoAjudar() {
             </div>
           </div>
         </div>
-        <div className={`${styles.outrasFormasAjudarSection} sectionMargin`}>
+        <div
+          className={`${styles.outrasFormasAjudarSection} ${commonStyles.sectionMargin}`}
+        >
           <div className={styles.outrasFormasAjudarContainer}>
             <div className={styles.doacaoItemsContainer}>
               <div className={styles.doacaoItemsHeader}>
@@ -303,7 +312,9 @@ export default function ComoAjudar() {
             </div>
           </div>
         </div>
-        <div className={styles.entregasSection + ' sectionMargin'}>
+        <div
+          className={`${styles.entregasSection} ${commonStyles.sectionMargin} ${commonStyles.paddingInlineClamp} ${commonStyles.lastSectionMargin}`}
+        >
           <div className={styles.entregasContainer}>
             <div className={styles.entregaPresencial}>
               <h3 className="text-subtitle">Entrega Presencial</h3>

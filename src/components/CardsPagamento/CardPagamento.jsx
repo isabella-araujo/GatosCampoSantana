@@ -1,5 +1,4 @@
 import styles from './CardsPagamento.module.css';
-import QRCode from 'qrcode';
 import { IoCopyOutline } from 'react-icons/io5';
 export function CardPagamento({
   metodo,

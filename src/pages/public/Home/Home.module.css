@@ -35,7 +35,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: clamp(1rem, 4vw, 2rem);
   width: min(1200px, 100% - 2rem);
   margin: 0 auto;
   gap: clamp(1rem, 3vw, 2.5rem);
@@ -72,7 +71,6 @@
 }
 
 .cardsHomeContainer {
-  padding-inline: clamp(1rem, 4vw, 2rem);
   display: flex;
   justify-content: center;
   gap: 2.6rem;
@@ -86,22 +84,24 @@
 }
 
 .quemSomosSection {
-  padding-inline: clamp(1rem, 4vw, 2rem);
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 2rem;
 }
 
-.quemSomosHeader{
-  position: relative;
+
+.quemSomosHeader,
+.nossosObjHeader {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-
+.quemSomosHeader{
+  position: relative;
+}
 
 .quemSomosText {
   max-width: 634px;
@@ -150,12 +150,7 @@
   gap: 3rem;
 }
 
-.nossosObjHeader{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
+
 
 .nossosObjContent{
   display: flex;
@@ -190,12 +185,10 @@
 
 .parceirosSection{
   width: min(1200px, 100%);
-  padding-inline: clamp(1rem, 4vw, 2rem);
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 2rem;
-  margin-bottom: 6rem;
 }
 
 .parceirosHeader{

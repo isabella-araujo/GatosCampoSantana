@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import styles from './Adote.module.css';
+import commonStyles from '../styles/PublicCommon.module.css';
 import { FiltrosGatos, GridGatos } from '../../../components';
 import { IoNewspaperOutline, IoHeartCircle } from 'react-icons/io5';
 import Formulario from '../../../assets/Adote/Formulario.svg';
@@ -85,8 +86,12 @@ export default function Adote() {
         />
         <link rel="canonical" href="https://gatosdocampodesantana.com/adote" />
       </Helmet>
-      <div className={styles.adoteContainer}>
-        <div className={styles.headerContainer}>
+      <div
+        className={`${commonStyles.paddingInlineClamp}${commonStyles.publicContainer} ${commonStyles.animatedFadeIn}  `}
+      >
+        <div
+          className={`${styles.headerContainer} ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.headerContent}>
             <div className={styles.headerTitle}>
               <h1 className="text-display">Adote amor em forma de gato</h1>
@@ -95,14 +100,16 @@ export default function Adote() {
               Cada um desses gatinhos tem uma história e está em busca de um lar
               cheio de carinho. Adotar transforma a sua vida e a de um gatinho.
             </p>
-            <div className={styles.headerLink}>
+            <div className={`${styles.headerLink} ${styles.pulse}`}>
               <a href="#gatosParaAdocaoSection" className="text-button">
                 Conheça nossos gatinhos!
               </a>
             </div>
           </div>
         </div>
-        <div className={`${styles.comoAdotarSection} sectionMargin`}>
+        <div
+          className={`${styles.comoAdotarSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp}`}
+        >
           <div className={styles.comoAdotarContainer}>
             <div className={styles.comoAdotarTitle}>
               <IoNewspaperOutline
@@ -113,7 +120,9 @@ export default function Adote() {
                 Como funciona o processo de adoção?
               </h2>
             </div>
-            <div className={styles.comoAdotarSteps}>
+            <div
+              className={`${styles.comoAdotarSteps} ${commonStyles.paddingInlineClamp}`}
+            >
               <div className={styles.step}>
                 <img
                   src={Documentos}
@@ -156,7 +165,7 @@ export default function Adote() {
           </div>
         </div>
         <div
-          className={`${styles.gatosParaAdocaoSection} sectionMargin`}
+          className={`${styles.gatosParaAdocaoSection} ${commonStyles.sectionMargin}  ${commonStyles.paddingInlineClamp} ${commonStyles.lastSectionMargin}`}
           id="gatosParaAdocaoSection"
         >
           <div className={styles.gatosParaAdocaoContainer}>

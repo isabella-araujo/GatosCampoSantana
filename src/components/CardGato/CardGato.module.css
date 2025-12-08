@@ -12,6 +12,11 @@
   box-sizing: border-box;
 }
 
+.card:hover {
+  transform: scale(1.03);
+  transition: transform .25s ease;
+}
+
 .imagemContainer{
   align-self: center;
   overflow: hidden;

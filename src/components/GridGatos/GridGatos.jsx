@@ -18,7 +18,7 @@ export default function GridGatos({ gatos }) {
 
   return (
     <div>
-      <div className={styles.gridContainer}>
+      <div className={`${styles.gridContainer} `}>
         {visiveis.map((gato) => (
           <div key={gato.id} className={styles.cardWrapper}>
             <CardGato gato={gato} />
