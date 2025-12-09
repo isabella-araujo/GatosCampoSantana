@@ -36,13 +36,10 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content={`https://gatosdocampodesantana.com/og-images/home.jpg`}
+          content={`https://gatoscamposantana.web.app/og-images/home.jpg`}
         />
-        <meta
-          property="og:url"
-          content="https://gatosdocampodesantana.com/home"
-        />
-        <link rel="canonical" href="https://gatosdocampodesantana.com/home" />
+        <meta property="og:url" content="https://gatoscamposantana.web.app/" />
+        <link rel="canonical" href="https://gatoscamposantana.web.app/" />
       </Helmet>
       <div className={`${styles.homeContainer} ${commonStyles.animatedFadeIn}`}>
         <div className={styles.bannerWrapper}>

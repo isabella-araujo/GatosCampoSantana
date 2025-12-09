@@ -58,7 +58,7 @@ export function CardGato({ gato }) {
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <Link to={`/adote/gatoDetalhes/${gato.slug}`}>
+        <Link to={`/adote/${gato.slug}`}>
           <Button variant="secondary" size="small" icon={IoHeart}>
             {gato.atributo}
           </Button>

@@ -66,17 +66,18 @@ export default function GatoDetalhes() {
         />
         <meta
           property="og:image"
-          content={`https://gatosdocampodesantana.com${
-            gato.fotoURL || '/default-og-image.jpg'
-          }`}
+          content={
+            gato.fotoURL ||
+            'https://gatoscamposantana.web.app/default-og-image.jpg'
+          }
         />
         <meta
           property="og:url"
-          content={`https://gatosdocampodesantana.com/adote/${gato.slug}`}
+          content={`https://gatoscamposantana.web.app//adote/${gato.slug}`}
         />
         <link
           rel="canonical"
-          href={`https://gatosdocampodesantana.com/adote/${gato.slug}`}
+          href={`https://gatoscamposantana.web.app//adote/${gato.slug}`}
         />
       </Helmet>
       <div

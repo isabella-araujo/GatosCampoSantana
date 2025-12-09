@@ -78,13 +78,13 @@ export default function Adote() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content={`https://gatosdocampodesantana.com/og-images/adote.jpg`}
+          content={`https://gatoscamposantana.web.app/og-images/adote.jpg`}
         />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com/adote"
+          content="https://gatoscamposantana.web.app/adote"
         />
-        <link rel="canonical" href="https://gatosdocampodesantana.com/adote" />
+        <link rel="canonical" href="https://gatoscamposantana.web.app/adote" />
       </Helmet>
       <div
         className={`${commonStyles.paddingInlineClamp}${commonStyles.publicContainer} ${commonStyles.animatedFadeIn}  `}

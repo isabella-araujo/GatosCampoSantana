@@ -31,15 +31,15 @@ export default function SobreNos() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content={`https://gatosdocampodesantana.com/og-images/sobre-nos.jpg`}
+          content={`https://gatoscamposantana.web.app/og-images/sobre-nos.jpg`}
         />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com/sobre-nos"
+          content="https://gatoscamposantana.web.app/sobre-nos"
         />
         <link
           rel="canonical"
-          href="https://gatosdocampodesantana.com/sobre-nos"
+          href="https://gatoscamposantana.web.app/sobre-nos"
         />
       </Helmet>
       <div

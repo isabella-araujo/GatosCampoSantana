@@ -29,13 +29,13 @@ export default function Doe() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content={`https://gatosdocampodesantana.com/og-images/doe.webp`}
+          content={`https://gatoscamposantana.web.app/og-images/doe.webp`}
         />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com/doe"
+          content="https://gatoscamposantana.web.app/doe"
         />
-        <link rel="canonical" href="https://gatosdocampodesantana.com/doe" />
+        <link rel="canonical" href="https://gatoscamposantana.web.app/doe" />
       </Helmet>
       <div
         className={`${commonStyles.paddingInlineClamp} ${commonStyles.publicContainer} ${commonStyles.animatedFadeIn}   `}

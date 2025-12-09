@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         path: 'adote',
         children: [
           { index: true, Component: Adote },
-          { path: 'gatoDetalhes/:slug', Component: GatoDetalhes },
+          { path: ':slug', Component: GatoDetalhes },
         ],
       },
       { path: 'sobre-nos', Component: SobreNos },

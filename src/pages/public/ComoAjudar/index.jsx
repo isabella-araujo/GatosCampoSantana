@@ -43,15 +43,15 @@ export default function ComoAjudar() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content={`https://gatosdocampodesantana.com/og-images/como-ajudar.jpg`}
+          content={`https://gatoscamposantana.web.app/og-images/como-ajudar.jpg`}
         />
         <meta
           property="og:url"
-          content="https://gatosdocampodesantana.com/como-ajudar"
+          content="https://gatoscamposantana.web.app/como-ajudar"
         />
         <link
           rel="canonical"
-          href="https://gatosdocampodesantana.com/como-ajudar"
+          href="https://gatoscamposantana.web.app/como-ajudar"
         />
       </Helmet>
       <div
