@@ -14,3 +14,11 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
+
+@media (max-width: 400px) {
+  .container {
+    min-width: 100%;
+    padding: 0.5rem;
+    border-radius: 16px;
+  }
+}

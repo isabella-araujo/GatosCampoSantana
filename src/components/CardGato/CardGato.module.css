@@ -65,3 +65,15 @@
 .buttonContainer{
   align-self: center;
 }
+
+@media (max-width: 380px) {
+  .card{
+    width: 260px;
+    height: 400px;
+  }
+
+  .imagemContainer{
+    width: 220px;
+    height: 220px;
+  }
+}

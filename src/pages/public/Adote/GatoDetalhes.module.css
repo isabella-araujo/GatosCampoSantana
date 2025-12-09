@@ -5,6 +5,11 @@ margin-bottom:  20rem;
 .gatoDetailsContainer{
   padding: 60px 0px;
 }
+
+.Container{
+  max-width: 900px;
+  margin: 0 auto;
+}
 .gatoDetailsWrapper{
   position: relative;
   padding: 40px 0px;
@@ -129,5 +134,30 @@ margin-bottom:  20rem;
   }
   .actionButtons{
     flex-direction: column;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .Container{
+   padding: 0;
+   max-width: 300px;
+  }
+
+  .imageContainer{
+    max-width: 300px;
+    height: auto;
+    padding: 0;
+    justify-self: center;
+  }
+
+  .gatoDetailsContent{
+    padding: 20px 0px;
+  }
+
+  .gatoInfoContainer{
+    gap: 16px;
+    padding: 0 10px;
+
   }
 }

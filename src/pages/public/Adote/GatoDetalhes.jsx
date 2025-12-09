@@ -86,7 +86,7 @@ export default function GatoDetalhes() {
           <h2 className="text-display">{gato.nomeFormatado}</h2>
         </div>
         <div className={styles.gatoDetailsWrapper}>
-          <Container style={{ width: '900px' }}>
+          <Container className={styles.Container}>
             <div className={styles.gatoDetailsContent}>
               <div className={styles.imageContainer}>
                 <img

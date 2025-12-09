@@ -323,9 +323,18 @@
     align-items: center;
   }
 }
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .sejaVoluntarioHeader, .sejaLarTemporarioContent{
     text-align: center;
+    margin-bottom: 1rem;
   }
+
+ .sejaVoluntarioContainer{
+    column-gap: 0px;
+ }
+
+ .voluntarioPaws{
+  opacity: 0.2;
+ }
   
 }

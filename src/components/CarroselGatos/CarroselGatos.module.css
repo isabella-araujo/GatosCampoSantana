@@ -23,7 +23,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .carroselContainer {
     max-width: 300px;
   }

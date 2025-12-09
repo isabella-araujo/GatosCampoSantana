@@ -35,7 +35,7 @@ export default function CarroselParceiros() {
     >
       {(parceiro) => (
         <div className={styles.parceiroCard} key={parceiro.id}>
-          <Tooltip text={parceiro.nome} key={parceiro.id} position="right">
+          <Tooltip text={parceiro.nome} key={parceiro.id} position="center">
             <img
               src={parceiro.logoURL}
               alt={parceiro.nome}
